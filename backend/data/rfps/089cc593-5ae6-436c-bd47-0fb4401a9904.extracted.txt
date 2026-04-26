@@ -1,0 +1,1 @@
+This is a sample RFP for summarization. Requirements: FedRAMP Moderate. Evaluation: technical approach, past performance.

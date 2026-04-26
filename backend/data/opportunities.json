@@ -1,0 +1,151 @@
+[
+  {
+    "id": "a1d8d5c4-75b6-4f6f-9b3d-b5e2c2f92f1f",
+    "name": "VA Benefits Platform Modernization",
+    "createdAt": "2026-04-25T20:39:18.072Z",
+    "updatedAt": "2026-04-25T22:56:04.859Z",
+    "opportunityName": "VA Benefits Platform Modernization",
+    "agency": "Department of Veterans Affairs",
+    "contractValue": "50-200M",
+    "vehicle": "SPRUCE IDIQ",
+    "setAside": "SDVOSB",
+    "timeline": "Draft RFP expected in 30 days; proposal due in 60 days; award forecast in 6 months.",
+    "description": "Modernize and migrate a legacy VA benefits case management platform to a secure cloud environment. Scope includes application modernization, data migration, DevSecOps pipeline, ransomware resilience, ATO support, and user training for 250k+ veterans.",
+    "knownRelationships": "Met the program lead at an industry day and received a warm introduction from a current teammate with incumbent-adjacent access. No direct contracting officer relationship has been confirmed yet.",
+    "notes": "We are SDVOSB and can lead as prime. FedRAMP Moderate authorization is in progress, and the team has strong cloud modernization experience. Risk is centered on integration ownership with legacy vendors and a compressed proposal timeline.",
+    "status": "active",
+    "gate": 1,
+    "evidence": [
+      {
+        "id": "e2687b3c-87d8-4ed7-a8f9-1c2f4387cf4e",
+        "source": "Industry Day Briefing",
+        "url": "https://example.com/va-industry-day-summary",
+        "note": "VA program lead emphasized cloud security and modern user experience as top priorities.",
+        "summary": "Buyers want a secure, modern platform that reduces manual workload and improves veteran case visibility."
+      },
+      {
+        "id": "f19d947e-293b-4f0d-9f3d-8a1a7a2b7c1d",
+        "source": "Partner Capability Statement",
+        "url": "https://example.com/capability-statement.pdf",
+        "note": "Proposed partner has FedRAMP Moderate controls and prior VA case management experience.",
+        "summary": "Partner supplements our core team with required cybersecurity and compliance delivery capacity."
+      }
+    ],
+    "stakeholders": [
+      {
+        "id": "s7a5e8d2b-1f84-4d6f-a2e3-72a4c5b6d7e8",
+        "name": "Erin James",
+        "role": "Program Lead",
+        "office": "VA Benefits Delivery Office",
+        "relationshipStrength": "moderate",
+        "lastTouch": "2026-04-11",
+        "nextTouch": "2026-05-02",
+        "notes": "Met at industry day; asked specific questions about ATO and cloud security."
+      },
+      {
+        "id": "s9b8c7f1a-2d54-4c6f-b9d1-8e7a2c3d4f5b",
+        "name": "Michael Chen",
+        "role": "Technical Authority",
+        "office": "VA IT Modernization",
+        "relationshipStrength": "weak",
+        "lastTouch": "2026-04-18",
+        "nextTouch": "2026-05-05",
+        "notes": "Intro call scheduled to validate security architecture assumptions."
+      }
+    ],
+    "evaluation": {
+      "type": "Best Value Tradeoff",
+      "criteria": [
+        "Technical approach",
+        "Past performance",
+        "Price realism",
+        "Security & ATO readiness",
+        "Innovation"
+      ],
+      "notes": "The procurement is expected to use a best-value tradeoff model with heavy weighting on cybersecurity, cloud migration experience, and implementation risk mitigation."
+    },
+    "updates": [
+      {
+        "id": "u3c9d7a0b-4f12-4c6d-8f1a-4e2b6c7d8f9e",
+        "type": "note",
+        "timestamp": "2026-04-18T15:20:00.000Z",
+        "content": "Scheduled intro call with Technical Authority Michael Chen to validate security assumptions."
+      },
+      {
+        "id": "u8d7f6b5c-2a41-4d3e-9f0b-5c6d7e8f9a0b",
+        "type": "field_update",
+        "timestamp": "2026-04-20T10:30:00.000Z",
+        "content": "Updated gate from 0 to 1.",
+        "field": "gate",
+        "oldValue": 0,
+        "newValue": 1
+      }
+    ],
+    "latestAnalysis": {
+      "opportunityName": "VA Benefits Platform Modernization",
+      "name": "VA Benefits Platform Modernization",
+      "agency": "Department of Veterans Affairs",
+      "contractValue": "50-200M",
+      "vehicle": "SPRUCE IDIQ",
+      "setAside": "SDVOSB",
+      "fitAssessment": {
+        "rating": "Strong",
+        "rationale": "Strong fit on vehicle, set-aside, and our cloud modernization capabilities with a viable partner for FedRAMP work.",
+        "details": [
+          "SDVOSB status positions us well for award eligibility and prime leadership.",
+          "Existing access signals from the program lead improve early capture visibility.",
+          "The scope aligns with our recent cloud modernization and data migration experience."
+        ],
+        "strengths": [
+          "Prime-ready SDVOSB posture",
+          "Relevant VA benefits modernization experience",
+          "Strong DevSecOps and FedRAMP support plan",
+          "Existing relationship with program leadership"
+        ]
+      },
+      "pWinScore": {
+        "score": 72,
+        "tier": "high",
+        "reasoning": "High pWin driven by vehicle and set-aside fit, plus strong capture signals, offset by timeline and integration risk."
+      },
+      "gaps": [
+        {
+          "area": "Security / Compliance",
+          "detail": "FedRAMP Moderate authorization must be confirmed or provided through partner delivery.",
+          "severity": "medium",
+          "mitigation": "Secure a partner with Federal cloud authorization and document ATO path early."
+        },
+        {
+          "area": "Relationship Coverage",
+          "detail": "No confirmed contracting officer relationship today.",
+          "severity": "medium",
+          "mitigation": "Develop a targeted outreach plan and secure at least one CO introduction."
+        }
+      ],
+      "feasibilityFactors": {
+        "Vehicle Fit": "Strong",
+        "Set-Aside Alignment": "Strong",
+        "Relationship Coverage": "Moderate",
+        "Timeline Feasibility": "Manageable",
+        "Scope Alignment": "Strong"
+      },
+      "risks": [
+        "Compressed proposal timeline could stress response quality.",
+        "Lack of confirmed contracting officer contact introduces chase risk.",
+        "Legacy integration ownership with incumbent vendors is unclear.",
+        "High-value solicitation may attract strong competitors."
+      ],
+      "recommendation": {
+        "action": "Go",
+        "rationale": "Proceed as prime with early buyer validation, clear ATO path, and a strong capture plan focused on security and modernization.",
+        "nextSteps": [
+          "Validate the final buying office and confirm SPRUCE IDIQ usage.",
+          "Secure a FedRAMP partner or confirm existing authorization path.",
+          "Book a technical discovery with the VA program lead and technical authority.",
+          "Develop a win strategy centered on secure cloud modernization, veteran outcomes, and risk mitigation."
+        ]
+      }
+    },
+    "rfp": null
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "vehicles": [
+    "GSA MAS",
+    "SPRUCE IDIQ"
+  ],
+  "setAside": [
+    "Small Business"
+  ],
+  "capabilities": [
+    "Cloud computing",
+    "Engineering",
+    "Devops",
+    "Front End",
+    "Back End"
+  ],
+  "relationships": [
+    {
+      "agency": "Department of Veterans Affairs",
+      "strength": "moderate"
+    },
+    {
+      "agency": "Department of Defense",
+      "strength": "weak"
+    },
+    {
+      "agency": "Centers for Medicare & Medicaid Services (CMS)",
+      "strength": "strong"
+    }
+  ],
+  "knownGaps": []
+}
