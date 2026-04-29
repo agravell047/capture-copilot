@@ -142,6 +142,14 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
     return sum + mid * (pwin !== null ? pwin / 100 : 0.5)
   }, 0)
 
+  const totalPipeline = activeOpps.reduce((sum, o) => sum + (VALUE_MIDPOINTS[o.contractValue] || 0), 0)
+
+  const wonCount = closedOpps.filter((o) => o.status === 'won').length
+  const decidedCount = closedOpps.filter((o) => ['won', 'lost', 'no_bid', 'withdrew'].includes(o.status)).length
+  const winRate = decidedCount > 0 ? Math.round((wonCount / decidedCount) * 100) : null
+
+  const inProposal = activeOpps.filter((o) => String(o.gate) === '3').length
+
   const q = search.trim().toLowerCase()
   const matchesSearch = (o) => {
     if (!q) return true
@@ -180,50 +188,68 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
   return (
     <div className="portfolio-page">
       <div className="portfolio-header">
-        <div>
-          <h2>Dashboard</h2>
-          <p className="portfolio-subtitle">
-            Active pursuits by gate stage — open any card to view AI analysis and update your capture.
-          </p>
-        </div>
-        <div className="portfolio-actions">
-          <div className="view-toggle">
-            <button
-              type="button"
-              className={`view-toggle-btn${view === 'board' ? ' active' : ''}`}
-              onClick={() => setView('board')}
-            >
-              ▦ Board
-            </button>
-            <button
-              type="button"
-              className={`view-toggle-btn${view === 'table' ? ' active' : ''}`}
-              onClick={() => setView('table')}
-            >
-              ≡ Table
-            </button>
-          </div>
-        </div>
+        <h2>Dashboard <span className="portfolio-subtitle">Active pursuits by gate stage — open any card to view AI analysis and update your capture.</span></h2>
       </div>
 
-      <div className="portfolio-summary">
+      <div className="portfolio-kpi-bar">
         <div className="summary-card summary-card-blue">
           <span className="summary-label">Active Pursuits</span>
           <strong>{activeOpps.length}</strong>
         </div>
-        <div className="summary-card summary-card-green">
-          <span className="summary-label">High pWin (70%+)</span>
-          <strong>{highPwinCount}</strong>
+        <div className="summary-card summary-card-indigo" title="Opportunities currently in Gate 3 (Proposal stage)">
+          <span className="summary-label">In Proposal</span>
+          <strong>{inProposal}</strong>
+        </div>
+        <div className="summary-card summary-card-slate" title="Sum of all active opportunity value midpoints before pWin weighting">
+          <span className="summary-label">Total Pipeline</span>
+          <strong>{totalPipeline > 0 ? formatMillions(totalPipeline) : '—'}</strong>
         </div>
         <div className="summary-card summary-card-purple" title="Sum of (contract value midpoint × pWin) across active opportunities — the dollar value you'd expect to win if scores hold">
           <span className="summary-label">Expected Value</span>
           <strong>{weightedValue > 0 ? formatMillions(weightedValue) : '—'}</strong>
+        </div>
+        <div className="summary-card summary-card-teal" title="Won ÷ (won + lost + no-bid + withdrew) across all closed opportunities">
+          <span className="summary-label">Win Rate</span>
+          <strong>{winRate !== null ? `${winRate}%` : '—'}</strong>
+        </div>
+        <div className="summary-card summary-card-green">
+          <span className="summary-label">High pWin (70%+)</span>
+          <strong>{highPwinCount}</strong>
         </div>
         <div className="summary-card summary-card-amber">
           <span className="summary-label">Needs Attention</span>
           <strong style={{ color: needsAttention > 0 ? '#b91c1c' : undefined }}>
             {needsAttention}
           </strong>
+        </div>
+      </div>
+
+      <div className="portfolio-toolbar">
+
+        <div className="toolbar-search">
+          <input
+            type="text"
+            placeholder="Search by name, agency, vehicle…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
+        <div className="view-toggle">
+          <button
+            type="button"
+            className={`view-toggle-btn${view === 'board' ? ' active' : ''}`}
+            onClick={() => setView('board')}
+          >
+            ▦ Board
+          </button>
+          <button
+            type="button"
+            className={`view-toggle-btn${view === 'table' ? ' active' : ''}`}
+            onClick={() => setView('table')}
+          >
+            ≡ Table
+          </button>
         </div>
       </div>
 
@@ -251,16 +277,6 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
         )
       })()}
 
-      <div className="portfolio-controls">
-        <div className="portfolio-search">
-          <input
-            type="text"
-            placeholder="Search by name, agency, vehicle…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-      </div>
 
       {error && <div className="error-message">{error}</div>}
 

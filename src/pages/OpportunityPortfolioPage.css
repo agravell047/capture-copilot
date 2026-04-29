@@ -6,23 +6,36 @@
 
 .portfolio-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  align-items: baseline;
+  gap: 0;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
 }
 
 .portfolio-header h2 {
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   color: #1f2937;
-  font-size: 28px;
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .portfolio-subtitle {
-  margin: 0;
-  color: #6b7280;
-  max-width: 640px;
-  line-height: 1.5;
+  margin-left: 0.75rem;
+  color: #9ca3af;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.portfolio-kpi-bar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .portfolio-help {
@@ -158,10 +171,39 @@
 .portfolio-status-withdrew { background: #daeef8; color: #1c3044; }
 
 .portfolio-summary {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.portfolio-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.toolbar-search {
+  flex: 1;
+  min-width: 180px;
+}
+
+.toolbar-search input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.toolbar-search input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
 @media (max-width: 768px) {
@@ -197,10 +239,12 @@
   border: 1px solid #d1d5db;
   border-radius: 6px;
   overflow: hidden;
+  height: 42px;
 }
 
 .view-toggle-btn {
-  padding: 6px 14px;
+  padding: 0 16px;
+  height: 100%;
   font-size: 13px;
   font-weight: 600;
   color: #6b7280;
@@ -227,16 +271,19 @@
 
 /* ── Kanban board ── */
 .kanban-board {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
+  padding: 1rem;
+  background: #e8edf3;
+  border-radius: 12px;
   align-items: flex-start;
   min-height: 480px;
 }
 
 .kanban-column {
-  flex: 0 0 280px;
+  flex: unset;
+  width: 100%;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
@@ -481,7 +528,15 @@
 
 /* ── Closed section ── */
 .closed-section {
-  margin-top: 2rem;
+  margin-top: 1rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 1rem;
+  min-height: 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .closed-toggle {
@@ -494,8 +549,8 @@
   font-weight: 600;
   color: #374151;
   cursor: pointer;
-  padding: 0.5rem 0;
-  margin-bottom: 0.75rem;
+  padding: 0.75rem 0;
+  margin-bottom: 0;
 }
 
 .closed-toggle:hover { color: #111827; }
@@ -620,30 +675,39 @@
 .summary-card {
   background: white;
   border: 1px solid #e5e7eb;
-  border-top: 3px solid #e5e7eb;
+  border-top: 3px solid #d1d5db;
   border-radius: 8px;
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  gap: 0.25rem;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
 }
 
-.summary-card-blue  { border-top-color: #3b82f6; }
-.summary-card-green { border-top-color: #16a34a; }
-.summary-card-purple { border-top-color: #7c3aed; }
-.summary-card-amber { border-top-color: #d97706; }
+/* Board-coordinated accent colors */
+.summary-card-green  { border-top-color: #16a34a; }
+.summary-card-amber  { border-top-color: #d97706; }
+
+/* Everything else: neutral */
+.summary-card-blue,
+.summary-card-purple,
+.summary-card-slate,
+.summary-card-teal,
+.summary-card-indigo { border-top-color: #374151; }
 
 .summary-label {
   color: #6b7280;
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
 }
 
 .summary-card strong {
   color: #111827;
-  font-size: 28px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .portfolio-grid {

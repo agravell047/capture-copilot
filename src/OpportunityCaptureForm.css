@@ -659,10 +659,11 @@ select {
   transition: border-color 0.2s;
   color: #111827;
   background-color: #ffffff;
+  box-sizing: border-box;
 }
 
 select {
-  height: 2.75rem;
+  width: 100%;
 }
 
 input,

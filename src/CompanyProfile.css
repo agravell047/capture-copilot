@@ -117,12 +117,17 @@
   align-items: center;
   gap: 0.5rem;
   padding: 8px 10px;
-  background: white;
-  border: 1px solid #d1d5db;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #93c5d5;
   border-radius: 6px;
   font-size: 13px;
   color: #111827;
 }
+
+.cap-row-core    { border-left-color: #1c3044; }
+.cap-row-supporting { border-left-color: #0369a1; }
+.cap-row-emerging { border-left-color: #92400e; }
 
 .capability-row-text {
   flex: 1;
@@ -254,16 +259,29 @@
   line-height: 1.45;
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .settings-grid {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 1.25rem;
 }
 
 .settings-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 1.25rem;
 }
 
 .settings-row-2 {
@@ -362,6 +380,7 @@
 .add-item input,
 .add-item select {
   flex: 1;
+  min-width: 0;
   padding: 10px 12px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
@@ -369,6 +388,13 @@
   font-family: inherit;
   background: white;
   color: #111827;
+  box-sizing: border-box;
+  min-height: 42px;
+  height: auto;
+}
+
+.capability-add select {
+  flex: 0 0 180px;
 }
 
 .add-item input:focus,

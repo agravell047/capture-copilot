@@ -7,6 +7,231 @@
 
 ---
 
+## VOICEOVER SCRIPT — Full Run (~15 min)
+
+### ACT 1 — Dashboard (~2 min)
+
+**DO:** Open http://localhost:5173. Dashboard loads in Board view.
+
+**SAY:** *"This is the CapturePilot dashboard — which is live view into current contract opportunities for the company. Every active pursuit is on the board, organized by gate stage. Before you look at a single card, the top bar tells you the story."*
+
+**DO:** Sweep cursor across the 7 KPI stat cards left to right.
+
+**SAY:** *"Active pursuits in the pipeline. How many are in proposal — where resources are most committed. Total pipeline value across all active opportunities. The AI-weighted expected value, which discounts each deal by its pWin score. Historical win rate from our closed pursuit record. High-confidence deals above 70% pWin — your strongest bets. And Needs Attention — pursuits that haven't been touched in over 30 days. Pipeline health at a glance, before you open a single card."*
+
+**DO:** Point to the gate columns — Gate 0 through Gate 3. Point to the column header showing count badge and dollar total.
+
+**SAY:** *"Four gate columns — Awareness through Proposal. Each column shows a count badge and the total contract value of everything in it. You can see at a glance where the weight of your pipeline sits."*
+
+**DO:** Point to one card's colored left border, then another (different color).
+
+**SAY:** *"Every card has a colored left border — green for high pWin, amber for medium, red for low. You can read the health of your pipeline spatially, just by scanning the board."*
+
+**DO:** Point to the bottom of a card — the freshness timestamp ("Xd ago").
+
+**SAY:** *"Each card shows when this capture was last touched. If it's going stale, you'll see it immediately. You don't need a status meeting to know which opportunities are being neglected."*
+
+**DO:** Click **Table** toggle.
+
+**SAY:** *"Same data, different lens. Every field searchable and sortable."*
+
+**DO:** Click **Board** to return.
+
+**DO:** Scroll down past the board. Point to the Closed Opportunities card.
+
+**SAY:** *"Below the board, closed deals — won, lost, no bid, withdrew. The full record stays in the system. That history feeds the AI's pattern recognition on every new pursuit."*
+
+**DO:** Click the Closed Opportunities toggle to expand briefly, then collapse.
+
+---
+
+### ACT 2 — Existing Card Walkthrough (~2 min)
+
+**DO:** Click **VA Benefits Platform Modernization**.
+
+**SAY:** *"Let's open a mature pursuit."*
+
+**DO:** Point to the animated pWin arc gauge in the top right.
+
+**SAY:** *"The pWin gauge animates on load — fills from zero to score. Color-coded: this one is green, 76%, High confidence. Not a number buried in a table — a visual that reads in half a second."*
+
+**DO:** Point to the Gate progress bar below the header.
+
+**SAY:** *"Gate progress bar — four stages, Awareness through Proposal. This pursuit is at Gate 2 — Capture. You can see exactly where it sits in the capture lifecycle without reading a single field."*
+
+**DO:** Point to Fit Assessment card — show the rating badge and bullet points.
+
+**SAY:** *"Fit assessment — the AI evaluated our company profile against this opportunity and returned a rating, a rationale, and the specific reasons why. Not generic. Specific to Apex's capabilities, vehicles, and set-asides."*
+
+**DO:** Point to Gap Analysis card — show severity badges (HIGH/MED/LOW) and mitigations.
+
+**SAY:** *"Gap analysis. Each gap gets a severity rating and a mitigation. The system tells you not just what's missing, but what to do about it."*
+
+**DO:** Point to Recommendation card — show the action badge and the numbered next steps.
+
+**SAY:** *"Recommendation: Go. Five sequenced next steps — not generic advice, specific to this pursuit's stage and gaps."*
+
+**DO:** Scroll to Proposed Capture Team.
+
+**SAY:** *"Proposed Capture Team. The AI scored our 77-person directory — skills, experience, availability signals — and named who should lead this pursuit by role. Not just availability, fit."*
+
+**DO:** Click **Invite Team by Email**.
+
+**SAY:** *"One click. Opens your email client pre-addressed to every team member — subject line, opp name, kickoff message. No copying from a roster."*
+
+**DO:** Close email client. Point to **Re-run Analysis** button.
+
+**SAY:** *"Captures evolve. Relationships develop, gaps close, the RFP drops. Hit Re-run and the AI refreshes the score and team from the latest data — no re-entry required."*
+
+**DO:** Click **Dashboard** in the navbar.
+
+---
+
+### ACT 3 — New Capture (~5 min)
+
+**DO:** Click **+ New Capture**.
+
+**SAY:** *"Now the intake flow. This is day one — no RFP, no solicitation, just early awareness."*
+
+**DO:** Type `SSA Disability Claims Processing Modernization` in Opportunity Name. Point to the completeness bar moving up.
+
+**SAY:** *"Watch the Analysis Quality bar in the top right. The system is coaching you as you type — it knows what's missing and what would make the analysis sharper."*
+
+**DO:** Select **Social Security Administration** from Agency dropdown. Show that contacts auto-populate in the Stakeholders section.
+
+**SAY:** *"Agency selected — and notice the Stakeholders section just pre-loaded every SSA contact from our CRM. The system knows our relationships and surfaces them automatically."*
+
+**DO:** Set Contract Value to **$5M–$50M**, Vehicle to **OASIS+**, Set-Aside to **SDVOSB**, Gate to **Gate 1 — Qualify**.
+
+**DO:** Paste the Timeline field:
+```
+Sources Sought issued April 14, 2026; RFP anticipated September 2026; award expected Q1 2027. Five-year IDIQ base with two option years.
+```
+
+**SAY:** *"Timeline — Sources Sought issued, RFP anticipated September, award Q1 2027. The AI will use this to reason about urgency and gate appropriateness."*
+
+**DO:** Paste the Description. Point to the completeness bar jumping.
+```
+Modernize SSA's Disability Case Management System — a 30-year-old COBOL/mainframe platform processing 2.8 million annual disability claims. Scope includes phased cloud migration to AWS GovCloud, legacy COBOL rewrite to Java/Spring microservices, integration with SSA's existing Numident and MBR databases, Section 508-compliant claimant portal redesign, DevSecOps pipeline implementation, and FedRAMP Moderate ATO preparation. Requires continuity-of-operations planning for 24/7 claims processing during migration.
+```
+
+**SAY:** *"The description is the biggest signal — 25 points. Watch the bar jump."*
+
+**DO:** Expand **Known Relationships / Internal Notes** section. Paste:
+```
+Marcus Webb attended the SSA IT Modernization Industry Day on April 9th and had a brief conversation with the program's Deputy CIO. No formal relationship yet — agency contact at SSA OIT identified but no direct outreach completed. Our OASIS+ vehicle PM at SSA confirmed Apex is registered and in good standing on the vehicle.
+```
+And Internal Notes:
+```
+OASIS+ vehicle aligns perfectly. SDVOSB set-aside confirmed via Sources Sought. Biggest risk is the absence of SSA past performance — we have strong CMS and VA comparable work but no direct SSA reference. Need to assess the competitive landscape and identify a teaming partner with SSA incumbent access before committing full capture resources.
+```
+
+**SAY:** *"Known relationships and internal notes. This is where you capture what you know that's not in a database — who you've met, what they said, what your gaps are. The AI reads all of it."*
+
+**DO:** Expand **Similar Past Pursuits**. Pick one relevant past pursuit from the list.
+
+**SAY:** *"Similar past pursuits. The AI learns from our history — past performance, win/loss patterns, team compositions that worked. Linking them here sharpens the analysis."*
+
+**DO:** Expand **Evaluation**. Type `Best Value`. Add the four criteria:
+```
+Technical approach and legacy modernization methodology (35%)
+Past performance on comparable federal benefits systems (30%)
+Management approach and key personnel (20%)
+Price realism (15%)
+```
+
+**SAY:** *"Evaluation approach and weighted criteria. The AI uses this to assess how our gaps and strengths map to what will actually be scored."*
+
+**DO:** Point to the completeness bar — should be near or at 100%.
+
+**SAY:** *"We're at 100% analysis quality. Every signal the AI can use is in the system. Now — Create."*
+
+**DO:** Click **Create & Analyze Opportunity**.
+
+**SAY:** *"Sending the full opportunity payload plus our company profile — capabilities, vehicles, team, past performance patterns. The AI knows Apex."*
+
+---
+
+### ACT 4 — AI Result Walkthrough (~3 min)
+
+**DO:** Let the pWin gauge animate on load.
+
+**SAY:** *"52% — Medium. Conservative at Gate 1 with no existing SSA relationship and no SSA past performance. That's honest. Compare to the VA pursuit at 76% — that's a mature Gate 2 with incumbent access. Different stage, different score. The system doesn't inflate."*
+
+**DO:** Point to the Gate progress bar — Gate 1 highlighted.
+
+**DO:** Point to Opportunity Snapshot card, scroll through the metadata.
+
+**SAY:** *"Everything we entered is structured and queryable. Vehicle, set-aside, timeline, relationships — stored, versioned, used in every future re-analysis."*
+
+**DO:** Point to Fit Assessment.
+
+**SAY:** *"Fit: Good. OASIS+ pre-qualified, SDVOSB narrows the competitive field, COBOL modernization is a core Apex capability."*
+
+**DO:** Point to Gap Analysis — show severity badges.
+
+**SAY:** *"Two high gaps — no SSA past performance, no established buyer relationship. Both flagged with mitigations. Recommendation: pursue a teaming partner with SSA incumbent access before committing full capture resources. That's not a guess — that's what the notes said, reflected back as a structured action."*
+
+**DO:** Point to Recommendation — show the numbered next steps.
+
+**SAY:** *"Five sequenced next steps. Specific. Actionable. Ready to assign."*
+
+**DO:** Scroll to Proposed Capture Team.
+
+**SAY:** *"AI-proposed team — scored from 77 people based on skills and experience relevant to this scope. Names, roles, rationale per person."*
+
+**DO:** Scroll to Feasibility Factors — point to the grid.
+
+**SAY:** *"Feasibility factors — a structured breakdown of the dimensions the AI evaluated: technical fit, competitive positioning, relationship access, vehicle alignment."*
+
+**DO:** Scroll to Activity Log.
+
+**SAY:** *"Every update to this pursuit is timestamped here. As the capture matures — new intel, relationship changes, field updates — each entry is stored and used in the next re-analysis. The AI's understanding of this opportunity grows with every update."*
+
+---
+
+### ACT 5 — Under the Hood (~1 min)
+
+**DO:** Press F12 → Network → Fetch/XHR → find `POST /api/opportunities` → click → Preview/Response tab.
+
+**SAY:** *"Full structured payload — opportunity data plus the entire company context: capabilities, team directory scored by relevance, past performance patterns. Nothing is hidden. The AI reasons from this input entirely. No black box."*
+
+**DO:** Close DevTools.
+
+---
+
+### ACT 6 — Settings (~2 min)
+
+**DO:** Click **Settings** in the navbar.
+
+**DO:** Click **Company** tab.
+
+**SAY:** *"Company identity — NAICS codes, size standard, positioning statement. This is the AI's baseline context for every single analysis. Change your positioning here and every future analysis reflects it."*
+
+**DO:** Click **Capabilities** tab.
+
+**SAY:** *"Core, Supporting, and Emerging capability tiers. The AI maps these to opportunity requirements when it builds the fit assessment. What you put here is what the AI leads with on every deal."*
+
+**DO:** Click **Contacts** tab.
+
+**SAY:** *"Our relationship map — who we know at each agency, relationship strength, last touch date. When you create a new capture and pick an agency, contacts auto-populate from this list."*
+
+**DO:** Click **Team** tab.
+
+**SAY:** *"77 people in the directory — skills, experience, roles. The AI scores the entire directory for each pursuit and proposes the right people. Add a new hire here and they're eligible for team proposals on the next analysis."*
+
+**DO:** Click **AI Settings** tab.
+
+**SAY:** *"Model configuration and standing prompt instructions. Any instruction you add here applies to every analysis — company-wide tone, evaluation priorities, anything you want the AI to always consider."*
+
+---
+
+### Closing Line
+
+**SAY:** *"Blank form to AI analysis — pWin score, gap analysis with mitigations, sequenced next steps, proposed capture team — in under ten minutes. Every entry is stored, versioned, and used to sharpen the next analysis as the capture matures. The AI gets smarter about this pursuit every time you update it. That's CapturePilot."*
+
+---
+
 ## ACT 1 — Dashboard (~2 min)
 
 1. Point out Board view — gate columns, pWin badges, **colored left border per pWin tier** (green=high, amber=medium, red=low)

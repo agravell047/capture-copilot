@@ -673,7 +673,7 @@ function CompanyProfile() {
                   {tierCaps.map((cap) => {
                     const realIdx = context.capabilities.indexOf(cap)
                     return (
-                      <div key={realIdx} className="capability-row">
+                      <div key={realIdx} className={`capability-row cap-row-${tier}`}>
                         <span className="capability-row-text">{cap.label}</span>
                         <button onClick={() => removeItem('capabilities', realIdx)}>×</button>
                       </div>
