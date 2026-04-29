@@ -75,26 +75,21 @@ Key requirements include:
     await page.locator('button').filter({ hasText: 'Key Stakeholders' }).click();
     await page.waitForTimeout(800);
 
-    // Add stakeholders
-    await page.locator('input[placeholder="Name"]').fill('Sarah Johnson');
-    await page.locator('input[placeholder="Role (optional)"]').fill('Program Manager');
-    await page.locator('input[placeholder="Office (optional)"]').fill('DISA');
-    await page.locator('select').filter({ hasText: 'Relationship' }).selectOption('strong');
-    await page.locator('input[placeholder="Last Touch"]').fill('2024-01-15');
-    await page.locator('input[placeholder="Next Touch"]').fill('2024-03-01');
-    await page.locator('input[placeholder="Notes (optional)"]').fill('Key decision maker for cloud initiatives');
-    await page.locator('button').filter({ hasText: 'Add Person' }).click();
-    await page.waitForTimeout(1000);
+    // Search for and select Sarah Johnson from the contact book
+    await page.locator('.contact-picker-search').fill('Sarah');
+    await page.waitForTimeout(600);
+    await page.locator('.contact-picker-item').filter({ hasText: 'Sarah Johnson' }).locator('input[type="checkbox"]').check();
+    await page.waitForTimeout(600);
 
-    await page.locator('input[placeholder="Name"]').fill('Mike Chen');
-    await page.locator('input[placeholder="Role (optional)"]').fill('Technical Lead');
-    await page.locator('input[placeholder="Office (optional)"]').fill('DoD CIO');
-    await page.locator('select').filter({ hasText: 'Relationship' }).selectOption('moderate');
-    await page.locator('input[placeholder="Last Touch"]').fill('2024-02-20');
-    await page.locator('input[placeholder="Next Touch"]').fill('2024-04-15');
-    await page.locator('input[placeholder="Notes (optional)"]').fill('Technical requirements owner');
-    await page.locator('button').filter({ hasText: 'Add Person' }).click();
-    await page.waitForTimeout(1000);
+    // Search for and select Mike Chen
+    await page.locator('.contact-picker-search').fill('Mike');
+    await page.waitForTimeout(600);
+    await page.locator('.contact-picker-item').filter({ hasText: 'Mike Chen' }).locator('input[type="checkbox"]').check();
+    await page.waitForTimeout(600);
+
+    // Clear search to show all selected contacts
+    await page.locator('.contact-picker-search').fill('');
+    await page.waitForTimeout(600);
 
     // Expand evidence section
     await page.locator('button').filter({ hasText: 'Sources & Evidence' }).click();

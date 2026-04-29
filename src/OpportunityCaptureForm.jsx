@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { createOpportunity, getOpportunity, ingestRfp, patchOpportunity } from './api/opportunities'
+import { listContacts } from './api/contacts'
 import OpportunityWorkspace from './components/OpportunityWorkspace'
+import SimilarPursuitsSelector from './components/SimilarPursuitsSelector'
 import './OpportunityCaptureForm.css'
 
 const initialFormData = {
@@ -24,18 +26,41 @@ const initialFormData = {
   evaluationNotes: '',
   evaluationCriteria: [],
   stakeholders: [],
-  evidence: []
+  evidence: [],
+  similarPursuits: []
 }
 
 const agencyOptions = [
-  'Department of Defense',
-  'Department of Veterans Affairs',
+  // Civilian
   'Centers for Medicare & Medicaid Services (CMS)',
+  'Department of Homeland Security',
+  'Department of Justice',
+  'Department of State',
+  'Department of the Treasury',
+  'Department of Transportation',
+  'Department of Veterans Affairs',
+  'Environmental Protection Agency',
+  'General Services Administration',
+  'Health & Human Services',
+  'Social Security Administration',
+  // Defense
+  'Department of Defense',
+  'Defense Information Systems Agency (DISA)',
+  'Defense Logistics Agency (DLA)',
+  'U.S. Air Force',
+  'U.S. Army',
+  'U.S. Navy / Marine Corps',
   'Other'
 ]
 
 const vehicleOptions = [
   'GSA MAS',
+  'OASIS+',
+  'CIO-SP3',
+  'CIO-SP4',
+  'SEWP V',
+  'NASA SEWP',
+  'Seaport NxG',
   'SPRUCE IDIQ',
   'Other'
 ]
@@ -68,8 +93,180 @@ const buildFormStateFromOpportunity = (opportunity) => {
     evaluationNotes: evaluation.notes || '',
     evaluationCriteria: evaluation.criteria || [],
     stakeholders: opportunity.stakeholders || [],
-    evidence: opportunity.evidence || []
+    evidence: opportunity.evidence || [],
+    similarPursuits: opportunity.similarPursuits || []
   }
+}
+
+// ContactPicker — loads global contacts and lets user toggle which ones are
+// involved in this opportunity, with per-contact relationship strength override.
+function ContactPicker({ selected, onChange, agency }) {
+  const [allContacts, setAllContacts] = useState([])
+  const [search, setSearch] = useState('')
+  const selectedIds = new Set((selected || []).map((s) => s.contactId || s.id).filter(Boolean))
+
+  useEffect(() => {
+    listContacts().then(setAllContacts).catch(() => {})
+  }, [])
+
+  // Auto-select contacts whose agency matches the opportunity agency when agency changes
+  const prevAgencyRef = useRef(agency)
+  useEffect(() => {
+    if (!agency || allContacts.length === 0) return
+    if (prevAgencyRef.current === agency) return
+    prevAgencyRef.current = agency
+    const agencyLower = agency.toLowerCase()
+    const matches = allContacts.filter((c) => c.agency && c.agency.toLowerCase().includes(agencyLower))
+    if (matches.length === 0) return
+    const currentIds = new Set((selected || []).map((s) => s.contactId || s.id))
+    const toAdd = matches.filter((c) => !currentIds.has(c.id)).map(toEntry)
+    if (toAdd.length > 0) onChange([...(selected || []), ...toAdd])
+  }, [agency, allContacts])
+
+  const toEntry = (contact) => ({
+    contactId: contact.id,
+    id: contact.id,
+    name: contact.name,
+    role: contact.title || '',
+    office: contact.office || '',
+    relationshipStrength: contact.relationshipStrength || 'moderate',
+    lastTouch: contact.lastTouch || '',
+    nextTouch: contact.nextTouch || '',
+    notes: contact.notes || '',
+  })
+
+  const toggle = (contact) => {
+    if (selectedIds.has(contact.id)) {
+      onChange((selected || []).filter((s) => (s.contactId || s.id) !== contact.id))
+    } else {
+      onChange([...(selected || []), toEntry(contact)])
+    }
+  }
+
+  const filtered = allContacts.filter((c) => {
+    const q = search.trim().toLowerCase()
+    if (!q) return true
+    return [c.name, c.agency, c.title, c.office].filter(Boolean).join(' ').toLowerCase().includes(q)
+  })
+
+  // Group contacts by agency for the "select all" headers
+  const agencyGroups = filtered.reduce((acc, c) => {
+    const key = c.agency || 'Other'
+    if (!acc[key]) acc[key] = []
+    acc[key].push(c)
+    return acc
+  }, {})
+
+  const toggleAgency = (agencyName, contacts) => {
+    const agencyIds = new Set(contacts.map((c) => c.id))
+    const allSelected = contacts.every((c) => selectedIds.has(c.id))
+    if (allSelected) {
+      onChange((selected || []).filter((s) => !agencyIds.has(s.contactId || s.id)))
+    } else {
+      const existing = (selected || []).filter((s) => !agencyIds.has(s.contactId || s.id))
+      onChange([...existing, ...contacts.filter((c) => !selectedIds.has(c.id)).map(toEntry)])
+    }
+  }
+
+  if (allContacts.length === 0) {
+    return (
+      <p className="field-help" style={{ marginTop: 0 }}>
+        No contacts found. Add contacts in the <strong>Settings</strong> page first.
+      </p>
+    )
+  }
+
+  return (
+    <div className="contact-picker">
+      <input
+        type="text"
+        className="contact-picker-search"
+        placeholder="Search contacts…"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <div className="contact-picker-list">
+        {Object.entries(agencyGroups).map(([agencyName, contacts]) => {
+          const allSelected = contacts.every((c) => selectedIds.has(c.id))
+          const someSelected = !allSelected && contacts.some((c) => selectedIds.has(c.id))
+          return (
+            <div key={agencyName} className="contact-picker-agency-group">
+              <div className="contact-picker-agency-header">
+                <label className="contact-picker-agency-check">
+                  <input
+                    type="checkbox"
+                    checked={allSelected}
+                    ref={(el) => { if (el) el.indeterminate = someSelected }}
+                    onChange={() => toggleAgency(agencyName, contacts)}
+                  />
+                  <span className="contact-picker-agency-name">{agencyName}</span>
+                  <span className="contact-picker-agency-count">{contacts.length}</span>
+                </label>
+              </div>
+              {contacts.map((c) => (
+                <div key={c.id} className={`contact-picker-item${selectedIds.has(c.id) ? ' selected' : ''}`}>
+                  <label className="contact-picker-check">
+                    <input type="checkbox" checked={selectedIds.has(c.id)} onChange={() => toggle(c)} />
+                    <span>
+                      <strong>{c.name}</strong>
+                      {c.title && <span className="contact-picker-meta"> · {c.title}</span>}
+                    </span>
+                  </label>
+                </div>
+              ))}
+            </div>
+          )
+        })}
+        {filtered.length === 0 && <p className="field-help">No contacts match "{search}".</p>}
+      </div>
+    </div>
+  )
+}
+
+function CaptureCompleteness({ formData }) {
+  const descLen = formData.description?.trim().length || 0
+  const hasRfp = Boolean(formData.rfpSummary)
+  const signals = [
+    { label: 'opportunity name', points: 10, met: formData.opportunityName?.trim().length > 0 },
+    { label: 'agency', points: 10, met: (formData.agency === 'Other' ? formData.customAgency : formData.agency)?.trim().length > 0 },
+    { label: 'description', points: 25, met: hasRfp || descLen > 0 },
+    { label: 'timeline or key dates', points: 15, met: formData.timeline?.trim().length > 0 },
+    { label: 'vehicle / contract type', points: 10, met: formData.vehicle?.trim().length > 0 },
+    {
+      label: 'known relationships or context (expand the Relationships section)',
+      points: 15,
+      met: formData.knownRelationships?.trim().length > 0 || formData.notes?.trim().length > 0 || (formData.evidence?.length || 0) > 0,
+    },
+    { label: 'related past pursuits (expand the Similar Pursuits section)', points: 10, met: (formData.similarPursuits?.length || 0) > 0 },
+    { label: 'evaluation approach (expand the Evaluation section)', points: 5, met: (formData.evaluationCriteria?.length || 0) > 0 || formData.evaluationType?.trim().length > 0 || formData.evaluationNotes?.trim().length > 0 },
+  ]
+  const total = signals.reduce((s, x) => s + x.points, 0)
+  const earned = signals.filter((x) => x.met).reduce((s, x) => s + x.points, 0)
+  const pct = Math.round((earned / total) * 100)
+  const missing = signals.filter((x) => !x.met)
+  const topMissing = missing.sort((a, b) => b.points - a.points)[0]
+
+  const color = pct >= 80 ? '#16a34a' : pct >= 50 ? '#d97706' : '#1c3044'
+
+  return (
+    <div className="capture-completeness">
+      <div className="capture-completeness-header">
+        <span className="capture-completeness-label">Analysis quality</span>
+        <span className="capture-completeness-pct" style={{ color }}>{pct}%</span>
+      </div>
+      <div className="capture-completeness-track">
+        <div
+          className="capture-completeness-fill"
+          style={{ width: `${pct}%`, background: color, transition: 'width 0.4s ease, background 0.3s' }}
+        />
+      </div>
+      {topMissing && (
+        <p className="capture-completeness-hint">
+          Add <strong>{topMissing.label}</strong> to improve analysis accuracy
+        </p>
+      )}
+    </div>
+  )
 }
 
 function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, onViewPortfolio }) {
@@ -95,12 +292,14 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
   const [loadingOpportunity, setLoadingOpportunity] = useState(false)
   const [error, setError] = useState('')
   const [result, setResult] = useState(null)
+  const [loadedOpportunity, setLoadedOpportunity] = useState(null)
   const [collapsedSections, setCollapsedSections] = useState({
     evaluation: true,
     knownRelationships: true,
     stakeholders: true,
     evidence: true,
-    internalNotes: true
+    internalNotes: true,
+    similarPursuits: true
   })
 
   useEffect(() => {
@@ -137,6 +336,7 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
 
         const loadedFormData = buildFormStateFromOpportunity(opportunity)
         setFormData(loadedFormData)
+        setLoadedOpportunity(opportunity)
         setUseUploadedRfp(Boolean(loadedFormData.rfpSummary))
         setCollapsedSections({
           evaluation: !(loadedFormData.evaluationType || loadedFormData.evaluationCriteria.length || loadedFormData.evaluationNotes),
@@ -387,191 +587,210 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
         <p className="subtitle">
           {editingOpportunityId
             ? 'Update the opportunity capture and refresh its analysis.'
-            : 'Create a new opportunity, run the initial analysis, and drop it into the portfolio.'}
+            : 'Create a new capture, run the initial analysis, and drop it into the pipeline.'}
         </p>
 
+        <CaptureCompleteness formData={formData} />
+
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="opportunityName">Opportunity Name *</label>
-            <input
-              type="text"
-              id="opportunityName"
-              name="opportunityName"
-              value={formData.opportunityName}
-              onChange={handleChange}
-              placeholder="e.g., DoD Cloud Migration Platform"
-              required
-            />
-          </div>
 
-          <div className="form-row">
+          {/* ── Zone 1: Core — what the AI needs most ────────────────── */}
+          <div className="form-zone form-zone-core">
+            <div className="form-zone-header">
+              <span className="form-zone-title">Core capture details</span>
+              <span className="form-zone-hint">Required fields — the AI uses everything you provide.</span>
+            </div>
+
             <div className="form-group">
-              <label htmlFor="agency">Agency *</label>
-              <select
-                id="agency"
-                name="agency"
-                value={formData.agency}
+              <label htmlFor="opportunityName">Opportunity Name *</label>
+              <input
+                type="text"
+                id="opportunityName"
+                name="opportunityName"
+                value={formData.opportunityName}
                 onChange={handleChange}
+                placeholder="e.g., DoD Cloud Migration Platform"
                 required
-              >
-                <option value="">Select an agency</option>
-                {agencyOptions.map((agencyOption) => (
-                  <option key={agencyOption} value={agencyOption}>
-                    {agencyOption}
-                  </option>
-                ))}
-              </select>
-              {formData.agency === 'Other' && (
-                <input
-                  type="text"
-                  id="customAgency"
-                  name="customAgency"
-                  value={formData.customAgency}
+              />
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="agency">Agency *</label>
+                <select
+                  id="agency"
+                  name="agency"
+                  value={formData.agency}
                   onChange={handleChange}
-                  placeholder="Enter agency name"
                   required
-                />
-              )}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="contractValue">Contract Value</label>
-              <select
-                id="contractValue"
-                name="contractValue"
-                value={formData.contractValue}
-                onChange={handleChange}
-              >
-                <option value="<5M">&lt; $5M</option>
-                <option value="5-50M">$5M - $50M</option>
-                <option value="50-200M">$50M - $200M</option>
-                <option value="200M+">$200M+</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="vehicle">Vehicle/Contract Type</label>
-              <select
-                id="vehicle"
-                name="vehicle"
-                value={formData.vehicle}
-                onChange={handleChange}
-              >
-                <option value="">Select contract type</option>
-                {vehicleOptions.map((vehicleOption) => (
-                  <option key={vehicleOption} value={vehicleOption}>
-                    {vehicleOption}
-                  </option>
-                ))}
-              </select>
-              {formData.vehicle === 'Other' && (
-                <input
-                  type="text"
-                  id="customVehicle"
-                  name="customVehicle"
-                  value={formData.customVehicle}
-                  onChange={handleChange}
-                  placeholder="Enter contract type"
-                />
-              )}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="setAside">Set-Aside Type</label>
-              <select
-                id="setAside"
-                name="setAside"
-                value={formData.setAside}
-                onChange={handleChange}
-              >
-                <option value="None">None</option>
-                <option value="SDVOSB">SDVOSB</option>
-                <option value="8(a)">8(a)</option>
-                <option value="WOSB">WOSB</option>
-                <option value="HUBZone">HUBZone</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="gate">Capture Gate</label>
-            <select id="gate" name="gate" value={formData.gate} onChange={handleChange}>
-              <option value={0}>Gate 0 - Identified</option>
-              <option value={1}>Gate 1 - Qualified</option>
-              <option value={2}>Gate 2 - Capture</option>
-              <option value={3}>Gate 3 - Proposal</option>
-            </select>
-            <p className="field-help">
-              Start broad at Gate 0. As you learn more, move the gate forward and add stakeholders/evidence.
-            </p>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="timeline">Timeline / Key Dates</label>
-            <input
-              type="text"
-              id="timeline"
-              name="timeline"
-              value={formData.timeline}
-              onChange={handleChange}
-              placeholder="e.g., RFP Q3 2024, Proposal due 30 days"
-            />
-          </div>
-
-          <div className="form-section-divider" />
-
-          <div className="form-group">
-            <label htmlFor="description">Opportunity Description *</label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder={
-                useUploadedRfp && formData.rfpFileName
-                  ? `Using uploaded RFP: ${formData.rfpFileName}`
-                  : 'Describe the opportunity, scope, and key requirements...'
-              }
-              rows="6"
-              disabled={useUploadedRfp && Boolean(formData.rfpSummary)}
-              required={!useUploadedRfp}
-            />
-
-            <div className="rfp-upload-row">
-              <div className="rfp-upload-left">
-                <span className="rfp-upload-label">Or upload the RFP (PDF, DOCX, TXT)</span>
-                <input
-                  type="file"
-                  accept=".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown"
-                  onChange={handleRfpFileChange}
-                  disabled={rfpUploading || loading}
-                />
-                <p className="field-help">
-                  {formData.rfpFileName
-                    ? `Attached: ${formData.rfpFileName} (a structured summary will be used for analysis).`
-                    : 'Upload the RFP and we will extract + summarize it for analysis.'}
-                </p>
-                {rfpUploading && <p className="field-help">Extracting + summarizing...</p>}
+                >
+                  <option value="">Select an agency</option>
+                  {agencyOptions.map((agencyOption) => (
+                    <option key={agencyOption} value={agencyOption}>
+                      {agencyOption}
+                    </option>
+                  ))}
+                </select>
+                {formData.agency === 'Other' && (
+                  <input
+                    type="text"
+                    id="customAgency"
+                    name="customAgency"
+                    value={formData.customAgency}
+                    onChange={handleChange}
+                    placeholder="Enter agency name"
+                    required
+                  />
+                )}
               </div>
 
-              {formData.rfpFileName && (
-                <div className="rfp-upload-actions">
-                  <label className="rfp-upload-toggle">
-                    <input
-                      type="checkbox"
-                      checked={useUploadedRfp}
-                      onChange={(e) => setUseUploadedRfp(e.target.checked)}
-                    />
-                    Use upload
-                  </label>
+              <div className="form-group">
+                <label htmlFor="contractValue">Contract Value</label>
+                <select
+                  id="contractValue"
+                  name="contractValue"
+                  value={formData.contractValue}
+                  onChange={handleChange}
+                >
+                  <option value="<5M">&lt; $5M</option>
+                  <option value="5-50M">$5M - $50M</option>
+                  <option value="50-200M">$50M - $200M</option>
+                  <option value="200M+">$200M+</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Capture Gate</label>
+              <div className="gate-picker">
+                {[
+                  { value: 0, label: 'Gate 0', sublabel: 'Awareness', desc: 'Just discovered — quick fit check only' },
+                  { value: 1, label: 'Gate 1', sublabel: 'Qualify', desc: 'Deciding whether to invest resources' },
+                  { value: 2, label: 'Gate 2', sublabel: 'Capture', desc: 'Actively shaping and pursuing to win' },
+                  { value: 3, label: 'Gate 3', sublabel: 'Proposal', desc: 'RFP out or imminent — writing to win' },
+                ].map((g) => (
+                  <button
+                    key={g.value}
+                    type="button"
+                    className={`gate-card${Number(formData.gate) === g.value ? ' selected' : ''}`}
+                    onClick={() => setFormData((prev) => ({ ...prev, gate: g.value }))}
+                  >
+                    <span className="gate-card-label">{g.label}</span>
+                    <span className="gate-card-sublabel">{g.sublabel}</span>
+                    <span className="gate-card-desc">{g.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="description">Description *
+                <span className="field-ai-tip">most influential field</span>
+              </label>
+
+              {useUploadedRfp && formData.rfpFileName ? (
+                <div className="rfp-active-banner">
+                  <div className="rfp-active-info">
+                    <strong>{formData.rfpFileName}</strong>
+                    <span className="rfp-active-sub">RFP uploaded — AI will use the extracted summary as the primary source of truth.</span>
+                  </div>
                   <button type="button" className="btn btn-secondary rfp-clear" onClick={clearRfpUpload}>
                     Remove
                   </button>
                 </div>
+              ) : (
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Describe the scope, requirements, and anything you know about what they're looking for. More detail = better AI analysis."
+                  rows="6"
+                  required
+                />
+              )}
+
+              {!useUploadedRfp && (
+                <div className="rfp-upload-row">
+                  <span className="rfp-upload-label">Have the RFP? Upload it instead (PDF, DOCX, TXT)</span>
+                  <input
+                    type="file"
+                    accept=".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown"
+                    onChange={handleRfpFileChange}
+                    disabled={rfpUploading || loading}
+                  />
+                  {rfpUploading && <p className="field-help">Extracting + summarizing RFP…</p>}
+                </div>
               )}
             </div>
+          </div>
+
+          {/* ── Zone 2: Enrichment — optional but valuable ───────────── */}
+          <div className="form-zone-divider">
+            <span>Enrich the analysis <span className="form-zone-divider-hint">optional — add what you know</span></span>
+          </div>
+
+          <div className="form-zone form-zone-enrich">
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="vehicle">Vehicle / Contract Type</label>
+                <select
+                  id="vehicle"
+                  name="vehicle"
+                  value={formData.vehicle}
+                  onChange={handleChange}
+                >
+                  <option value="">Unknown / TBD</option>
+                  {vehicleOptions.map((vehicleOption) => (
+                    <option key={vehicleOption} value={vehicleOption}>
+                      {vehicleOption}
+                    </option>
+                  ))}
+                </select>
+                {formData.vehicle === 'Other' && (
+                  <input
+                    type="text"
+                    id="customVehicle"
+                    name="customVehicle"
+                    value={formData.customVehicle}
+                    onChange={handleChange}
+                    placeholder="Enter contract type"
+                  />
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="setAside">Set-Aside Type</label>
+                <select
+                  id="setAside"
+                  name="setAside"
+                  value={formData.setAside}
+                  onChange={handleChange}
+                >
+                  <option value="None">Full &amp; Open (Unrestricted)</option>
+                  <option value="Small Business">Small Business</option>
+                  <option value="SDVOSB">SDVOSB</option>
+                  <option value="8(a)">8(a)</option>
+                  <option value="WOSB">WOSB</option>
+                  <option value="HUBZone">HUBZone</option>
+                  <option value="VOSB">VOSB</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="timeline">Timeline / Key Dates</label>
+              <input
+                type="text"
+                id="timeline"
+                name="timeline"
+                value={formData.timeline}
+                onChange={handleChange}
+                placeholder="e.g., RFP expected Q3 2026, proposals due 30 days after"
+              />
+            </div>
+
           </div>
 
           <div className={`collapsible-section ${collapsedSections.evaluation ? 'collapsed' : ''}`}>
@@ -581,8 +800,8 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
               onClick={() => toggleSection('evaluation')}
             >
               <div>
-                <h2>Evaluation</h2>
-                <span className="optional-label">Optional</span>
+                <div className="section-title-row"><h2>Evaluation</h2><span className="optional-label">Optional</span></div>
+                <p className="section-hint">How will the winner be scored? LPTA vs. Best Value changes pricing strategy completely.</p>
               </div>
               <span className="collapse-indicator">
                 {collapsedSections.evaluation ? '+' : '−'}
@@ -655,8 +874,8 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
               onClick={() => toggleSection('knownRelationships')}
             >
               <div>
-                <h2>Known Relationships / Access Signals</h2>
-                <span className="optional-label">Optional</span>
+                <div className="section-title-row"><h2>Known Relationships / Access Signals</h2><span className="optional-label">Optional</span></div>
+                <p className="section-hint">Incumbent presence, prior engagement, or insider intel that shapes your competitive position.</p>
               </div>
               <span className="collapse-indicator">
                 {collapsedSections.knownRelationships ? '+' : '−'}
@@ -688,8 +907,8 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
               onClick={() => toggleSection('stakeholders')}
             >
               <div>
-                <h2>Stakeholders</h2>
-                <span className="optional-label">Optional</span>
+                <div className="section-title-row"><h2>Stakeholders</h2><span className="optional-label">Optional</span></div>
+                <p className="section-hint">Agency contacts involved in this pursuit — the AI uses these to assess relationship strength.</p>
               </div>
               <span className="collapse-indicator">
                 {collapsedSections.stakeholders ? '+' : '−'}
@@ -697,123 +916,17 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
             </button>
             <div className="collapsible-body">
               <div className="form-group">
-                <label>Stakeholders (Optional)</label>
                 <p className="field-help">
-                  Track who matters and how strong the relationship is. This becomes input for "who should we talk to next?"
+                  Select contacts from your relationship book who are involved in this opportunity. Manage your contacts in the Company Profile.
                 </p>
-
-            {formData.stakeholders.length > 0 && (
-              <div className="table-wrap">
-                <table className="mini-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Role / Office</th>
-                      <th>Strength</th>
-                      <th>Next Touch</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {formData.stakeholders.map((person, idx) => (
-                      <tr key={`${person.name}-${idx}`}>
-                        <td>{person.name}</td>
-                        <td>{[person.role, person.office].filter(Boolean).join(' • ')}</td>
-                        <td className="mono">{person.relationshipStrength}</td>
-                        <td className="mono">{person.nextTouch || '—'}</td>
-                        <td>
-                          <button type="button" className="btn btn-secondary btn-compact" onClick={() => removeStakeholder(idx)}>
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-
-            <div className="stakeholder-form">
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Name *</label>
-                  <input
-                    type="text"
-                    value={stakeholderDraft.name}
-                    onChange={(e) => setStakeholderDraft((prev) => ({ ...prev, name: e.target.value }))}
-                    placeholder="e.g., Jane Doe"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Relationship Strength</label>
-                  <select
-                    value={stakeholderDraft.relationshipStrength}
-                    onChange={(e) => setStakeholderDraft((prev) => ({ ...prev, relationshipStrength: e.target.value }))}
-                  >
-                    <option value="weak">Weak</option>
-                    <option value="moderate">Moderate</option>
-                    <option value="strong">Strong</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Role</label>
-                  <input
-                    type="text"
-                    value={stakeholderDraft.role}
-                    onChange={(e) => setStakeholderDraft((prev) => ({ ...prev, role: e.target.value }))}
-                    placeholder="e.g., Program Manager"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Office</label>
-                  <input
-                    type="text"
-                    value={stakeholderDraft.office}
-                    onChange={(e) => setStakeholderDraft((prev) => ({ ...prev, office: e.target.value }))}
-                    placeholder="e.g., VA OIT"
-                  />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Last Touch</label>
-                  <input
-                    type="date"
-                    value={stakeholderDraft.lastTouch}
-                    onChange={(e) => setStakeholderDraft((prev) => ({ ...prev, lastTouch: e.target.value }))}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Next Touch</label>
-                  <input
-                    type="date"
-                    value={stakeholderDraft.nextTouch}
-                    onChange={(e) => setStakeholderDraft((prev) => ({ ...prev, nextTouch: e.target.value }))}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label>Notes</label>
-                <textarea
-                  value={stakeholderDraft.notes}
-                  onChange={(e) => setStakeholderDraft((prev) => ({ ...prev, notes: e.target.value }))}
-                  rows="2"
-                  placeholder="What matters, what they care about, context from interactions..."
+                <ContactPicker
+                  selected={formData.stakeholders}
+                  onChange={(stakeholders) => setFormData((prev) => ({ ...prev, stakeholders }))}
+                  agency={formData.agency}
                 />
               </div>
-
-              <button type="button" className="btn btn-secondary" onClick={addStakeholder}>
-                Add Stakeholder
-              </button>
             </div>
           </div>
-        </div>
-      </div>
 
           <div className={`collapsible-section ${collapsedSections.evidence ? 'collapsed' : ''}`}>
             <button
@@ -822,8 +935,8 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
               onClick={() => toggleSection('evidence')}
             >
               <div>
-                <h2>Sources / Evidence</h2>
-                <span className="optional-label">Optional</span>
+                <div className="section-title-row"><h2>Sources / Evidence</h2><span className="optional-label">Optional</span></div>
+                <p className="section-hint">SAM.gov notices, industry day notes, or intel that corroborates what you entered above.</p>
               </div>
               <span className="collapse-indicator">
                 {collapsedSections.evidence ? '+' : '−'}
@@ -910,8 +1023,8 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
               onClick={() => toggleSection('internalNotes')}
             >
               <div>
-                <h2>Internal Notes</h2>
-                <span className="optional-label">Optional</span>
+                <div className="section-title-row"><h2>Internal Notes</h2><span className="optional-label">Optional</span></div>
+                <p className="section-hint">Private context for your team — strategy hunches, red flags, or decisions already made.</p>
               </div>
               <span className="collapse-indicator">
                 {collapsedSections.internalNotes ? '+' : '−'}
@@ -933,6 +1046,29 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
           </div>
 
           {error && <div className="error-message">{error}</div>}
+
+          {/* Similar Past Pursuits — always shown; auto-suggest when editing, browse-all when creating */}
+          <div className={`collapsible-section ${collapsedSections.similarPursuits ? 'collapsed' : ''}`}>
+            <button
+              type="button"
+              className="collapsible-header"
+              onClick={() => toggleSection('similarPursuits')}
+            >
+              <div>
+                <div className="section-title-row"><h2>Similar Past Pursuits</h2><span className="optional-label">Optional</span></div>
+                <p className="section-hint">Link past bids you won or lost — the AI draws explicit lessons from them.</p>
+              </div>
+              <span className="collapse-indicator">
+                {collapsedSections.similarPursuits ? '+' : '−'}
+              </span>
+            </button>
+            <div className="collapsible-body">
+              <SimilarPursuitsSelector
+                opportunity={loadedOpportunity || { similarPursuits: formData.similarPursuits || [] }}
+                onSelectionChange={(ids) => setFormData((prev) => ({ ...prev, similarPursuits: ids }))}
+              />
+            </div>
+          </div>
 
           <div className="form-actions">
             <button type="submit" disabled={loading} className="btn btn-primary">

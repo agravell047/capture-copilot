@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getOpportunity } from '../api/opportunities'
 import OpportunityWorkspace from '../components/OpportunityWorkspace'
+import PostMortemModal from '../components/PostMortemModal'
 import { getOpportunityName } from '../utils/opportunities'
 import './OpportunityDetailPage.css'
 import '../OpportunityCaptureForm.css'
@@ -9,6 +10,9 @@ function OpportunityDetailPage({ opportunityId, onBackToPortfolio, onCreateOppor
   const [opportunity, setOpportunity] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [showPostMortem, setShowPostMortem] = useState(false)
+
+  const isClosed = opportunity && ['won', 'lost', 'no_bid', 'withdrew'].includes(opportunity.status)
 
   useEffect(() => {
     let ignore = false
@@ -62,10 +66,10 @@ function OpportunityDetailPage({ opportunityId, onBackToPortfolio, onCreateOppor
           <p>{error}</p>
           <div className="detail-empty-actions">
             <button type="button" className="btn btn-secondary" onClick={onBackToPortfolio}>
-              Back to Portfolio
+              Back to Dashboard
             </button>
             <button type="button" className="btn btn-primary" onClick={onCreateOpportunity}>
-              Create Opportunity
+              New Capture
             </button>
           </div>
         </div>
@@ -83,15 +87,38 @@ function OpportunityDetailPage({ opportunityId, onBackToPortfolio, onCreateOppor
 
         <div className="detail-actions">
           <button type="button" className="btn btn-secondary" onClick={onBackToPortfolio}>
-            Back to Portfolio
+            Back to Dashboard
           </button>
-          <button type="button" className="btn btn-primary" onClick={onEditOpportunity}>
-            Edit Opportunity
-          </button>
+          {!isClosed && (
+            <>
+              <button type="button" className="btn btn-secondary" onClick={() => setShowPostMortem(true)}>
+                Close Opportunity
+              </button>
+              <button type="button" className="btn btn-primary" onClick={onEditOpportunity}>
+                Edit Opportunity
+              </button>
+            </>
+          )}
+          {isClosed && (
+            <span className={`outcome-badge outcome-badge--${opportunity.status}`}>
+              {opportunity.status.replace('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+            </span>
+          )}
         </div>
       </div>
 
-      <OpportunityWorkspace opportunity={opportunity} onOpportunityChange={setOpportunity} showUpdateForm={false} />
+      <OpportunityWorkspace opportunity={opportunity} onOpportunityChange={setOpportunity} showUpdateForm={!isClosed} />
+
+      {showPostMortem && (
+        <PostMortemModal
+          opportunity={opportunity}
+          onClose={() => setShowPostMortem(false)}
+          onSaved={({ opportunity: updated }) => {
+            setOpportunity(updated)
+            setShowPostMortem(false)
+          }}
+        />
+      )}
     </div>
   )
 }

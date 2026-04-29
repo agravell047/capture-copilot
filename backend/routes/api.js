@@ -10,6 +10,9 @@ const proposalService = require('../services/proposal');
 const multer = require('multer');
 const rfpExtractService = require('../services/rfpExtract');
 const rfpIngestService = require('../services/rfpIngest');
+const pastPerformanceService = require('../services/pastPerformance');
+const { OUTCOMES, LOSS_REASONS, LESSON_TAGS } = require('../models/pastPerformance');
+const contactsService = require('../services/contacts');
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -86,7 +89,8 @@ router.get('/settings', async (req, res) => {
     res.json({
       hasOpenAiKey: Boolean(settings.openaiApiKey),
       model: settings.model || '',
-      baseUrl: settings.baseUrl || ''
+      baseUrl: settings.baseUrl || '',
+      systemPromptSuffix: settings.systemPromptSuffix || ''
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -99,7 +103,8 @@ router.post('/settings', async (req, res) => {
     res.json({
       hasOpenAiKey: Boolean(result.openaiApiKey),
       model: result.model || '',
-      baseUrl: result.baseUrl || ''
+      baseUrl: result.baseUrl || '',
+      systemPromptSuffix: result.systemPromptSuffix || ''
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -173,12 +178,33 @@ router.post('/opportunities', async (req, res) => {
   }
 });
 
+// Fields that can be updated without re-running AI analysis
+const METADATA_ONLY_FIELDS = new Set(['gate', 'status']);
+
 router.patch('/opportunities/:id', async (req, res) => {
   try {
     const opportunity = await opportunityStoreService.getOpportunityById(req.params.id);
 
     if (!opportunity) {
       return res.status(404).json({ error: 'Opportunity not found' });
+    }
+
+    // If the patch only touches metadata fields (e.g. gate, status from drag-and-drop),
+    // skip the LLM call and persist directly.
+    const patchKeys = Object.keys(req.body);
+    const isMetadataOnly = patchKeys.length > 0 && patchKeys.every((k) => METADATA_ONLY_FIELDS.has(k));
+
+    if (isMetadataOnly) {
+      const metaPatch = { ...req.body }
+      // Coerce gate to a number so it stays consistent with the rest of the data
+      if ('gate' in metaPatch) metaPatch.gate = Number(metaPatch.gate)
+      const updated = await opportunityStoreService.upsertOpportunity({
+        ...opportunity,
+        ...metaPatch,
+        id: opportunity.id,
+        updatedAt: new Date().toISOString()
+      });
+      return res.json(formatOpportunityResponse(updated));
     }
 
     const updatedOpportunity = await analyzeAndPersistOpportunity({
@@ -304,6 +330,154 @@ router.post('/generate-proposal', async (req, res) => {
     const { rfpData } = req.body;
     const result = await proposalService.generate(rfpData);
     res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ── Past Performance ──────────────────────────────────────────────────────────
+
+// GET /api/past-performance/meta — return fixed tag/reason enums for the UI
+router.get('/past-performance/meta', (_req, res) => {
+  res.json({ outcomes: OUTCOMES, lossReasons: LOSS_REASONS, lessonTags: LESSON_TAGS });
+});
+
+// GET /api/past-performance — list all records
+router.get('/past-performance', async (_req, res) => {
+  try {
+    const records = await pastPerformanceService.listPastPerformance();
+    res.json(records);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// GET /api/past-performance/:id — single record
+router.get('/past-performance/:id', async (req, res) => {
+  try {
+    const record = await pastPerformanceService.getPastPerformanceById(req.params.id);
+    if (!record) return res.status(404).json({ error: 'Record not found' });
+    res.json(record);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/opportunities/:id/close — mark opportunity outcome + create past performance record
+router.post('/opportunities/:id/close', async (req, res) => {
+  try {
+    const opportunity = await opportunityStoreService.getOpportunityById(req.params.id);
+    if (!opportunity) return res.status(404).json({ error: 'Opportunity not found' });
+
+    const { outcome, lossReason, lessonsLearned, notes } = req.body || {};
+    if (!OUTCOMES.includes(outcome)) {
+      return res.status(400).json({ error: `outcome must be one of: ${OUTCOMES.join(', ')}` });
+    }
+
+    // Persist outcome on the opportunity itself (changes status)
+    const updatedOpportunity = await opportunityStoreService.upsertOpportunity({
+      ...opportunity,
+      status: outcome,
+      outcome,
+      outcomeDetails: { lossReason: lossReason || null, notes: notes || '' }
+    });
+
+    // Create the past performance record linked to this opportunity
+    const companyContext = await companyContextService.getCompanyContext().catch(() => ({}));
+    const ppRecord = await pastPerformanceService.createPastPerformance({
+      opportunityId: opportunity.id,
+      opportunityName: opportunity.opportunityName || opportunity.name,
+      agency: opportunity.agency,
+      vehicle: opportunity.vehicle,
+      setAside: opportunity.setAside,
+      contractValue: opportunity.contractValue,
+      capabilities: companyContext.capabilities || [],
+      outcome,
+      lossReason: lossReason || null,
+      lessonsLearned: lessonsLearned || [],
+      notes: notes || '',
+      closedAt: new Date().toISOString()
+    });
+
+    res.json({ opportunity: updatedOpportunity, pastPerformance: ppRecord });
+  } catch (error) {
+    const status = error.message.includes('already exists') ? 409 : 400;
+    res.status(status).json({ error: error.message });
+  }
+});
+
+// GET /api/opportunities/:id/similar-past — suggest up to 3 similar past performance records
+router.get('/opportunities/:id/similar-past', async (req, res) => {
+  try {
+    const opportunity = await opportunityStoreService.getOpportunityById(req.params.id);
+    if (!opportunity) return res.status(404).json({ error: 'Opportunity not found' });
+    const similar = await pastPerformanceService.findSimilar(opportunity, 3);
+    res.json(similar);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// PATCH /api/opportunities/:id/similar-pursuits — save the user's confirmed selection
+router.patch('/opportunities/:id/similar-pursuits', async (req, res) => {
+  try {
+    const opportunity = await opportunityStoreService.getOpportunityById(req.params.id);
+    if (!opportunity) return res.status(404).json({ error: 'Opportunity not found' });
+
+    const { similarPursuits } = req.body || {};
+    if (!Array.isArray(similarPursuits)) {
+      return res.status(400).json({ error: 'similarPursuits must be an array of IDs' });
+    }
+
+    const updated = await opportunityStoreService.upsertOpportunity({
+      ...opportunity,
+      similarPursuits: similarPursuits.slice(0, 3)
+    });
+
+    res.json(updated);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// ── Contacts ──────────────────────────────────────────────────────────────────
+
+// GET /api/contacts
+router.get('/contacts', (_req, res) => {
+  try {
+    res.json(contactsService.listContacts());
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/contacts
+router.post('/contacts', (req, res) => {
+  try {
+    const contact = contactsService.createContact(req.body);
+    res.status(201).json(contact);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// PUT /api/contacts/:id
+router.put('/contacts/:id', (req, res) => {
+  try {
+    const updated = contactsService.updateContact(req.params.id, req.body);
+    if (!updated) return res.status(404).json({ error: 'Contact not found' });
+    res.json(updated);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// DELETE /api/contacts/:id
+router.delete('/contacts/:id', (req, res) => {
+  try {
+    const deleted = contactsService.deleteContact(req.params.id);
+    if (!deleted) return res.status(404).json({ error: 'Contact not found' });
+    res.json({ success: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -4,37 +4,51 @@ const settingsService = require('../services/settings');
 const MOCK_RESPONSES = {
   'opportunity-analysis': {
     recommendation: 'GO',
-    pWin: 65,
-    fitSummary: 'Good fit on vehicle and scope, existing relationships provide advantage, but timeline is tight.',
+    pWin: 52,
+    fitSummary: "Strong vehicle and set-aside fit — OASIS+ is pre-qualified and SDVOSB set-aside reduces the competitive field. Core COBOL modernization scope maps directly to Apex's declared capabilities, with CMS and VA analog past performance as the credibility bridge. The key qualification question is whether SSA will accept comparable benefits-platform references in lieu of direct SSA history.",
     fitDetails: [
-      'IDIQ vehicle and SDVOSB set-aside align with company posture and reduces entry friction',
-      'Known access signals suggest early traction (program lead touch + incumbent-adjacent teammate)',
-      'FedRAMP/ATO expectations are achievable but need a clear compliance plan or partner support'
+      'OASIS+ vehicle is pre-qualified — Apex is registered and in good standing, eliminating vehicle access risk at Gate 1.',
+      'SDVOSB set-aside confirmed via Sources Sought — significantly narrows the competitive field to SDVOSB-eligible primes only.',
+      'COBOL-to-microservices modernization with AWS GovCloud migration is a declared core capability with direct delivery history.',
+      'CMS Medicaid Enterprise Systems engagement is the strongest past performance analog — benefits adjudication at scale with FedRAMP and Section 508 requirements is functionally comparable.',
+      'FedRAMP Moderate and DevSecOps are named PWS requirements that match Apex core delivery capabilities exactly.',
+      'No direct SSA past performance — the 30%-weighted past performance criterion is the primary proposal risk at this stage.'
     ],
-    recommendationRationale: 'Proceed as prime if you can confirm buyer priorities and lock a compliance plan quickly. Timeline is workable, but only with early capture discipline and targeted teaming for any gaps.',
-    pWinRationale: 'Moderate pWin driven by vehicle fit and access signals, reduced by compliance and incumbent competition.',
-    gaps: [
-      'FedRAMP certification - we need to acquire or partner',
-      'Specific domain expertise in combat systems integration',
-      'Proven experience with this specific agency contract office'
+    recommendationRationale: 'Qualify and pursue as SDVOSB prime. Vehicle fit, set-aside alignment, and scope match are all strong enough to justify Gate 1 investment. The gaps — SSA past performance and buyer relationship — are real but addressable before a September RFP drop with the right teaming strategy. Do not commit full capture resources yet: complete the qualification actions below first, particularly identifying a teaming partner with active SSA task order experience.',
+    pWinRationale: 'Conservative Gate 1 estimate reflecting strong structural fit (vehicle, set-aside, scope) against the two primary drag factors: absence of SSA-specific past performance weighted at 30% and no established buyer relationship. pWin is upgradable to 65-70% if teaming brings SSA incumbent access and stakeholder introductions are secured before RFP drop.',
+    nextSteps: [
+      "Request an industry engagement meeting with SSA OIT — use Marcus Webb's Industry Day contact (Deputy CIO) as the entry point. Target before May 15.",
+      'Identify 1-2 teaming partner candidates with active SSA task orders. Prioritize firms with SSA COBOL or mainframe modernization experience.',
+      'Pull all active SSA IDIQ vehicles and award data on SAM.gov to map the competitive landscape before committing further resources.',
+      "Have Priya Nair draft a one-page technical brief on Apex's COBOL-to-cloud methodology addressing the 24/7 continuity-of-operations constraint — this will be the leave-behind for the SSA OIT meeting.",
+      'Go/No-Go checkpoint: reconvene in 3 weeks to assess whether a credible teaming path and buyer engagement are achievable before RFP drop.'
     ],
     strengths: [
-      'Existing relationships with DIA contracting office',
-      'IDIQ vehicle provides flexibility',
-      'Strong cloud infrastructure experience',
-      'Key personnel have worked with agency before'
+      'OASIS+ vehicle pre-qualified — no access risk',
+      'SDVOSB set-aside confirmed, reducing the competitive field',
+      'COBOL modernization and AWS GovCloud migration are declared core capabilities',
+      'CMS and VA analog past performance are high-credibility comparables for a benefits agency',
+      'FedRAMP Moderate and DevSecOps requirements match Apex core delivery exactly'
+    ],
+    gaps: [
+      { area: 'SSA Past Performance', detail: 'No direct SSA delivery history. Past performance is weighted at 30% and evaluators will compare references directly against the SSA benefits and disability claims context.', severity: 'high', mitigation: 'Identify a teaming partner with an active or recent SSA task order. Position CMS Medicaid Enterprise work as the primary analog — document the functional parallels between Medicaid adjudication and disability claims processing explicitly.' },
+      { area: 'Buyer Relationship', detail: 'No established relationship with the SSA program office, contracting officer, or technical authority beyond a brief Industry Day encounter.', severity: 'high', mitigation: "Request a one-on-one industry engagement meeting with SSA OIT leadership. Use Marcus Webb's Industry Day contact (Deputy CIO) as the warm introduction path." },
+      { area: 'Competitive Landscape', detail: 'SSA modernization historically attracts large prime contractors. Incumbent presence and large-prime teaming posture are not yet mapped.', severity: 'medium', mitigation: 'Pull active SSA IDIQ vehicle award data on SAM.gov. Confirm whether the SDVOSB set-aside effectively limits the field before committing full capture investment.' }
     ],
     risks: [
-      'Tight 45-day proposal timeline could impact quality',
-      'Incumbent (TechCorp) has significant relationship advantages',
-      'Large contract value ($50-200M) likely attracts strong competitors',
-      'May need to subcontract cybersecurity components'
+      'No SSA past performance reference — 30% evaluation weight makes this the single largest proposal risk.',
+      'Buyer relationship is nascent — no established trust with the program office or contracting officer.',
+      'Legacy COBOL scope may attract large established contractors with existing SSA mainframe access.',
+      'Continuity-of-operations requirement (24/7 claims processing) adds delivery complexity and proposal narrative risk.',
+      'September RFP timeline leaves ~5 months for capture — adequate but requires immediate relationship-building to be effective.'
     ],
-    nextSteps: [
-      'Confirm the contracting office and buying activity (office + set-aside posture) and validate vehicle usage',
-      'Schedule a technical discovery with the program office to validate integration and ATO expectations',
-      'Draft a lightweight win strategy: discriminator list + proof points + likely evaluation hooks',
-      'Identify and pre-qualify a FedRAMP/ATO partner if required'
+    proposedTeam: [
+      { memberId: 'tm-002', proposedRole: 'Capture Lead', rationale: 'James Okafor owns the capture strategy and pipeline — the right person to manage this pursuit from qualification through proposal.' },
+      { memberId: 'tm-003', proposedRole: 'Technical Volume Lead', rationale: "Priya Nair's cloud architecture and FedRAMP expertise are central to the technical approach narrative for SSA's GovCloud migration." },
+      { memberId: 'tm-004', proposedRole: 'Program Manager', rationale: "Marcus Webb has the existing Industry Day contact at SSA OIT and the federal CPARS reporting background needed to lead program delivery." },
+      { memberId: 'tm-005', proposedRole: 'Proposal Manager', rationale: 'Sofia Reyes owns the compliance matrix and color review process — essential for a Best Value Tradeoff evaluation with four weighted criteria.' },
+      { memberId: 'tm-022', proposedRole: 'Key Personnel — Legacy Migration Lead', rationale: "Patrick O'Brien's COBOL modernization and Java migration background directly addresses the 30-year mainframe-to-microservices core requirement." },
+      { memberId: 'tm-008', proposedRole: 'Key Personnel — DevSecOps Lead', rationale: "Alicia Fontaine's ATO pipeline automation and SAST/DAST credentials are directly responsive to the FedRAMP Moderate and DevSecOps PWS requirements." }
     ]
   },
   'analyze-rfp': {

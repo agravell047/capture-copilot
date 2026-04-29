@@ -80,3 +80,24 @@ export const ingestRfp = async (file) => {
 
   return parseResponse(response)
 }
+
+// ── Past Performance ──────────────────────────────────────────────────────────
+
+export const getPastPerformanceMeta = () => request('/past-performance/meta')
+
+export const listPastPerformance = () => request('/past-performance')
+
+export const getSimilarPastPursuits = (opportunityId) =>
+  request(`/opportunities/${opportunityId}/similar-past`)
+
+export const saveSimilarPursuits = (opportunityId, similarPursuits) =>
+  request(`/opportunities/${opportunityId}/similar-pursuits`, {
+    method: 'PATCH',
+    body: JSON.stringify({ similarPursuits })
+  })
+
+export const closeOpportunity = (opportunityId, payload) =>
+  request(`/opportunities/${opportunityId}/close`, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  })

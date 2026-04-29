@@ -1,28 +1,98 @@
+const fs = require('fs');
+const path = require('path');
 const { callLLM } = require('../llm/client');
 const companyContextService = require('./companyContext');
+const settingsService = require('./settings');
+const pastPerformanceService = require('./pastPerformance');
 
-const SYSTEM_PROMPT = `You are a federal capture strategist evaluating whether a company should pursue a federal opportunity.
+const TEAM_DATA_PATH = path.join(__dirname, '../data/teamData.json');
 
-Your role is to assess ONLY:
+// Load team keyed by ID for post-AI mapping (name/email never sent to AI)
+const loadTeamById = () => {
+  try {
+    const raw = JSON.parse(fs.readFileSync(TEAM_DATA_PATH, 'utf8'));
+    return Object.fromEntries(raw.map((m) => [m.id, m]));
+  } catch {
+    return {};
+  }
+};
+
+const GATE_CONTEXT = {
+  0: {
+    stage: 'Gate 0 — Awareness',
+    focus: `This opportunity is in early awareness. The company just learned about it.
+PRIORITY QUESTIONS at this stage:
+- Is this worth tracking at all? Quick fit check only.
+- Does the agency, vehicle, and rough scope match the company's wheelhouse?
+- Is there any existing relationship or past work with this agency?
+- Is the set-aside compatible?
+DO NOT over-analyze. Keep recommendation and pWin appropriately tentative — data is sparse.
+nextSteps should be intelligence-gathering actions (research the agency, identify contacts, check vehicle eligibility).`,
+  },
+  1: {
+    stage: 'Gate 1 — Qualify',
+    focus: `This opportunity is being qualified. The company is deciding whether to invest real capture resources.
+PRIORITY QUESTIONS at this stage:
+- Do we have a realistic path to win (relationships, past performance, vehicle access)?
+- Who is the competition and do we have a differentiated position?
+- Is the set-aside and contract value right for prime vs. sub?
+- Are there any early shaping opportunities?
+pWin should reflect early intelligence — be conservative. Flag where data is missing.
+nextSteps should focus on relationship-building, intel-gathering, and go/no-go decision criteria.`,
+  },
+  2: {
+    stage: 'Gate 2 — Capture',
+    focus: `This opportunity is in active capture. The company has committed resources and is shaping to win.
+PRIORITY QUESTIONS at this stage:
+- What is the win strategy and discriminators?
+- Who are we teaming with and does the team close all gaps?
+- Are we shaping the requirement (briefings, RFI responses, white papers)?
+- What does the incumbent look like and how do we beat them?
+- How are evaluation criteria likely to be weighted and are we positioned against them?
+pWin should reflect capture progress — relationships, teaming, shaping actions completed.
+nextSteps should be specific capture actions: meetings booked, white papers, teaming agreements, orals prep.`,
+  },
+  3: {
+    stage: 'Gate 3 — Proposal',
+    focus: `This opportunity is at proposal stage. An RFP is out or imminent.
+PRIORITY QUESTIONS at this stage:
+- Are we fully positioned against every evaluation criterion?
+- Is the proposal team stood up and the timeline executable?
+- What is the pricing strategy and is it competitive?
+- Are key personnel identified and available?
+- What are the highest-risk areas in the proposal?
+pWin should reflect actual positioning — be specific about what will win or lose this.
+nextSteps must be proposal-execution actions with urgency: volume assignments, review schedule, pricing sign-off, orals prep.`,
+  },
+};
+
+const buildSystemPrompt = (gate) => {
+  const gateNum = Number.isFinite(Number(gate)) ? Math.min(Math.max(Number(gate), 0), 3) : 0;
+  const ctx = GATE_CONTEXT[gateNum];
+  return `You are a federal capture strategist evaluating a federal opportunity at ${ctx.stage}.
+
+${ctx.focus}
+
+ALWAYS ASSESS (regardless of gate):
 1. VEHICLE: Does the company have access?
 2. SET-ASIDE: Is it compatible with company designation?
 3. CONTRACT VALUE: Impact on prime vs subcontractor likelihood
 4. SCOPE ALIGNMENT: Does description match company capabilities?
 5. RELATIONSHIPS: Any known stakeholders or advantages?
-6. EVALUATION: How are they scoring the winner (orals, case study, etc.) and what does that imply?
+6. EVALUATION: How are they scoring the winner and what does that imply?
 7. TIMELINE: Impact on feasibility and pWin
 8. EVIDENCE: Use provided evidence notes/summaries when available
-9. EVOLVING CONTEXT: Do later updates improve or weaken the pursuit case?
+9. EVOLVING CONTEXT: Treat updates as higher-priority than stale assumptions
+10. PAST PERFORMANCE PATTERNS: If similarPastPursuits is provided, reference specific lessons explicitly. Do not fabricate.
+11. TEAM FIT: company.teamMembers is pre-filtered by relevance from a team of company.teamSize. Name specific individuals for key roles.
 
 IMPORTANT RULES:
-- pWin must be 0-100, realistic and conservative
+- pWin must be 0-100, realistic and conservative — reflect the actual stage of capture maturity
 - Recommendation: GO (pursue as prime), SUBCONTRACT (pursue as sub), or NO_GO
-- Avoid generic statements and be specific about gaps, strengths, and risks
+- Avoid generic statements — be specific to this agency, scope, and company
 - Base ALL reasoning ONLY on provided data
-- Treat updates as higher-priority context than stale assumptions in the original opportunity when they conflict
-- Explicitly incorporate meaningful updates into the reasoning behind pWin, strengths, gaps, and risks
-- Keep the output format exactly the same even when updates are present
 - Return ONLY valid JSON with NO additional text`;
+};
 
 const toCompactString = (value) => {
   if (value === null || value === undefined) return '';
@@ -55,10 +125,11 @@ const buildOpportunityContext = (formData = {}) => ({
   internalNotes: formData.notes || 'None'
 });
 
-const buildPromptPayload = ({ opportunity, company, updates }) => ({
+const buildPromptPayload = ({ opportunity, company, updates, similarPastPursuits }) => ({
   opportunity,
   company,
-  updates
+  updates,
+  ...(similarPastPursuits && similarPastPursuits.length > 0 ? { similarPastPursuits } : {})
 });
 
 const analyzeOpportunity = async (formData, options = {}) => {
@@ -98,16 +169,60 @@ const analyzeOpportunity = async (formData, options = {}) => {
     console.warn('[Opportunity Analysis] Could not load company context:', error.message);
   }
 
-  // Keep prompt bounded even if the company profile is very large.
+  // Score each team member by relevance to this opportunity, then send the top 30.
+  // This ensures the AI sees the right people (not a random slice) regardless of team size.
   if (companyContext && typeof companyContext === 'object') {
-    if (Array.isArray(companyContext.teamMembers)) {
+    // Normalise capabilities: backend stores {label, tier} objects; flatten to strings for prompt
+    if (Array.isArray(companyContext.capabilities)) {
       companyContext = {
         ...companyContext,
-        teamMembers: companyContext.teamMembers.slice(0, 20).map((member) => ({
-          name: member.name,
+        // Send tiers to the AI so it knows what we lead with
+        capabilities: companyContext.capabilities.map((c) =>
+          typeof c === 'string' ? c : `[${c.tier || 'core'}] ${c.label}`
+        )
+      };
+    }
+
+    if (Array.isArray(companyContext.teamMembers)) {
+      const capStrings = Array.isArray(companyContext.capabilities)
+        ? companyContext.capabilities.map((c) => (typeof c === 'string' ? c : c.label || ''))
+        : [];
+      const oppKeywords = [
+        formData.agency,
+        formData.description,
+        formData.vehicle,
+        formData.setAside,
+        ...capStrings
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase()
+        .split(/\W+/)
+        .filter((w) => w.length > 3);
+
+      const scored = companyContext.teamMembers.map((member) => {
+        const memberText = [
+          member.role,
+          ...(Array.isArray(member.skills) ? member.skills : [])
+        ]
+          .join(' ')
+          .toLowerCase();
+        const score = oppKeywords.reduce((acc, kw) => acc + (memberText.includes(kw) ? 1 : 0), 0);
+        return { member, score };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+
+      companyContext = {
+        ...companyContext,
+        identity: companyContext.identity || undefined,
+        teamSize: companyContext.teamMembers.length,
+        // Privacy: only send ID + role + skills to AI — name and email are never transmitted
+        teamMembers: scored.slice(0, 30).map(({ member }) => ({
+          id: member.id,
           role: member.role,
-          experienceYears: member.experienceYears,
-          skills: Array.isArray(member.skills) ? member.skills.slice(0, 8) : []
+          skills: Array.isArray(member.skills) ? member.skills.slice(0, 5) : [],
+          experience: member.experience
         }))
       };
     }
@@ -115,18 +230,44 @@ const analyzeOpportunity = async (formData, options = {}) => {
 
   const opportunityJson = buildOpportunityContext(formData);
   const updatesForPrompt = includeUpdates ? opportunityUpdates : [];
+
+  // Load past performance for the confirmed similar pursuits (max 3, compacted for prompt)
+  let similarPastPursuits = [];
+  try {
+    const confirmedIds = Array.isArray(formData.similarPursuits) ? formData.similarPursuits.slice(0, 3) : [];
+    if (confirmedIds.length > 0) {
+      const allPP = await pastPerformanceService.listPastPerformance();
+      similarPastPursuits = allPP
+        .filter((r) => confirmedIds.includes(r.id))
+        .map((r) => ({
+          opportunityName: r.opportunityName,
+          agency: r.agency,
+          vehicle: r.vehicle,
+          setAside: r.setAside,
+          contractValue: r.contractValue,
+          outcome: r.outcome,
+          lossReason: r.lossReason || undefined,
+          lessonsLearned: r.lessonsLearned.slice(0, 4),
+          notes: r.notes ? r.notes.slice(0, 200) : undefined
+        }));
+    }
+  } catch (ppError) {
+    console.warn('[Opportunity Analysis] Could not load past performance:', ppError.message);
+  }
+
   const promptPayload = buildPromptPayload({
     opportunity: opportunityJson,
     company: companyContext,
-    updates: updatesForPrompt
+    updates: updatesForPrompt,
+    similarPastPursuits
   });
 
-  const prompt = `Evaluate this federal opportunity:
+  const prompt = `Evaluate this federal opportunity at ${GATE_CONTEXT[Math.min(Math.max(Number(gate), 0), 3)].stage}:
 
 ${JSON.stringify(promptPayload, null, 2)}
 
-Provide a go/no-go recommendation with pWin score and analysis. Consider company context when assessing fit, capabilities, feasibility, and evolving context over time.
-If an rfpSummary is present, use it as the primary source of truth for scope/requirements (do not depend on raw RFP text).
+Provide a go/no-go recommendation with pWin score and analysis. Let the gate stage drive what you focus on.
+If an rfpSummary is present, use it as the primary source of truth for scope/requirements.
 
 Return ONLY valid JSON. Always include ALL keys below. Keep content rich but compact.
 
@@ -137,17 +278,36 @@ REQUIRED JSON format (always return this exact shape):
   "fitSummary": "string - one sentence on overall fit (used as the headline)",
   "fitDetails": ["2-5 short bullets explaining why (specific)"],
   "recommendationRationale": "2-4 sentences explaining the recommendation (not just the same as fitSummary)",
-  "nextSteps": ["3-6 specific next steps tailored to this opportunity"],
-  "pWinRationale": "1-2 sentences explaining drivers of pWin",
+  "nextSteps": ["3-6 specific next steps tailored to this opportunity AND gate stage"],
+  "pWinRationale": "1-2 sentences explaining drivers of pWin at this stage of capture",
   "gaps": [{"area":"string","detail":"string","severity":"high|medium|low","mitigation":"string"}],
   "strengths": ["strength1", "strength2"],
-  "risks": ["risk1", "risk2"]
+  "risks": ["risk1", "risk2"],
+  "proposedTeam": [{"memberId":"tm-XXX","proposedRole":"string (the role on this proposal, e.g. Technical Volume Lead)","rationale":"1 sentence why this person fits this opportunity"}]
 }`;
+
+  const systemPrompt = buildSystemPrompt(gate);
+  const settings = await settingsService.getSettings();
+  const finalSystemPrompt = settings.systemPromptSuffix
+    ? `${systemPrompt}\n\n---\n${settings.systemPromptSuffix}`
+    : systemPrompt;
+
+  // ── DEMO: log full prompts so you can see exactly what hits the AI ──────
+  console.log('\n' + '═'.repeat(72));
+  console.log(`🤖  SYSTEM PROMPT (${GATE_CONTEXT[Math.min(Math.max(Number(gate), 0), 3)].stage})`);
+  console.log('─'.repeat(72));
+  console.log(systemPrompt);
+  console.log('\n' + '─'.repeat(72));
+  console.log('📋  USER PROMPT (opportunity payload)');
+  console.log('─'.repeat(72));
+  console.log(prompt);
+  console.log('═'.repeat(72) + '\n');
+  // ─────────────────────────────────────────────────────────────────────────
 
   try {
     const response = await callLLM({
       messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'system', content: finalSystemPrompt },
         { role: 'user', content: prompt }
       ],
       json: true,
@@ -203,6 +363,26 @@ REQUIRED JSON format (always return this exact shape):
     const pWinRationale = toCompactString(response.pWinRationale) || fallbackPwinRationale();
     const recommendationRationale = toCompactString(response.recommendationRationale) || fallbackRecommendationRationale();
 
+    // Map proposed team IDs back to full members (name + email resolved here, never sent to AI)
+    const teamById = loadTeamById();
+    const proposedTeam = Array.isArray(response.proposedTeam)
+      ? response.proposedTeam
+          .map((pt) => {
+            if (!pt || !pt.memberId) return null;
+            const member = teamById[pt.memberId];
+            if (!member) return null;
+            return {
+              id: member.id,
+              name: member.name,
+              email: member.email || '',
+              role: member.role,
+              proposedRole: toCompactString(pt.proposedRole),
+              rationale: toCompactString(pt.rationale)
+            };
+          })
+          .filter(Boolean)
+      : [];
+
     return {
       opportunityName,
       name: opportunityName,
@@ -230,7 +410,8 @@ REQUIRED JSON format (always return this exact shape):
         action: response.recommendation === 'GO' ? 'Go' : response.recommendation === 'SUBCONTRACT' ? 'Conditional' : 'Pass',
         rationale: recommendationRationale,
         nextSteps
-      }
+      },
+      proposedTeam
     };
   } catch (error) {
     console.error('[Opportunity Analysis] Error:', error);

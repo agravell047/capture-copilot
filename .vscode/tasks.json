@@ -6,7 +6,10 @@
       "type": "shell",
       "command": "npm run dev",
       "options": {
-        "cwd": "${workspaceFolder}/backend"
+        "cwd": "${workspaceFolder}/backend",
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
       },
       "isBackground": true,
       "problemMatcher": [],
@@ -22,7 +25,10 @@
       "type": "shell",
       "command": "npm run dev",
       "options": {
-        "cwd": "${workspaceFolder}"
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
       },
       "isBackground": true,
       "problemMatcher": [],
@@ -40,6 +46,73 @@
       "problemMatcher": []
     },
     {
+      "label": "Playwright: Install Browsers",
+      "type": "shell",
+      "command": "npx",
+      "args": ["playwright", "install", "chromium"],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Playwright: Run CapturePilot Demo",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test",
+        "--",
+        "capturepilot-demo.spec.js"
+      ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Playwright: Run CapturePilot Demo (Headed)",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test:headed",
+        "--",
+        "--project=chromium",
+        "capturepilot-demo.spec.js"
+      ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
       "label": "Playwright: Run Opportunity Capture Demo",
       "type": "shell",
       "command": "npm",
@@ -49,6 +122,11 @@
         "--",
         "opportunity-capture-demo.spec.js"
       ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
       "group": {
         "kind": "test",
         "isDefault": false
@@ -69,6 +147,11 @@
         "--",
         "opportunity-capture-demo.spec.js"
       ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
       "group": {
         "kind": "test",
         "isDefault": false
@@ -89,6 +172,11 @@
         "--",
         "company-profile-demo.spec.js"
       ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
       "group": {
         "kind": "test",
         "isDefault": false
@@ -109,6 +197,11 @@
         "--",
         "company-profile-demo.spec.js"
       ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
       "group": {
         "kind": "test",
         "isDefault": false
@@ -127,6 +220,11 @@
         "run",
         "test"
       ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
       "group": {
         "kind": "test",
         "isDefault": false
@@ -145,6 +243,11 @@
         "run",
         "test:ui"
       ],
+      "options": {
+        "env": {
+          "PATH": "C:\\Users\\OITMANGRAVEA\\Documents\\DEV\\Node\\node-v20.19.2-win-x64;${env:PATH}"
+        }
+      },
       "group": {
         "kind": "test",
         "isDefault": false

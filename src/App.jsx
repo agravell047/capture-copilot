@@ -20,6 +20,10 @@ const getRouteState = (pathname) => {
     return { page: 'portfolio' }
   }
 
+  if (normalizedPath === '/new') {
+    return { page: 'capture' }
+  }
+
   if (normalizedPath.startsWith('/opportunities/') && normalizedPath.endsWith('/edit')) {
     return {
       page: 'capture',
@@ -38,7 +42,7 @@ const getRouteState = (pathname) => {
     return { page: 'profile' }
   }
 
-  return { page: 'capture' }
+  return { page: 'portfolio' }
 }
 
 function App() {
@@ -71,7 +75,8 @@ function App() {
       <header className="app-header">
         <div className="header-left">
           <button type="button" className="brand-button" onClick={() => navigateTo('/')}>
-            Capture Copilot
+            <img src="/wilcore-logo.jpg" alt="" className="brand-logo" />
+            CapturePilot
           </button>
         </div>
 
@@ -79,17 +84,10 @@ function App() {
           <div className="primary-nav">
             <button
               type="button"
-              className={`nav-button ${route.page === 'capture' ? 'nav-button-active' : ''}`}
-              onClick={() => navigateTo('/')}
-            >
-              New Capture
-            </button>
-            <button
-              type="button"
               className={`nav-button ${route.page === 'portfolio' || route.page === 'detail' ? 'nav-button-active' : ''}`}
               onClick={() => navigateTo('/opportunities')}
             >
-              Portfolio
+              Dashboard
             </button>
             <button
               type="button"
@@ -97,6 +95,13 @@ function App() {
               onClick={() => navigateTo('/company-profile')}
             >
               Settings
+            </button>
+            <button
+              type="button"
+              className="nav-button nav-button-cta"
+              onClick={() => navigateTo('/new')}
+            >
+              + New Capture
             </button>
           </div>
         </div>
@@ -112,7 +117,7 @@ function App() {
 
         {route.page === 'portfolio' && (
           <OpportunityPortfolioPage
-            onCreateOpportunity={() => navigateTo('/')}
+            onCreateOpportunity={() => navigateTo('/new')}
             onOpenOpportunity={(opportunityId) => navigateTo(`/opportunities/${opportunityId}`)}
           />
         )}
@@ -121,7 +126,7 @@ function App() {
           <OpportunityDetailPage
             opportunityId={route.opportunityId}
             onBackToPortfolio={() => navigateTo('/opportunities')}
-            onCreateOpportunity={() => navigateTo('/')}
+            onCreateOpportunity={() => navigateTo('/new')}
             onEditOpportunity={() => navigateTo(`/opportunities/${route.opportunityId}/edit`)}
           />
         )}

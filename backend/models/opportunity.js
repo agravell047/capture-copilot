@@ -119,7 +119,8 @@ class Opportunity {
 
     this.contractValue = data.contractValue || '<5M';
     this.setAside = data.setAside || 'None';
-    this.status = data.status === 'archived' ? 'archived' : 'active';
+    const validStatuses = ['active', 'archived', 'won', 'lost', 'no_bid', 'withdrew'];
+    this.status = validStatuses.includes(data.status) ? data.status : 'active';
     this.updates = Opportunity.normalizeUpdates(data.updates);
     this.latestAnalysis = data.latestAnalysis || null;
     this.rfp = data.rfp || null;
@@ -127,6 +128,12 @@ class Opportunity {
     this.evidence = normalizeEvidence(data.evidence);
     this.stakeholders = normalizeStakeholders(data.stakeholders);
     this.evaluation = normalizeEvaluation(data.evaluation);
+    // Past performance linkage
+    this.outcome = data.outcome || null;
+    this.outcomeDetails = data.outcomeDetails || null;
+    this.similarPursuits = Array.isArray(data.similarPursuits)
+      ? data.similarPursuits.slice(0, 3)
+      : [];
   }
 
   static create(data = {}) {
@@ -142,7 +149,10 @@ class Opportunity {
       gate: data.gate,
       evidence: data.evidence,
       stakeholders: data.stakeholders,
-      evaluation: data.evaluation
+      evaluation: data.evaluation,
+      outcome: data.outcome,
+      outcomeDetails: data.outcomeDetails,
+      similarPursuits: data.similarPursuits
     });
   }
 
@@ -164,7 +174,10 @@ class Opportunity {
       evaluation: nextData.evaluation !== undefined ? nextData.evaluation : existingOpportunity.evaluation,
       updates: nextData.updates !== undefined
         ? Opportunity.normalizeUpdates(nextData.updates)
-        : Opportunity.normalizeUpdates(existingOpportunity.updates)
+        : Opportunity.normalizeUpdates(existingOpportunity.updates),
+      outcome: nextData.outcome !== undefined ? nextData.outcome : existingOpportunity.outcome,
+      outcomeDetails: nextData.outcomeDetails !== undefined ? nextData.outcomeDetails : existingOpportunity.outcomeDetails,
+      similarPursuits: nextData.similarPursuits !== undefined ? nextData.similarPursuits : existingOpportunity.similarPursuits
     });
   }
 
@@ -259,7 +272,10 @@ class Opportunity {
       evaluation: this.evaluation,
       updates: this.updates,
       latestAnalysis: this.latestAnalysis,
-      rfp: this.rfp
+      rfp: this.rfp,
+      outcome: this.outcome,
+      outcomeDetails: this.outcomeDetails,
+      similarPursuits: this.similarPursuits
     };
   }
 }

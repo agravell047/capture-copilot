@@ -1,32 +1,1111 @@
 [
   {
-    "id": 1,
-    "name": "Alice Johnson",
-    "skills": ["project management", "federal contracting", "proposal writing", "leadership"],
-    "experience": 10
+    "id": "tm-001",
+    "name": "Rachel Torres",
+    "email": "rachel.torres@apexfederal.com",
+    "role": "Chief Executive Officer",
+    "skills": [
+      "executive leadership",
+      "federal capture strategy",
+      "P&L management",
+      "SDVOSB compliance",
+      "stakeholder engagement"
+    ],
+    "experience": 18
   },
   {
-    "id": 2,
-    "name": "Bob Smith",
-    "skills": ["technical writing", "compliance", "risk assessment", "systems design"],
-    "experience": 8
+    "id": "tm-002",
+    "name": "James Okafor",
+    "email": "james.okafor@apexfederal.com",
+    "role": "VP of Capture & Business Development",
+    "skills": [
+      "capture management",
+      "proposal strategy",
+      "federal BD",
+      "pipeline development",
+      "VA and CMS relationships"
+    ],
+    "experience": 14
   },
   {
-    "id": 3,
-    "name": "Carol Lee",
-    "skills": ["data analysis", "strategic planning", "team leadership", "metrics"],
+    "id": "tm-003",
+    "name": "Priya Nair",
+    "email": "priya.nair@apexfederal.com",
+    "role": "Chief Technology Officer",
+    "skills": [
+      "cloud architecture",
+      "AWS GovCloud",
+      "Azure Government",
+      "FedRAMP",
+      "zero-trust",
+      "DevSecOps"
+    ],
+    "experience": 16
+  },
+  {
+    "id": "tm-004",
+    "name": "Marcus Webb",
+    "email": "marcus.webb@apexfederal.com",
+    "role": "Director of Program Delivery",
+    "skills": [
+      "agile delivery",
+      "program management",
+      "SAFe",
+      "risk management",
+      "federal CPARS reporting"
+    ],
     "experience": 12
   },
   {
-    "id": 4,
-    "name": "David Martinez",
-    "skills": ["software development", "architecture", "performance optimization", "security"],
+    "id": "tm-005",
+    "name": "Sofia Reyes",
+    "email": "sofia.reyes@apexfederal.com",
+    "role": "Lead Proposal Manager",
+    "skills": [
+      "proposal writing",
+      "color reviews",
+      "volume management",
+      "compliance matrices",
+      "APMP certified"
+    ],
     "experience": 9
   },
   {
-    "id": 5,
-    "name": "Emma Wilson",
-    "skills": ["quality assurance", "testing", "documentation", "training"],
+    "id": "tm-006",
+    "name": "Tyler Brooks",
+    "email": "tyler.brooks@apexfederal.com",
+    "role": "Senior DevOps Engineer",
+    "skills": [
+      "CI/CD pipelines",
+      "Jenkins",
+      "GitHub Actions",
+      "Kubernetes",
+      "Terraform",
+      "VA BCMS contract"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-007",
+    "name": "Jordan Kim",
+    "email": "jordan.kim@apexfederal.com",
+    "role": "DevOps Engineer",
+    "skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS GovCloud",
+      "Helm",
+      "monitoring",
+      "CMS contract"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-008",
+    "name": "Alicia Fontaine",
+    "email": "alicia.fontaine@apexfederal.com",
+    "role": "DevSecOps Lead",
+    "skills": [
+      "DevSecOps",
+      "SAST/DAST",
+      "SonarQube",
+      "Anchore",
+      "ATO pipeline automation",
+      "DoD contract"
+    ],
+    "experience": 10
+  },
+  {
+    "id": "tm-009",
+    "name": "Derek Osei",
+    "email": "derek.osei@apexfederal.com",
+    "role": "DevOps Engineer",
+    "skills": [
+      "Terraform",
+      "Ansible",
+      "AWS",
+      "infrastructure-as-code",
+      "VA BCMS contract"
+    ],
     "experience": 6
+  },
+  {
+    "id": "tm-010",
+    "name": "Megan Walsh",
+    "email": "megan.walsh@apexfederal.com",
+    "role": "Platform Engineer",
+    "skills": [
+      "Kubernetes",
+      "OpenShift",
+      "GitOps",
+      "ArgoCD",
+      "service mesh",
+      "CMS contract"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-011",
+    "name": "Carlos Ibarra",
+    "email": "carlos.ibarra@apexfederal.com",
+    "role": "DevOps Engineer",
+    "skills": [
+      "CI/CD",
+      "Jenkins",
+      "Docker",
+      "Linux",
+      "bash scripting"
+    ],
+    "experience": 4
+  },
+  {
+    "id": "tm-012",
+    "name": "Nadia Petrov",
+    "email": "nadia.petrov@apexfederal.com",
+    "role": "Site Reliability Engineer",
+    "skills": [
+      "SRE",
+      "Prometheus",
+      "Grafana",
+      "incident management",
+      "SLO/SLA",
+      "VA BCMS contract"
+    ],
+    "experience": 9
+  },
+  {
+    "id": "tm-013",
+    "name": "Owen Garrett",
+    "email": "owen.garrett@apexfederal.com",
+    "role": "DevOps Engineer",
+    "skills": [
+      "AWS CodePipeline",
+      "CloudFormation",
+      "ECR",
+      "ECS",
+      "secrets management"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-014",
+    "name": "Brianna Cole",
+    "email": "brianna.cole@apexfederal.com",
+    "role": "Build & Release Engineer",
+    "skills": [
+      "release management",
+      "GitLab CI",
+      "artifact management",
+      "Nexus",
+      "environment management"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-015",
+    "name": "Sameer Chopra",
+    "email": "sameer.chopra@apexfederal.com",
+    "role": "Senior DevOps Engineer",
+    "skills": [
+      "AWS GovCloud",
+      "FedRAMP compliance",
+      "Terraform",
+      "Vault",
+      "pipeline security",
+      "DoD contract"
+    ],
+    "experience": 11
+  },
+  {
+    "id": "tm-016",
+    "name": "Felicia Dumont",
+    "email": "felicia.dumont@apexfederal.com",
+    "role": "DevOps Engineer",
+    "skills": [
+      "Docker",
+      "GitHub Actions",
+      "Python automation",
+      "AWS",
+      "monitoring dashboards"
+    ],
+    "experience": 4
+  },
+  {
+    "id": "tm-017",
+    "name": "Aaron Hsieh",
+    "email": "aaron.hsieh@apexfederal.com",
+    "role": "Infrastructure Engineer",
+    "skills": [
+      "AWS",
+      "network security",
+      "load balancing",
+      "transit gateway",
+      "VPN",
+      "CMS contract"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-018",
+    "name": "Chris Washington",
+    "email": "chris.washington@apexfederal.com",
+    "role": "Senior Software Engineer",
+    "skills": [
+      "Java",
+      "Spring Boot",
+      "microservices",
+      "REST APIs",
+      "PostgreSQL",
+      "VA BCMS contract"
+    ],
+    "experience": 10
+  },
+  {
+    "id": "tm-019",
+    "name": "Angela Park",
+    "email": "angela.park@apexfederal.com",
+    "role": "Software Engineer",
+    "skills": [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "REST APIs",
+      "accessibility (508)"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-020",
+    "name": "Ryan Liu",
+    "email": "ryan.liu@apexfederal.com",
+    "role": "Full-Stack Engineer",
+    "skills": [
+      "React",
+      "Java",
+      "Spring Boot",
+      "PostgreSQL",
+      "Docker",
+      "CMS contract"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-021",
+    "name": "Destiny Monroe",
+    "email": "destiny.monroe@apexfederal.com",
+    "role": "Backend Engineer",
+    "skills": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "message queues",
+      "VA BCMS contract"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-022",
+    "name": "Patrick O'Brien",
+    "email": "patrick.obrien@apexfederal.com",
+    "role": "Senior Software Engineer",
+    "skills": [
+      "COBOL modernization",
+      "Java",
+      "legacy migration",
+      "batch processing",
+      "VA BCMS contract"
+    ],
+    "experience": 12
+  },
+  {
+    "id": "tm-023",
+    "name": "Leila Hamdan",
+    "email": "leila.hamdan@apexfederal.com",
+    "role": "Software Engineer",
+    "skills": [
+      "React",
+      "JavaScript",
+      "CSS",
+      "REST APIs",
+      "unit testing"
+    ],
+    "experience": 4
+  },
+  {
+    "id": "tm-024",
+    "name": "Drew Castellano",
+    "email": "drew.castellano@apexfederal.com",
+    "role": "Backend Engineer",
+    "skills": [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "GraphQL",
+      "microservices"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-025",
+    "name": "Yuna Tanaka",
+    "email": "yuna.tanaka@apexfederal.com",
+    "role": "Software Engineer II",
+    "skills": [
+      "Java",
+      "Spring Boot",
+      "Kafka",
+      "event-driven architecture",
+      "CMS contract"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-026",
+    "name": "Marcus Bailey",
+    "email": "marcus.bailey@apexfederal.com",
+    "role": "Senior Full-Stack Engineer",
+    "skills": [
+      "React",
+      "Java",
+      "AWS Lambda",
+      "serverless",
+      "DynamoDB",
+      "DoD contract"
+    ],
+    "experience": 11
+  },
+  {
+    "id": "tm-027",
+    "name": "Isabelle Tremblay",
+    "email": "isabelle.tremblay@apexfederal.com",
+    "role": "Software Engineer",
+    "skills": [
+      "Python",
+      "Django",
+      "REST APIs",
+      "PostgreSQL",
+      "data pipelines"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-028",
+    "name": "Kenji Watanabe",
+    "email": "kenji.watanabe@apexfederal.com",
+    "role": "Software Architect",
+    "skills": [
+      "system design",
+      "microservices",
+      "event-driven architecture",
+      "API gateway",
+      "cloud-native",
+      "VA BCMS contract"
+    ],
+    "experience": 14
+  },
+  {
+    "id": "tm-029",
+    "name": "Fatima Al-Rashid",
+    "email": "fatima.alrashid@apexfederal.com",
+    "role": "Software Engineer",
+    "skills": [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "accessibility (508)",
+      "veteran-facing UX"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-030",
+    "name": "Brendan Kowalski",
+    "email": "brendan.kowalski@apexfederal.com",
+    "role": "Backend Engineer",
+    "skills": [
+      "Java",
+      "Spring Security",
+      "OAuth 2.0",
+      "identity management",
+      "PIV/CAC integration"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-031",
+    "name": "Zoe Moreau",
+    "email": "zoe.moreau@apexfederal.com",
+    "role": "Software Engineer",
+    "skills": [
+      "Go",
+      "gRPC",
+      "microservices",
+      "REST APIs",
+      "cloud functions"
+    ],
+    "experience": 4
+  },
+  {
+    "id": "tm-032",
+    "name": "Nathan Cruz",
+    "email": "nathan.cruz@apexfederal.com",
+    "role": "Senior Software Engineer",
+    "skills": [
+      "C#",
+      ".NET",
+      "Azure Government",
+      "REST APIs",
+      "CMS contract"
+    ],
+    "experience": 9
+  },
+  {
+    "id": "tm-033",
+    "name": "Adriana Vega",
+    "email": "adriana.vega@apexfederal.com",
+    "role": "Software Engineer II",
+    "skills": [
+      "Python",
+      "Flask",
+      "Celery",
+      "Redis",
+      "async processing",
+      "DoD contract"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-034",
+    "name": "Miles Porter",
+    "email": "miles.porter@apexfederal.com",
+    "role": "Software Engineer",
+    "skills": [
+      "React",
+      "JavaScript",
+      "Node.js",
+      "GraphQL",
+      "unit testing"
+    ],
+    "experience": 3
+  },
+  {
+    "id": "tm-035",
+    "name": "Nina Rosario",
+    "email": "nina.rosario@apexfederal.com",
+    "role": "QA Lead",
+    "skills": [
+      "test strategy",
+      "Selenium",
+      "Playwright",
+      "test planning",
+      "federal compliance testing",
+      "VA BCMS contract"
+    ],
+    "experience": 10
+  },
+  {
+    "id": "tm-036",
+    "name": "Justin Tran",
+    "email": "justin.tran@apexfederal.com",
+    "role": "QA Engineer",
+    "skills": [
+      "Cypress",
+      "Jest",
+      "API testing",
+      "Postman",
+      "regression testing"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-037",
+    "name": "Kelsey Okafor",
+    "email": "kelsey.okafor@apexfederal.com",
+    "role": "Automated Test Engineer",
+    "skills": [
+      "Selenium",
+      "Java",
+      "TestNG",
+      "CI/CD integration",
+      "smoke testing",
+      "CMS contract"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-038",
+    "name": "Benjamin Marsh",
+    "email": "benjamin.marsh@apexfederal.com",
+    "role": "Performance Test Engineer",
+    "skills": [
+      "JMeter",
+      "Gatling",
+      "load testing",
+      "performance baselines",
+      "DoD contract"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-039",
+    "name": "Tanya Fischer",
+    "email": "tanya.fischer@apexfederal.com",
+    "role": "QA Engineer",
+    "skills": [
+      "manual testing",
+      "test case design",
+      "bug triage",
+      "Jira",
+      "ISTQB certified"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-040",
+    "name": "Rajesh Mehta",
+    "email": "rajesh.mehta@apexfederal.com",
+    "role": "Security Test Engineer",
+    "skills": [
+      "penetration testing",
+      "OWASP",
+      "vulnerability scanning",
+      "SAST/DAST",
+      "DoD contract"
+    ],
+    "experience": 9
+  },
+  {
+    "id": "tm-041",
+    "name": "Claudia Santos",
+    "email": "claudia.santos@apexfederal.com",
+    "role": "QA Engineer",
+    "skills": [
+      "Playwright",
+      "API testing",
+      "test automation",
+      "Postman",
+      "accessibility testing (508)"
+    ],
+    "experience": 4
+  },
+  {
+    "id": "tm-042",
+    "name": "Owen Harrington",
+    "email": "owen.harrington@apexfederal.com",
+    "role": "QA Engineer II",
+    "skills": [
+      "regression testing",
+      "Cypress",
+      "REST-assured",
+      "CI/CD testing",
+      "VA BCMS contract"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-043",
+    "name": "Aisha Obi",
+    "email": "aisha.obi@apexfederal.com",
+    "role": "Lead UX Designer",
+    "skills": [
+      "user research",
+      "Figma",
+      "Section 508 accessibility",
+      "design systems",
+      "veteran UX",
+      "VA BCMS contract"
+    ],
+    "experience": 10
+  },
+  {
+    "id": "tm-044",
+    "name": "Leo Fontaine",
+    "email": "leo.fontaine@apexfederal.com",
+    "role": "UX Designer",
+    "skills": [
+      "Figma",
+      "prototyping",
+      "usability testing",
+      "interaction design",
+      "CMS contract"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-045",
+    "name": "Maya Chen",
+    "email": "maya.chen@apexfederal.com",
+    "role": "UX Researcher",
+    "skills": [
+      "user research",
+      "contextual inquiry",
+      "journey mapping",
+      "survey design",
+      "VA Design System"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-046",
+    "name": "Jordan Rivera",
+    "email": "jordan.rivera@apexfederal.com",
+    "role": "UX/UI Designer",
+    "skills": [
+      "Figma",
+      "UI design",
+      "design tokens",
+      "responsive design",
+      "accessibility (508)"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-047",
+    "name": "Cassie Huang",
+    "email": "cassie.huang@apexfederal.com",
+    "role": "Content Strategist / UX Writer",
+    "skills": [
+      "content strategy",
+      "UX writing",
+      "plain language",
+      "VA plain-language standards",
+      "information architecture"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-048",
+    "name": "Stefan Novak",
+    "email": "stefan.novak@apexfederal.com",
+    "role": "UX Designer",
+    "skills": [
+      "Figma",
+      "prototyping",
+      "wireframing",
+      "user flows",
+      "component libraries"
+    ],
+    "experience": 4
+  },
+  {
+    "id": "tm-049",
+    "name": "Priya Sharma",
+    "email": "priya.sharma@apexfederal.com",
+    "role": "Data Engineer",
+    "skills": [
+      "AWS Glue",
+      "Spark",
+      "Databricks",
+      "ETL pipelines",
+      "data lake architecture",
+      "VA BCMS contract"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-050",
+    "name": "Elijah Thomas",
+    "email": "elijah.thomas@apexfederal.com",
+    "role": "Senior Data Engineer",
+    "skills": [
+      "Apache Kafka",
+      "Spark",
+      "Delta Lake",
+      "Python",
+      "real-time data pipelines",
+      "CMS contract"
+    ],
+    "experience": 10
+  },
+  {
+    "id": "tm-051",
+    "name": "Christine Woo",
+    "email": "christine.woo@apexfederal.com",
+    "role": "Data Analyst",
+    "skills": [
+      "Power BI",
+      "SQL",
+      "data storytelling",
+      "federal reporting dashboards",
+      "CMS contract"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-052",
+    "name": "Antoine Bernard",
+    "email": "antoine.bernard@apexfederal.com",
+    "role": "Data Engineer",
+    "skills": [
+      "Python",
+      "Airflow",
+      "PostgreSQL",
+      "dbt",
+      "data quality"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-053",
+    "name": "Dani Reeves",
+    "email": "dani.reeves@apexfederal.com",
+    "role": "Business Intelligence Analyst",
+    "skills": [
+      "Power BI",
+      "Tableau",
+      "DAX",
+      "SQL",
+      "executive dashboards",
+      "DoD contract"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-054",
+    "name": "Hiroshi Tanaka",
+    "email": "hiroshi.tanaka@apexfederal.com",
+    "role": "Data Architect",
+    "skills": [
+      "data modeling",
+      "data governance",
+      "AWS Redshift",
+      "snowflake schema",
+      "lineage tracking",
+      "CMS contract"
+    ],
+    "experience": 13
+  },
+  {
+    "id": "tm-055",
+    "name": "Rosa Guerrero",
+    "email": "rosa.guerrero@apexfederal.com",
+    "role": "Data Engineer",
+    "skills": [
+      "Python",
+      "AWS S3",
+      "Glue",
+      "Lambda",
+      "data validation"
+    ],
+    "experience": 4
+  },
+  {
+    "id": "tm-056",
+    "name": "Kyle Anderson",
+    "email": "kyle.anderson@apexfederal.com",
+    "role": "Data Analyst",
+    "skills": [
+      "SQL",
+      "Power BI",
+      "Excel",
+      "reporting automation",
+      "VA BCMS contract"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-057",
+    "name": "Shane McCormick",
+    "email": "shane.mccormick@apexfederal.com",
+    "role": "Cybersecurity Lead",
+    "skills": [
+      "FedRAMP",
+      "NIST 800-53",
+      "ATO",
+      "SIEM",
+      "continuous monitoring",
+      "VA BCMS contract"
+    ],
+    "experience": 12
+  },
+  {
+    "id": "tm-058",
+    "name": "Nadira Hassan",
+    "email": "nadira.hassan@apexfederal.com",
+    "role": "Information Systems Security Officer (ISSO)",
+    "skills": [
+      "ISSO",
+      "ATO documentation",
+      "POA&M management",
+      "FISMA",
+      "FedRAMP Moderate",
+      "CMS contract"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-059",
+    "name": "Lucas Klein",
+    "email": "lucas.klein@apexfederal.com",
+    "role": "Cybersecurity Analyst",
+    "skills": [
+      "SIEM",
+      "Splunk",
+      "threat hunting",
+      "incident response",
+      "SOC operations",
+      "DoD contract"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-060",
+    "name": "Elena Volkov",
+    "email": "elena.volkov@apexfederal.com",
+    "role": "Zero-Trust Architect",
+    "skills": [
+      "zero-trust architecture",
+      "BeyondCorp",
+      "identity-centric security",
+      "microsegmentation",
+      "NIST SP 800-207"
+    ],
+    "experience": 10
+  },
+  {
+    "id": "tm-061",
+    "name": "Terrence Phillips",
+    "email": "terrence.phillips@apexfederal.com",
+    "role": "Penetration Tester",
+    "skills": [
+      "penetration testing",
+      "red team",
+      "OWASP",
+      "NIST 800-115",
+      "vulnerability assessment",
+      "DoD contract"
+    ],
+    "experience": 9
+  },
+  {
+    "id": "tm-062",
+    "name": "Aisha Brooks",
+    "email": "aisha.brooks@apexfederal.com",
+    "role": "Cybersecurity Analyst",
+    "skills": [
+      "vulnerability scanning",
+      "Tenable Nessus",
+      "CIS benchmarks",
+      "hardening",
+      "patch management"
+    ],
+    "experience": 5
+  },
+  {
+    "id": "tm-063",
+    "name": "Connor Wright",
+    "email": "connor.wright@apexfederal.com",
+    "role": "Cloud Security Engineer",
+    "skills": [
+      "AWS Security Hub",
+      "GuardDuty",
+      "CloudTrail",
+      "IAM least privilege",
+      "CSPM",
+      "VA BCMS contract"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-064",
+    "name": "Bethany Liu",
+    "email": "bethany.liu@apexfederal.com",
+    "role": "Senior Cloud Architect",
+    "skills": [
+      "AWS GovCloud",
+      "multi-account strategy",
+      "landing zone",
+      "Control Tower",
+      "cost optimization",
+      "VA BCMS contract"
+    ],
+    "experience": 11
+  },
+  {
+    "id": "tm-065",
+    "name": "Omar Khalil",
+    "email": "omar.khalil@apexfederal.com",
+    "role": "Cloud Architect",
+    "skills": [
+      "Azure Government",
+      "hybrid cloud",
+      "networking",
+      "ExpressRoute",
+      "Azure Policy",
+      "DoD contract"
+    ],
+    "experience": 9
+  },
+  {
+    "id": "tm-066",
+    "name": "Raj Patel",
+    "email": "raj.patel@apexfederal.com",
+    "role": "Solutions Architect",
+    "skills": [
+      "cloud-native design",
+      "Well-Architected Framework",
+      "AWS",
+      "serverless",
+      "CMS contract"
+    ],
+    "experience": 13
+  },
+  {
+    "id": "tm-067",
+    "name": "Ingrid Svensson",
+    "email": "ingrid.svensson@apexfederal.com",
+    "role": "Cloud Migration Architect",
+    "skills": [
+      "migration strategy",
+      "6 Rs framework",
+      "AWS Migration Hub",
+      "legacy modernization",
+      "VA BCMS contract"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-068",
+    "name": "Destiny Johnson",
+    "email": "destiny.johnson@apexfederal.com",
+    "role": "Scrum Master",
+    "skills": [
+      "Scrum",
+      "SAFe",
+      "Jira",
+      "sprint facilitation",
+      "retrospectives",
+      "VA BCMS contract"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-069",
+    "name": "Michael Durand",
+    "email": "michael.durand@apexfederal.com",
+    "role": "Program Manager",
+    "skills": [
+      "program management",
+      "federal contracts",
+      "EVMS",
+      "risk management",
+      "stakeholder reporting",
+      "CMS contract"
+    ],
+    "experience": 11
+  },
+  {
+    "id": "tm-070",
+    "name": "Sarah Kim",
+    "email": "sarah.kim@apexfederal.com",
+    "role": "Scrum Master",
+    "skills": [
+      "Scrum",
+      "Kanban",
+      "Jira",
+      "team facilitation",
+      "agile coaching"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-071",
+    "name": "Kwame Asante",
+    "email": "kwame.asante@apexfederal.com",
+    "role": "Senior Project Manager",
+    "skills": [
+      "PMP",
+      "federal project management",
+      "schedule management",
+      "risk registers",
+      "DoD contract"
+    ],
+    "experience": 10
+  },
+  {
+    "id": "tm-072",
+    "name": "Tracy Coleman",
+    "email": "tracy.coleman@apexfederal.com",
+    "role": "Agile Coach",
+    "skills": [
+      "SAFe Program Consultant",
+      "agile transformation",
+      "PI planning",
+      "team coaching",
+      "CMS contract"
+    ],
+    "experience": 9
+  },
+  {
+    "id": "tm-073",
+    "name": "Louis Gagnon",
+    "email": "louis.gagnon@apexfederal.com",
+    "role": "Project Manager",
+    "skills": [
+      "PMP",
+      "Jira",
+      "project scheduling",
+      "resource allocation",
+      "status reporting"
+    ],
+    "experience": 7
+  },
+  {
+    "id": "tm-074",
+    "name": "Vanessa Diaz",
+    "email": "vanessa.diaz@apexfederal.com",
+    "role": "Scrum Master / RTE",
+    "skills": [
+      "Release Train Engineer",
+      "SAFe",
+      "PI planning",
+      "ART facilitation",
+      "VA BCMS contract"
+    ],
+    "experience": 8
+  },
+  {
+    "id": "tm-075",
+    "name": "Emily Stern",
+    "email": "emily.stern@apexfederal.com",
+    "role": "Senior Business Analyst",
+    "skills": [
+      "requirements elicitation",
+      "process mapping",
+      "user stories",
+      "JIRA",
+      "federal business analysis",
+      "VA BCMS contract"
+    ],
+    "experience": 9
+  },
+  {
+    "id": "tm-076",
+    "name": "Jason Howell",
+    "email": "jason.howell@apexfederal.com",
+    "role": "Business Analyst",
+    "skills": [
+      "requirements documentation",
+      "gap analysis",
+      "stakeholder interviews",
+      "workflow design",
+      "CMS contract"
+    ],
+    "experience": 6
+  },
+  {
+    "id": "tm-077",
+    "name": "Monica Navarro",
+    "email": "monica.navarro@apexfederal.com",
+    "role": "Business Analyst",
+    "skills": [
+      "user stories",
+      "acceptance criteria",
+      "process improvement",
+      "Visio",
+      "data flow diagrams"
+    ],
+    "experience": 5
   }
 ]

@@ -38,23 +38,601 @@
   gap: 0.75rem;
 }
 
+.portfolio-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.portfolio-search {
+  flex: 1;
+  min-width: 200px;
+}
+
+.portfolio-search input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.portfolio-search input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+.portfolio-tabs {
+  display: flex;
+  gap: 4px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.portfolio-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.portfolio-tab:hover {
+  background: white;
+  color: #111827;
+}
+
+.portfolio-tab.active {
+  background: white;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.portfolio-tab-count {
+  background: #e5e7eb;
+  color: #374151;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.portfolio-tab.active .portfolio-tab-count {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.portfolio-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 1.5rem;
+}
+
+.portfolio-page-btn {
+  padding: 7px 16px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.portfolio-page-btn:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.portfolio-page-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.portfolio-page-info {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.portfolio-status-won { background: #dcfce7; color: #15803d; }
+.portfolio-status-lost { background: #fee2e2; color: #b91c1c; }
+.portfolio-status-no_bid { background: #fef9c3; color: #92400e; }
+.portfolio-status-withdrew { background: #daeef8; color: #1c3044; }
+
 .portfolio-summary {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .portfolio-page {
+    padding: 1rem;
+  }
+
+  .portfolio-header {
+    flex-direction: column;
+  }
+
+  .portfolio-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .portfolio-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .portfolio-details {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-card-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ── View toggle ── */
+.view-toggle {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-toggle-btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  background: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.view-toggle-btn:first-child {
+  border-right: 1px solid #d1d5db;
+}
+
+.view-toggle-btn:hover {
+  background: #f9fafb;
+  color: #111827;
+}
+
+.view-toggle-btn.active {
+  background: #1c3044;
+  color: white;
+}
+
+/* ── Kanban board ── */
+.kanban-board {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  align-items: flex-start;
+  min-height: 480px;
+}
+
+.kanban-column {
+  flex: 0 0 280px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  max-height: 72vh;
+}
+
+.kanban-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.85rem 1rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 10px 10px 0 0;
+}
+
+.kanban-gate-label {
+  font-weight: 700;
+  font-size: 13px;
+  color: #111827;
+}
+
+.kanban-gate-sublabel {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kanban-col-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.kanban-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+}
+
+.kanban-col-value {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.kanban-cards {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.kanban-empty {
+  text-align: center;
+  color: #d1d5db;
+  font-size: 13px;
+  padding: 2rem 0;
+}
+
+/* ── Kanban card ── */
+.kanban-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem 0.6rem;
+  cursor: grab;
+  transition: box-shadow 0.15s, border-color 0.15s, opacity 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: relative;
+  user-select: none;
+}
+
+.kanban-card-pwin-high { border-left-color: #16a34a; }
+.kanban-card-pwin-med  { border-left-color: #d97706; }
+.kanban-card-pwin-low  { border-left-color: #dc2626; }
+.kanban-card-pwin-early { border-left-color: #93c5fd; }
+.kanban-card-none      { border-left-color: #d1d5db; }
+
+.kanban-card:active {
+  cursor: grabbing;
+}
+
+.kanban-card:hover {
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+  border-color: #93c5fd;
+}
+
+.kanban-card.dragging {
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+.kanban-drag-handle {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  font-size: 14px;
+  color: #d1d5db;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.kanban-column.drop-target {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  box-shadow: inset 0 0 0 2px #93c5fd;
+}
+
+.kanban-card-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #111827;
+  line-height: 1.35;
+}
+
+.kanban-card-agency {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.kanban-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.kanban-pwin {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pwin-high  { background: #dcfce7; color: #15803d; }
+.pwin-med   { background: #fef9c3; color: #92400e; }
+.pwin-low   { background: #fee2e2; color: #b91c1c; }
+.pwin-null  { background: #f3f4f6; color: #9ca3af; }
+.pwin-early { background: #edf6fb; color: #253d54; border: 1px dashed #c5e8f5; }
+
+/* ── Pipeline health warnings ── */
+.pipeline-warnings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.pipeline-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.pipeline-warning-red {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.pipeline-warning-yellow {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+}
+
+.kanban-card-value {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.kanban-attention {
+  color: #f59e0b;
+  font-size: 13px;
+  margin-left: auto;
+}
+
+.kanban-freshness {
+  font-size: 10px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.kanban-freshness-stale {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.kanban-card-actions {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.kanban-card:hover .kanban-card-actions {
+  display: flex;
+}
+
+.kanban-archive-btn {
+  font-size: 11px;
+  padding: 3px 8px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.kanban-archive-btn:hover {
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+/* ── Closed section ── */
+.closed-section {
+  margin-top: 2rem;
+}
+
+.closed-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 0.75rem;
+}
+
+.closed-toggle:hover { color: #111827; }
+
+.closed-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.closed-table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.closed-row {
+  cursor: pointer;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.1s;
+}
+
+.closed-row:last-child { border-bottom: none; }
+.closed-row:hover { background: #f9fafb; }
+
+.closed-row td {
+  padding: 10px 12px;
+  color: #374151;
+}
+
+.closed-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ── Table view ── */
+.portfolio-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: white;
+}
+
+.portfolio-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.portfolio-table thead th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable-th:hover { background: #f3f4f6; }
+
+.sort-icon { color: #d1d5db; font-style: normal; }
+.sort-icon.active { color: #1d4ed8; }
+
+.portfolio-table-row {
+  border-bottom: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.portfolio-table-row:last-child { border-bottom: none; }
+.portfolio-table-row:hover { background: #f9fafb; }
+
+.portfolio-table-row td {
+  padding: 11px 14px;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.table-name {
+  font-weight: 600;
+  color: #111827;
+  max-width: 280px;
+}
+
+.portfolio-empty {
+  background: white;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.portfolio-empty h3 {
+  margin: 0 0 0.5rem 0;
+  color: #111827;
+}
+
+.portfolio-empty p {
+  margin: 0 0 1rem 0;
 }
 
 .summary-card {
   background: white;
   border: 1px solid #e5e7eb;
+  border-top: 3px solid #e5e7eb;
   border-radius: 8px;
   padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.2rem;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
 }
+
+.summary-card-blue  { border-top-color: #3b82f6; }
+.summary-card-green { border-top-color: #16a34a; }
+.summary-card-purple { border-top-color: #7c3aed; }
+.summary-card-amber { border-top-color: #d97706; }
 
 .summary-label {
   color: #6b7280;
@@ -95,7 +673,9 @@
 .portfolio-card h3 {
   margin: 0 0 0.35rem 0;
   color: #111827;
-  font-size: 20px;
+  font-size: 18px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .portfolio-agency {
@@ -194,31 +774,4 @@
 
 .portfolio-empty p {
   margin: 0 0 1rem 0;
-}
-
-@media (max-width: 768px) {
-  .portfolio-page {
-    padding: 1rem;
-  }
-
-  .portfolio-header {
-    flex-direction: column;
-  }
-
-  .portfolio-actions {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .portfolio-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .portfolio-details {
-    grid-template-columns: 1fr;
-  }
-
-  .portfolio-card-actions .btn {
-    width: 100%;
-  }
 }

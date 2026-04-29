@@ -2,83 +2,118 @@
   {
     "id": "a1d8d5c4-75b6-4f6f-9b3d-b5e2c2f92f1f",
     "name": "VA Benefits Platform Modernization",
-    "createdAt": "2026-04-25T20:39:18.072Z",
+    "createdAt": "2026-04-01T13:00:00.000Z",
     "updatedAt": "2026-04-25T22:56:04.859Z",
     "opportunityName": "VA Benefits Platform Modernization",
     "agency": "Department of Veterans Affairs",
     "contractValue": "50-200M",
     "vehicle": "SPRUCE IDIQ",
     "setAside": "SDVOSB",
-    "timeline": "Draft RFP expected in 30 days; proposal due in 60 days; award forecast in 6 months.",
-    "description": "Modernize and migrate a legacy VA benefits case management platform to a secure cloud environment. Scope includes application modernization, data migration, DevSecOps pipeline, ransomware resilience, ATO support, and user training for 250k+ veterans.",
-    "knownRelationships": "Met the program lead at an industry day and received a warm introduction from a current teammate with incumbent-adjacent access. No direct contracting officer relationship has been confirmed yet.",
-    "notes": "We are SDVOSB and can lead as prime. FedRAMP Moderate authorization is in progress, and the team has strong cloud modernization experience. Risk is centered on integration ownership with legacy vendors and a compressed proposal timeline.",
+    "timeline": "Draft RFP expected May 15, 2026; final RFP June 10, 2026; proposals due July 2, 2026; award forecast Q4 2026.",
+    "description": "Modernize and migrate the VA Benefits Case Management System (BCMS) to a FedRAMP-authorized cloud environment. Scope includes re-platforming a Java/COBOL monolith to a microservices architecture on AWS GovCloud, full data migration for 6.2M active veteran records, implementation of a DevSecOps pipeline, ATO preparation and continuous monitoring, ransomware resilience and backup architecture, Section 508-compliant veteran-facing portal, and change management/training for 4,200 VA staff across 57 regional offices.",
+    "knownRelationships": "James Okafor met Program Director Erin James at the VA Industry Day on April 3rd and received a warm introduction from our teaming partner (CloudBridge Federal), who has an active task order with the VA IT Modernization office. Priya Nair has a standing working relationship with the Technical Authority, Michael Chen, from a prior CMS engagement. No direct contracting officer relationship confirmed — targeted outreach planned for May.",
+    "notes": "Apex is SDVOSB and positioned to lead as prime. Pursuing teaming with CloudBridge Federal (FedRAMP Moderate authorized, active VA incumbent) to cover authorization risk. FedRAMP Moderate ATO under our own UEI is 60% complete, targeting provisional authorization by August 2026. Compressed proposal timeline is the primary execution risk — Sofia is already building the compliance matrix. Incumbent (DataCore Systems) has an expiring task order; buyer signaled intent to compete fully.",
     "status": "active",
-    "gate": 1,
+    "gate": 2,
     "evidence": [
       {
         "id": "e2687b3c-87d8-4ed7-a8f9-1c2f4387cf4e",
-        "source": "Industry Day Briefing",
-        "url": "https://example.com/va-industry-day-summary",
-        "note": "VA program lead emphasized cloud security and modern user experience as top priorities.",
-        "summary": "Buyers want a secure, modern platform that reduces manual workload and improves veteran case visibility."
+        "source": "VA Industry Day Briefing — April 3, 2026",
+        "url": "https://sam.gov/opp/va-bcms-modernization-industry-day",
+        "note": "Program Director Erin James emphasized cloud security, veteran UX, and implementation risk as the top three evaluation discriminators. She explicitly called out failed migrations at peer agencies as a cautionary benchmark.",
+        "summary": "Buyers want a proven, low-risk migration partner who can deliver a secure, modern veteran experience without service disruption. Security and past performance will be heavily weighted."
       },
       {
         "id": "f19d947e-293b-4f0d-9f3d-8a1a7a2b7c1d",
-        "source": "Partner Capability Statement",
-        "url": "https://example.com/capability-statement.pdf",
-        "note": "Proposed partner has FedRAMP Moderate controls and prior VA case management experience.",
-        "summary": "Partner supplements our core team with required cybersecurity and compliance delivery capacity."
+        "source": "CloudBridge Federal — Teaming Letter of Intent",
+        "url": "https://internal.apexfederal.com/partnerships/cloudbridge-loi-2026",
+        "note": "CloudBridge Federal confirmed intent to team as subcontractor. They hold FedRAMP Moderate authorization, an active VA BCMS task order (expires Sept 2026), and a TS facility clearance. Their inclusion closes our two largest proposal risks.",
+        "summary": "Teaming closes the FedRAMP authorization gap and provides incumbent-adjacent access and credibility with the buying office."
+      },
+      {
+        "id": "e3b1a9f7-2c74-4a8d-8d3f-1f2e3a4b5c6d",
+        "source": "SAM.gov Pre-Solicitation Notice #VA-2026-BCMS-001",
+        "url": "https://sam.gov/opp/va-bcms-2026-presolicitation",
+        "note": "Pre-solicitation confirms SPRUCE IDIQ vehicle, SDVOSB set-aside, 5-year base with two 1-year options. PWS mentions ATO, Section 508, and DevSecOps as mandatory components.",
+        "summary": "Official pre-solicitation confirms vehicle alignment, set-aside eligibility, and key mandatory requirements that match our core delivery capabilities."
       }
     ],
     "stakeholders": [
       {
         "id": "s7a5e8d2b-1f84-4d6f-a2e3-72a4c5b6d7e8",
         "name": "Erin James",
-        "role": "Program Lead",
-        "office": "VA Benefits Delivery Office",
+        "role": "Program Director",
+        "office": "VA Benefits Delivery Office (BDO)",
         "relationshipStrength": "moderate",
         "lastTouch": "2026-04-11",
         "nextTouch": "2026-05-02",
-        "notes": "Met at industry day; asked specific questions about ATO and cloud security."
+        "notes": "Met at Industry Day. Responded positively to our secure migration narrative. Has asked for a white paper on our phased migration approach. Key decision influencer on technical risk."
       },
       {
         "id": "s9b8c7f1a-2d54-4c6f-b9d1-8e7a2c3d4f5b",
         "name": "Michael Chen",
-        "role": "Technical Authority",
-        "office": "VA IT Modernization",
-        "relationshipStrength": "weak",
-        "lastTouch": "2026-04-18",
+        "role": "Contracting Officer's Representative (COR) / Technical Authority",
+        "office": "VA Office of Information & Technology (OIT)",
+        "relationshipStrength": "moderate",
+        "lastTouch": "2026-04-22",
         "nextTouch": "2026-05-05",
-        "notes": "Intro call scheduled to validate security architecture assumptions."
+        "notes": "Intro call completed April 22. Priya presented zero-trust architecture reference model. Chen requested a follow-up on CI/CD toolchain and ATO evidence package. Strong technical rapport established."
+      },
+      {
+        "id": "s4d3e2f1a-8b74-4c6f-a1d2-9e8f7a6b5c4d",
+        "name": "Sandra Patel",
+        "role": "Contracting Officer",
+        "office": "VA Network Contracting Office 4 (NCO-4)",
+        "relationshipStrength": "weak",
+        "lastTouch": "",
+        "nextTouch": "2026-05-15",
+        "notes": "Identified through SAM.gov notice. No direct contact yet. James is pursuing an introduction through our PCO at the VA OAMP office. First outreach planned for mid-May."
       }
     ],
     "evaluation": {
       "type": "Best Value Tradeoff",
       "criteria": [
-        "Technical approach",
-        "Past performance",
-        "Price realism",
-        "Security & ATO readiness",
-        "Innovation"
+        "Technical approach and migration methodology (30%)",
+        "Past performance — cloud modernization and federal agency delivery (25%)",
+        "Security, ATO readiness, and FedRAMP compliance (20%)",
+        "Price realism and cost control approach (15%)",
+        "Management approach and key personnel (10%)"
       ],
-      "notes": "The procurement is expected to use a best-value tradeoff model with heavy weighting on cybersecurity, cloud migration experience, and implementation risk mitigation."
+      "notes": "Best-value tradeoff with technical factors significantly outweighing price. Program Director has publicly indicated that past failed migrations at peer agencies make risk mitigation the primary discriminator. ATO and FedRAMP sections will likely be pass/fail prerequisites before full evaluation. Key personnel (PM and CTO equivalent) will be evaluated on VA-specific experience."
     },
     "updates": [
       {
-        "id": "u3c9d7a0b-4f12-4c6d-8f1a-4e2b6c7d8f9e",
+        "id": "u1a2b3c4d-5e6f-7890-ab12-cd34ef567890",
         "type": "note",
-        "timestamp": "2026-04-18T15:20:00.000Z",
-        "content": "Scheduled intro call with Technical Authority Michael Chen to validate security assumptions."
+        "timestamp": "2026-04-03T18:00:00.000Z",
+        "content": "Attended VA BCMS Industry Day. Erin James confirmed SDVOSB set-aside and SPRUCE IDIQ vehicle. CloudBridge Federal also attended — connected afterward and explored teaming. Strong alignment on scope and gaps."
+      },
+      {
+        "id": "u2b3c4d5e-6f70-8901-bc23-de45fg678901",
+        "type": "note",
+        "timestamp": "2026-04-11T14:00:00.000Z",
+        "content": "Submitted formal RFI response highlighting our phased migration methodology and SDVOSB prime posture. Erin James requested a one-pager on our DevSecOps pipeline — forwarded to Priya to draft."
+      },
+      {
+        "id": "u3c4d5e6f-7081-9012-cd34-ef56gh789012",
+        "type": "note",
+        "timestamp": "2026-04-18T10:30:00.000Z",
+        "content": "Signed LOI with CloudBridge Federal. They will contribute FedRAMP Moderate authorization, ATO documentation artifacts, and 2 FTEs (cybersecurity lead + systems architect) as named subcontractor personnel."
       },
       {
         "id": "u8d7f6b5c-2a41-4d3e-9f0b-5c6d7e8f9a0b",
         "type": "field_update",
         "timestamp": "2026-04-20T10:30:00.000Z",
-        "content": "Updated gate from 0 to 1.",
+        "content": "Updated gate from 1 to 2 — opportunity cleared go/no-go review. Approved for full capture investment.",
         "field": "gate",
-        "oldValue": 0,
-        "newValue": 1
+        "oldValue": 1,
+        "newValue": 2
+      },
+      {
+        "id": "u5e6f7a8b-9012-abcd-ef34-567890abcdef",
+        "type": "note",
+        "timestamp": "2026-04-22T16:00:00.000Z",
+        "content": "Technical call with Michael Chen completed. Priya presented zero-trust reference architecture. Chen requested our CI/CD toolchain brief and ATO evidence package. Follow-up scheduled May 5."
       }
     ],
     "latestAnalysis": {
@@ -90,36 +125,45 @@
       "setAside": "SDVOSB",
       "fitAssessment": {
         "rating": "Strong",
-        "rationale": "Strong fit on vehicle, set-aside, and our cloud modernization capabilities with a viable partner for FedRAMP work.",
+        "rationale": "Apex is SDVOSB-eligible prime on an SDVOSB-set-aside contract, holds a teaming agreement that closes the FedRAMP gap, has direct relationships with two of three key stakeholders, and the scope maps precisely to our cloud modernization, DevSecOps, and ATO delivery capabilities.",
         "details": [
-          "SDVOSB status positions us well for award eligibility and prime leadership.",
-          "Existing access signals from the program lead improve early capture visibility.",
-          "The scope aligns with our recent cloud modernization and data migration experience."
+          "SDVOSB prime eligibility confirmed — set-aside is a direct qualifier.",
+          "Teaming agreement with CloudBridge Federal closes the FedRAMP Moderate authorization gap and brings incumbent-adjacent credibility.",
+          "CTO Priya Nair has an existing working relationship with the Technical Authority from a prior CMS engagement.",
+          "Program Director relationship is active and advancing — white paper request signals genuine buyer interest.",
+          "Scope covers all eight listed PWS components, with no capability gaps requiring new hires or unfamiliar tooling."
         ],
         "strengths": [
-          "Prime-ready SDVOSB posture",
-          "Relevant VA benefits modernization experience",
-          "Strong DevSecOps and FedRAMP support plan",
-          "Existing relationship with program leadership"
+          "Prime-eligible SDVOSB with confirmed set-aside alignment",
+          "Teaming partner closes FedRAMP and ATO risk on Day 1",
+          "Active, advancing relationships with Program Director and Technical Authority",
+          "Proven cloud migration and DevSecOps delivery on comparable federal programs",
+          "Incumbent task order expires — open competitive landscape"
         ]
       },
       "pWinScore": {
-        "score": 72,
+        "score": 76,
         "tier": "high",
-        "reasoning": "High pWin driven by vehicle and set-aside fit, plus strong capture signals, offset by timeline and integration risk."
+        "reasoning": "Strong vehicle and set-aside alignment, two active stakeholder relationships, incumbent-adjacent teaming, and scope fit drive a high pWin. Primary drag factors are the unconfirmed CO relationship and compressed proposal timeline."
       },
       "gaps": [
         {
-          "area": "Security / Compliance",
-          "detail": "FedRAMP Moderate authorization must be confirmed or provided through partner delivery.",
+          "area": "Contracting Officer Relationship",
+          "detail": "No direct relationship with Contracting Officer Sandra Patel at NCO-4. Outreach is planned but not yet executed.",
           "severity": "medium",
-          "mitigation": "Secure a partner with Federal cloud authorization and document ATO path early."
+          "mitigation": "James is pursuing a warm introduction through our VA OAMP PCO contact. First touch targeted for May 15 — ahead of draft RFP release."
         },
         {
-          "area": "Relationship Coverage",
-          "detail": "No confirmed contracting officer relationship today.",
+          "area": "Proposal Timeline",
+          "detail": "Draft RFP to proposal submission window is approximately 7 weeks. Complex technical volume and past performance write-ups require early resourcing.",
           "severity": "medium",
-          "mitigation": "Develop a targeted outreach plan and secure at least one CO introduction."
+          "mitigation": "Sofia has begun compliance matrix and volume shells. Kickoff proposal team meeting scheduled for May 1."
+        },
+        {
+          "area": "Own FedRAMP ATO",
+          "detail": "Apex standalone FedRAMP Moderate ATO is 60% complete and may not reach provisional authorization before proposals are due.",
+          "severity": "low",
+          "mitigation": "CloudBridge Federal authorization will be cited as the primary compliance path. Apex ATO progress documented as supplemental evidence of commitment."
         }
       ],
       "feasibilityFactors": {
@@ -127,25 +171,589 @@
         "Set-Aside Alignment": "Strong",
         "Relationship Coverage": "Moderate",
         "Timeline Feasibility": "Manageable",
-        "Scope Alignment": "Strong"
+        "Scope Alignment": "Strong",
+        "Teaming Strength": "Strong"
       },
       "risks": [
-        "Compressed proposal timeline could stress response quality.",
-        "Lack of confirmed contracting officer contact introduces chase risk.",
-        "Legacy integration ownership with incumbent vendors is unclear.",
-        "High-value solicitation may attract strong competitors."
+        "Contracting Officer (Sandra Patel) has not been engaged — late CO relationship creates price and strategy risk.",
+        "7-week proposal window from draft RFP to submission requires immediate resourcing.",
+        "Incumbent DataCore Systems may protest or pursue aggressive pricing to retain the work.",
+        "Integration complexity with VA legacy COBOL systems could surface unknown scope in the final PWS.",
+        "Key personnel commitments (PM, CTO) must be locked in before RFP drop to avoid availability conflicts."
       ],
       "recommendation": {
         "action": "Go",
-        "rationale": "Proceed as prime with early buyer validation, clear ATO path, and a strong capture plan focused on security and modernization.",
+        "rationale": "Proceed as SDVOSB prime with full capture investment. The combination of set-aside fit, teaming closure, advancing stakeholder relationships, and scope alignment makes this a top-tier pipeline opportunity.",
         "nextSteps": [
-          "Validate the final buying office and confirm SPRUCE IDIQ usage.",
-          "Secure a FedRAMP partner or confirm existing authorization path.",
-          "Book a technical discovery with the VA program lead and technical authority.",
-          "Develop a win strategy centered on secure cloud modernization, veteran outcomes, and risk mitigation."
+          "Finalize and deliver white paper on phased migration approach to Erin James by May 1.",
+          "Secure CO introduction through VA OAMP PCO contact before May 15.",
+          "Lock key personnel commitments (PM: Marcus Webb, CTO: Priya Nair) and prepare bios.",
+          "Kick off proposal team with Sofia on May 1 — begin technical volume shell and past performance write-ups.",
+          "Formalize CloudBridge teaming agreement (move from LOI to signed NDA + teaming agreement) by April 30."
         ]
-      }
+      },
+      "proposedTeam": [
+        {
+          "id": "tm-002",
+          "name": "James Okafor",
+          "email": "james.okafor@apexfederal.com",
+          "role": "VP of Capture & Business Development",
+          "proposedRole": "Capture Lead",
+          "rationale": "James Okafor drives the capture strategy and owns the buyer relationship with VA BDO."
+        },
+        {
+          "id": "tm-003",
+          "name": "Priya Nair",
+          "email": "priya.nair@apexfederal.com",
+          "role": "Chief Technology Officer",
+          "proposedRole": "Technical Volume Lead",
+          "rationale": "Priya Nair's FedRAMP, AWS GovCloud, and DevSecOps expertise anchors the technical approach for this cloud migration."
+        },
+        {
+          "id": "tm-004",
+          "name": "Marcus Webb",
+          "email": "marcus.webb@apexfederal.com",
+          "role": "Director of Program Delivery",
+          "proposedRole": "Program Manager",
+          "rationale": "Marcus Webb has the VA relationship via CloudBridge teaming contact and federal CPARS reporting background needed for delivery."
+        },
+        {
+          "id": "tm-005",
+          "name": "Sofia Reyes",
+          "email": "sofia.reyes@apexfederal.com",
+          "role": "Lead Proposal Manager",
+          "proposedRole": "Proposal Manager",
+          "rationale": "Sofia Reyes owns the compliance matrix and color reviews — critical for this compressed proposal timeline."
+        },
+        {
+          "id": "tm-022",
+          "name": "Patrick O'Brien",
+          "email": "patrick.obrien@apexfederal.com",
+          "role": "Senior Software Engineer",
+          "proposedRole": "Key Personnel — Legacy Migration Lead",
+          "rationale": "Patrick O'Brien's COBOL modernization and Java migration background directly addresses the Java/COBOL monolith re-platforming core requirement."
+        },
+        {
+          "id": "tm-008",
+          "name": "Alicia Fontaine",
+          "email": "alicia.fontaine@apexfederal.com",
+          "role": "DevSecOps Lead",
+          "proposedRole": "Key Personnel — DevSecOps Lead",
+          "rationale": "Alicia Fontaine's ATO pipeline automation and SAST/DAST credentials are directly responsive to the FedRAMP Moderate and DevSecOps mandatory PWS components."
+        },
+        {
+          "id": "tm-043",
+          "name": "Aisha Obi",
+          "email": "aisha.obi@apexfederal.com",
+          "role": "Lead UX Designer",
+          "proposedRole": "Key Personnel — UX Lead",
+          "rationale": "Aisha Obi's veteran-facing UX and Section 508 expertise are directly relevant to the veteran portal redesign scope."
+        }
+      ]
     },
-    "rfp": null
+    "rfp": null,
+    "outcome": null,
+    "outcomeDetails": null,
+    "similarPursuits": [
+      "pp-001-va-vba-modernization",
+      "pp-002-cms-platform"
+    ]
+  },
+  {
+    "id": "legacy-opp-001",
+    "name": "VBA Claims Processing Modernization",
+    "createdAt": "2024-01-10T09:00:00.000Z",
+    "updatedAt": "2024-09-15T00:00:00.000Z",
+    "opportunityName": "VBA Claims Processing Modernization",
+    "agency": "Department of Veterans Affairs",
+    "contractValue": "50-200M",
+    "vehicle": "SPRUCE IDIQ",
+    "setAside": "SDVOSB",
+    "timeline": "Award September 2024.",
+    "description": "Modernize the VBA Claims Processing system to a cloud-native microservices architecture on AWS GovCloud, including full data migration, DevSecOps pipeline, and FedRAMP Moderate ATO support.",
+    "knownRelationships": "Warm intro to Program Director through incumbent sub CloudBridge Federal.",
+    "notes": "Competed as SDVOSB prime. Won best-value evaluation. Earned Exceptional CPARS across all categories.",
+    "status": "won",
+    "gate": 3,
+    "evidence": [],
+    "stakeholders": [],
+    "evaluation": {
+      "type": "",
+      "criteria": [],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": null,
+    "rfp": null,
+    "outcome": "won",
+    "outcomeDetails": {
+      "lossReason": null,
+      "lessonsLearned": [
+        {
+          "tag": "relationship",
+          "note": "Warm intro to Program Director was a key differentiator."
+        },
+        {
+          "tag": "proposal_quality",
+          "note": "Phased migration narrative with rollback plans addressed buyer risk concerns."
+        },
+        {
+          "tag": "pricing",
+          "note": "Priced 8% above lowest offer but won on best value."
+        }
+      ],
+      "notes": "ATO roadmap cited as single most important differentiator in source selection."
+    },
+    "similarPursuits": []
+  },
+  {
+    "id": "legacy-opp-002",
+    "name": "CMS Beneficiary Data Platform Replatform",
+    "createdAt": "2024-08-01T09:00:00.000Z",
+    "updatedAt": "2025-03-20T00:00:00.000Z",
+    "opportunityName": "CMS Beneficiary Data Platform Replatform",
+    "agency": "Centers for Medicare & Medicaid Services",
+    "contractValue": "50-200M",
+    "vehicle": "OASIS+",
+    "setAside": "Small Business",
+    "timeline": "Award March 2025.",
+    "description": "Replatform the CMS Beneficiary Data Platform to a modern cloud-native architecture with HL7 FHIR compliance, data governance, and analytics capabilities.",
+    "knownRelationships": "No prior CMS CO or COR relationship. Cold outreach started too late.",
+    "notes": "Lost in best-value evaluation. Second on technical, third on past performance.",
+    "status": "lost",
+    "gate": 3,
+    "evidence": [],
+    "stakeholders": [],
+    "evaluation": {
+      "type": "",
+      "criteria": [],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": null,
+    "rfp": null,
+    "outcome": "lost",
+    "outcomeDetails": {
+      "lossReason": "past_performance",
+      "lessonsLearned": [
+        {
+          "tag": "past_performance",
+          "note": "Winning team had a directly relevant CMS CPARS citation. We lacked agency-specific references."
+        },
+        {
+          "tag": "relationship",
+          "note": "Cold outreach only 2 weeks before RFP drop. Earlier BD investment is critical for CMS."
+        },
+        {
+          "tag": "proposal_quality",
+          "note": "Data architecture section lacked quantified outcomes and migration sequence detail."
+        }
+      ],
+      "notes": "Need CMS-specific past performance before pursuing another replatform at this scale."
+    },
+    "similarPursuits": []
+  },
+  {
+    "id": "legacy-opp-003",
+    "name": "DISA Enterprise Cloud Services Expansion",
+    "createdAt": "2025-04-01T09:00:00.000Z",
+    "updatedAt": "2025-07-01T00:00:00.000Z",
+    "opportunityName": "DISA Enterprise Cloud Services Expansion",
+    "agency": "Defense Information Systems Agency",
+    "contractValue": "50-200M",
+    "vehicle": "GSA MAS",
+    "setAside": "Small Business",
+    "timeline": "No-bid decision July 2025.",
+    "description": "Expand DISA enterprise cloud services across DoD components, requiring CMMC Level 2 certification and TS/SCI cleared personnel.",
+    "knownRelationships": "No existing DISA relationships.",
+    "notes": "Deliberate no-bid at Gate 2 due to CMMC gap and proposal bandwidth constraints.",
+    "status": "no_bid",
+    "gate": 2,
+    "evidence": [],
+    "stakeholders": [],
+    "evaluation": {
+      "type": "",
+      "criteria": [],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": null,
+    "rfp": null,
+    "outcome": "no_bid",
+    "outcomeDetails": {
+      "lossReason": null,
+      "lessonsLearned": [
+        {
+          "tag": "capability_gap",
+          "note": "Required CMMC Level 2 and TS/SCI staff — neither available at time of pursuit."
+        },
+        {
+          "tag": "timeline",
+          "note": "5-week draft-to-proposal window while team was committed to two other live proposals."
+        }
+      ],
+      "notes": "Strategic no-bid. If CMMC Level 2 is achieved, future DISA recompete would be strong fit."
+    },
+    "similarPursuits": []
+  },
+  {
+    "id": "b2e9f1a3-1c4d-4e5f-8a7b-c6d0e1f23456",
+    "name": "DHS Cybersecurity Operations Center Modernization",
+    "createdAt": "2026-03-10T09:00:00.000Z",
+    "updatedAt": "2026-04-20T14:30:00.000Z",
+    "opportunityName": "DHS Cybersecurity Operations Center Modernization",
+    "agency": "Department of Homeland Security",
+    "contractValue": "5-50M",
+    "vehicle": "GSA MAS",
+    "setAside": "Small Business",
+    "timeline": "RFP expected June 2026; award Q1 2027.",
+    "description": "Modernize the DHS Cybersecurity Operations Center with next-generation SIEM tooling, 24/7 SOC staffing augmentation, threat intelligence integration, and zero-trust network architecture across 12 DHS component agencies.",
+    "knownRelationships": "Tom Reynolds has a prior relationship with the CSOC program manager from a 2023 CISA engagement.",
+    "notes": "Strong fit for our cybersecurity portfolio. Two large primes in the competitive landscape — positioning on small business set-aside.",
+    "status": "active",
+    "gate": 1,
+    "evidence": [],
+    "stakeholders": [
+      {
+        "id": "sh-dhs-01",
+        "name": "Tom Reynolds",
+        "role": "Program Manager",
+        "office": "CSOC",
+        "relationshipStrength": "moderate",
+        "lastTouch": "",
+        "nextTouch": "",
+        "notes": ""
+      }
+    ],
+    "evaluation": {
+      "type": "",
+      "criteria": [],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": {
+      "fitAssessment": "Good",
+      "pWin": 58,
+      "recommendation": "Pursue",
+      "gaps": [
+        "No FedRAMP High authorization",
+        "Limited 24/7 SOC staffing bench"
+      ],
+      "risks": [
+        "Incumbent advantage",
+        "Aggressive timeline"
+      ],
+      "summary": "Solid opportunity with manageable gaps. DHS relationship and small business set-aside favor Apex.",
+      "proposedTeam": [
+        {
+          "id": "tm-002",
+          "name": "James Okafor",
+          "email": "james.okafor@apexfederal.com",
+          "role": "VP of Capture & Business Development",
+          "proposedRole": "Capture Lead",
+          "rationale": "James Okafor drives the capture strategy and pipeline investment decision at Gate 1."
+        },
+        {
+          "id": "tm-003",
+          "name": "Priya Nair",
+          "email": "priya.nair@apexfederal.com",
+          "role": "Chief Technology Officer",
+          "proposedRole": "Technical Volume Lead",
+          "rationale": "Priya Nair's zero-trust, DevSecOps, and FedRAMP background positions her to lead the technical approach for a DHS cybersecurity SOC scope."
+        },
+        {
+          "id": "tm-004",
+          "name": "Marcus Webb",
+          "email": "marcus.webb@apexfederal.com",
+          "role": "Director of Program Delivery",
+          "proposedRole": "Program Manager",
+          "rationale": "Marcus Webb provides federal delivery credibility and risk management leadership for this high-visibility DHS engagement."
+        },
+        {
+          "id": "tm-005",
+          "name": "Sofia Reyes",
+          "email": "sofia.reyes@apexfederal.com",
+          "role": "Lead Proposal Manager",
+          "proposedRole": "Proposal Manager",
+          "rationale": "Sofia Reyes manages proposal volume structure and compliance matrix for this Best Value competition."
+        },
+        {
+          "id": "tm-008",
+          "name": "Alicia Fontaine",
+          "email": "alicia.fontaine@apexfederal.com",
+          "role": "DevSecOps Lead",
+          "proposedRole": "Key Personnel — DevSecOps Lead",
+          "rationale": "Alicia Fontaine's SAST/DAST, ATO pipeline, and DoD contract experience make her the strongest key personnel candidate for DHS cybersecurity delivery."
+        },
+        {
+          "id": "tm-040",
+          "name": "Rajesh Mehta",
+          "email": "rajesh.mehta@apexfederal.com",
+          "role": "Security Test Engineer",
+          "proposedRole": "Key Personnel — Security Assessment Lead",
+          "rationale": "Rajesh Mehta's penetration testing, OWASP, and vulnerability scanning credentials directly address the SOC modernization technical requirements."
+        }
+      ]
+    },
+    "rfp": null,
+    "outcome": null,
+    "outcomeDetails": null,
+    "similarPursuits": []
+  },
+  {
+    "id": "c3f0a2b4-2d5e-4f60-9b8c-d7e1f2345678",
+    "name": "CMS Medicaid Enterprise Systems Transformation",
+    "createdAt": "2026-02-14T11:00:00.000Z",
+    "updatedAt": "2026-04-10T16:00:00.000Z",
+    "opportunityName": "CMS Medicaid Enterprise Systems Transformation",
+    "agency": "Centers for Medicare & Medicaid Services",
+    "contractValue": "50-200M",
+    "vehicle": "OASIS+",
+    "setAside": "Small Business",
+    "timeline": "Sources sought closed March 2026; RFP expected August 2026.",
+    "description": "Transform the CMS Medicaid Enterprise Systems to a modular, API-first architecture aligned with CMS Interoperability Rule requirements, including HL7 FHIR implementation and state technical assistance.",
+    "knownRelationships": "Priya Nair has an established relationship with the CMS IT Modernization team from the Beneficiary Data Platform engagement.",
+    "notes": "High strategic value. FHIR expertise is a differentiator. Teaming with a FHIR-certified partner recommended.",
+    "status": "active",
+    "gate": 2,
+    "evidence": [],
+    "stakeholders": [
+      {
+        "id": "sh-cms-01",
+        "name": "Priya Nair",
+        "role": "Program Lead",
+        "office": "CMS IT Modernization",
+        "relationshipStrength": "strong",
+        "lastTouch": "",
+        "nextTouch": "",
+        "notes": ""
+      }
+    ],
+    "evaluation": {
+      "type": "",
+      "criteria": [],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": {
+      "fitAssessment": "Strong",
+      "pWin": 72,
+      "recommendation": "Pursue",
+      "gaps": [
+        "FHIR implementation at scale",
+        "State-level coordination experience"
+      ],
+      "risks": [
+        "Long RFP cycle",
+        "Multiple large incumbents in MES space"
+      ],
+      "summary": "Strong pipeline opportunity. CMS relationship and OASIS+ vehicle position Apex well. FHIR gap should be closed via teaming.",
+      "proposedTeam": [
+        {
+          "id": "tm-002",
+          "name": "James Okafor",
+          "email": "james.okafor@apexfederal.com",
+          "role": "VP of Capture & Business Development",
+          "proposedRole": "Capture Lead",
+          "rationale": "James Okafor leverages existing CMS Medicaid relationships and owns the Gate 2 capture strategy."
+        },
+        {
+          "id": "tm-003",
+          "name": "Priya Nair",
+          "email": "priya.nair@apexfederal.com",
+          "role": "Chief Technology Officer",
+          "proposedRole": "Technical Volume Lead",
+          "rationale": "Priya Nair's cloud architecture and FedRAMP expertise drive the technical approach for CMS Medicaid re-platforming."
+        },
+        {
+          "id": "tm-004",
+          "name": "Marcus Webb",
+          "email": "marcus.webb@apexfederal.com",
+          "role": "Director of Program Delivery",
+          "proposedRole": "Program Manager",
+          "rationale": "Marcus Webb has federal benefits platform delivery experience and CPARS documentation to support CMS past performance."
+        },
+        {
+          "id": "tm-005",
+          "name": "Sofia Reyes",
+          "email": "sofia.reyes@apexfederal.com",
+          "role": "Lead Proposal Manager",
+          "proposedRole": "Proposal Manager",
+          "rationale": "Sofia Reyes leads proposal management and color reviews for this active Gate 2 competition."
+        },
+        {
+          "id": "tm-018",
+          "name": "Chris Washington",
+          "email": "chris.washington@apexfederal.com",
+          "role": "Senior Software Engineer",
+          "proposedRole": "Key Personnel — Java/Spring Boot Lead",
+          "rationale": "Chris Washington's Java, Spring Boot, and microservices background directly supports CMS Medicaid platform modernization scope."
+        },
+        {
+          "id": "tm-049",
+          "name": "Priya Sharma",
+          "email": "priya.sharma@apexfederal.com",
+          "role": "Data Engineer",
+          "proposedRole": "Key Personnel — Data Engineering Lead",
+          "rationale": "Priya Sharma's ETL pipelines and data lake experience address the Medicaid beneficiary data integration and reporting requirements."
+        }
+      ]
+    },
+    "rfp": null,
+    "outcome": null,
+    "outcomeDetails": null,
+    "similarPursuits": [
+      "pp-002-cms-platform"
+    ]
+  },
+  {
+    "id": "e5b2c4d6-4f70-4182-bd0e-f9031245678a",
+    "name": "SSA Disability Case Processing System Enhancement",
+    "createdAt": "2026-03-28T14:00:00.000Z",
+    "updatedAt": "2026-04-27T00:09:10.860Z",
+    "opportunityName": "SSA Disability Case Processing System Enhancement",
+    "agency": "Social Security Administration",
+    "contractValue": "5-50M",
+    "vehicle": "OASIS+",
+    "setAside": "SDVOSB",
+    "timeline": "Pre-solicitation posted April 2026; RFP expected July 2026.",
+    "description": "Enhance the SSA Disability Case Processing System with AI-assisted case routing, automated evidence gathering, and modernized examiner interfaces to reduce adjudication backlog.",
+    "knownRelationships": "No prior SSA relationships. Identified through SAM.gov pre-solicitation notice.",
+    "notes": "New agency for Apex. SDVOSB set-aside strongly favors us. AI case routing is directly in our wheelhouse.",
+    "status": "active",
+    "gate": 1,
+    "evidence": [],
+    "stakeholders": [],
+    "evaluation": {
+      "type": "",
+      "criteria": [],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": {
+      "opportunityName": "SSA Disability Case Processing System Enhancement",
+      "name": "SSA Disability Case Processing System Enhancement",
+      "agency": "Social Security Administration",
+      "contractValue": "5-50M",
+      "vehicle": "OASIS+",
+      "setAside": "SDVOSB",
+      "fitAssessment": {
+        "rating": "Good",
+        "rationale": "Good fit on vehicle and scope, existing relationships provide advantage, but timeline is tight.",
+        "details": [
+          "IDIQ vehicle and SDVOSB set-aside align with company posture and reduces entry friction",
+          "Known access signals suggest early traction (program lead touch + incumbent-adjacent teammate)",
+          "FedRAMP/ATO expectations are achievable but need a clear compliance plan or partner support"
+        ],
+        "strengths": [
+          "Existing relationships with DIA contracting office",
+          "IDIQ vehicle provides flexibility",
+          "Strong cloud infrastructure experience",
+          "Key personnel have worked with agency before"
+        ]
+      },
+      "pWinScore": {
+        "score": 65,
+        "tier": "medium",
+        "reasoning": "Moderate pWin driven by vehicle fit and access signals, reduced by compliance and incumbent competition."
+      },
+      "gaps": [
+        {
+          "area": "Operational Gap",
+          "detail": "FedRAMP certification - we need to acquire or partner",
+          "severity": "low",
+          "mitigation": ""
+        },
+        {
+          "area": "Operational Gap",
+          "detail": "Specific domain expertise in combat systems integration",
+          "severity": "low",
+          "mitigation": ""
+        },
+        {
+          "area": "Operational Gap",
+          "detail": "Proven experience with this specific agency contract office",
+          "severity": "low",
+          "mitigation": ""
+        }
+      ],
+      "feasibilityFactors": {
+        "Vehicle Fit": "Strong",
+        "Set-Aside Alignment": "Strong",
+        "Relationship Coverage": "Strong",
+        "Timeline Feasibility": "Favorable",
+        "Scope Alignment": "Strong"
+      },
+      "risks": [
+        "Tight 45-day proposal timeline could impact quality",
+        "Incumbent (TechCorp) has significant relationship advantages",
+        "Large contract value ($50-200M) likely attracts strong competitors",
+        "May need to subcontract cybersecurity components"
+      ],
+      "recommendation": {
+        "action": "Go",
+        "rationale": "Proceed as prime if you can confirm buyer priorities and lock a compliance plan quickly. Timeline is workable, but only with early capture discipline and targeted teaming for any gaps.",
+        "nextSteps": [
+          "Confirm the contracting office and buying activity (office + set-aside posture) and validate vehicle usage",
+          "Schedule a technical discovery with the program office to validate integration and ATO expectations",
+          "Draft a lightweight win strategy: discriminator list + proof points + likely evaluation hooks",
+          "Identify and pre-qualify a FedRAMP/ATO partner if required"
+        ]
+      },
+      "proposedTeam": [
+        {
+          "id": "tm-002",
+          "name": "James Okafor",
+          "email": "james.okafor@apexfederal.com",
+          "role": "VP of Capture & Business Development",
+          "proposedRole": "Capture Lead",
+          "rationale": "James Okafor owns the SSA Industry Day relationship and drives the Gate 1 qualification decision."
+        },
+        {
+          "id": "tm-003",
+          "name": "Priya Nair",
+          "email": "priya.nair@apexfederal.com",
+          "role": "Chief Technology Officer",
+          "proposedRole": "Technical Volume Lead",
+          "rationale": "Priya Nair's cloud architecture and FedRAMP Moderate credentials anchor the technical narrative for SSA's GovCloud migration scope."
+        },
+        {
+          "id": "tm-004",
+          "name": "Marcus Webb",
+          "email": "marcus.webb@apexfederal.com",
+          "role": "Director of Program Delivery",
+          "proposedRole": "Program Manager",
+          "rationale": "Marcus Webb holds the existing SSA OIT contact from Industry Day — the critical entry point for buyer relationship development."
+        },
+        {
+          "id": "tm-005",
+          "name": "Sofia Reyes",
+          "email": "sofia.reyes@apexfederal.com",
+          "role": "Lead Proposal Manager",
+          "proposedRole": "Proposal Manager",
+          "rationale": "Sofia Reyes leads proposal strategy and compliance matrix development if this advances past Gate 1."
+        },
+        {
+          "id": "tm-022",
+          "name": "Patrick O'Brien",
+          "email": "patrick.obrien@apexfederal.com",
+          "role": "Senior Software Engineer",
+          "proposedRole": "Key Personnel — Legacy Migration Lead",
+          "rationale": "Patrick O'Brien's COBOL modernization and batch processing experience directly address SSA's 30-year mainframe-to-microservices core requirement."
+        },
+        {
+          "id": "tm-008",
+          "name": "Alicia Fontaine",
+          "email": "alicia.fontaine@apexfederal.com",
+          "role": "DevSecOps Lead",
+          "proposedRole": "Key Personnel — DevSecOps Lead",
+          "rationale": "Alicia Fontaine's ATO pipeline automation and SAST/DAST credentials respond directly to the FedRAMP Moderate PWS requirements."
+        }
+      ]
+    },
+    "rfp": null,
+    "outcome": null,
+    "outcomeDetails": null,
+    "similarPursuits": []
   }
 ]

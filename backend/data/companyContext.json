@@ -1,31 +1,1083 @@
 {
+  "identity": {
+    "name": "Apex Federal Solutions",
+    "founded": "2014",
+    "hq": "Reston, VA",
+    "size": "~120 employees",
+    "naics": ["541511", "541512", "541519"],
+    "positioning": "SDVOSB technology modernization firm specializing in federal health IT, benefits platforms, and DevSecOps delivery."
+  },
   "vehicles": [
     "GSA MAS",
-    "SPRUCE IDIQ"
+    "SPRUCE IDIQ",
+    "OASIS+"
   ],
   "setAside": [
+    "SDVOSB",
     "Small Business"
   ],
   "capabilities": [
-    "Cloud computing",
-    "Engineering",
-    "Devops",
-    "Front End",
-    "Back End"
+    {"label": "Cloud migration and application modernization (AWS GovCloud, Azure Government)", "tier": "core"},
+    {"label": "DevSecOps pipeline design and CI/CD automation", "tier": "core"},
+    {"label": "FedRAMP Moderate authorization support and ATO preparation", "tier": "core"},
+    {"label": "Legacy system integration and data migration", "tier": "core"},
+    {"label": "Cybersecurity and zero-trust architecture", "tier": "supporting"},
+    {"label": "Human-centered design and 508-compliant UX", "tier": "supporting"},
+    {"label": "Program management and agile delivery", "tier": "supporting"},
+    {"label": "Data engineering and analytics (Power BI, Databricks)", "tier": "emerging"}
   ],
+  "setAsideNotes": "Apex Federal Solutions is a verified SDVOSB and qualifies as a small business under NAICS 541511, 541512, and 541519.",
   "relationships": [
     {
       "agency": "Department of Veterans Affairs",
-      "strength": "moderate"
-    },
-    {
-      "agency": "Department of Defense",
-      "strength": "weak"
+      "strength": "strong"
     },
     {
       "agency": "Centers for Medicare & Medicaid Services (CMS)",
       "strength": "strong"
+    },
+    {
+      "agency": "Department of Defense",
+      "strength": "weak"
     }
   ],
-  "knownGaps": []
+  "knownGaps": [
+    "No current CMMC Level 2 certification — limits DoD classified work",
+    "Limited cleared personnel (only 2 active TS/SCI holders on staff)",
+    "No existing SEWP or T4NG2 vehicle — would need a teaming partner for those"
+  ],
+  "teamMembers": [
+    {
+      "id": "tm-001",
+      "name": "Rachel Torres",
+      "role": "Chief Executive Officer",
+      "experienceYears": 18,
+      "skills": [
+        "executive leadership",
+        "federal capture strategy",
+        "P&L management",
+        "SDVOSB compliance",
+        "stakeholder engagement"
+      ]
+    },
+    {
+      "id": "tm-002",
+      "name": "James Okafor",
+      "role": "VP of Capture & Business Development",
+      "experienceYears": 14,
+      "skills": [
+        "capture management",
+        "proposal strategy",
+        "federal BD",
+        "pipeline development",
+        "VA and CMS relationships"
+      ]
+    },
+    {
+      "id": "tm-003",
+      "name": "Priya Nair",
+      "role": "Chief Technology Officer",
+      "experienceYears": 16,
+      "skills": [
+        "cloud architecture",
+        "AWS GovCloud",
+        "Azure Government",
+        "FedRAMP",
+        "zero-trust",
+        "DevSecOps"
+      ]
+    },
+    {
+      "id": "tm-004",
+      "name": "Marcus Webb",
+      "role": "Director of Program Delivery",
+      "experienceYears": 12,
+      "skills": [
+        "agile delivery",
+        "program management",
+        "SAFe",
+        "risk management",
+        "federal CPARS reporting"
+      ]
+    },
+    {
+      "id": "tm-005",
+      "name": "Sofia Reyes",
+      "role": "Lead Proposal Manager",
+      "experienceYears": 9,
+      "skills": [
+        "proposal writing",
+        "color reviews",
+        "volume management",
+        "compliance matrices",
+        "APMP certified"
+      ]
+    },
+    {
+      "id": "tm-006",
+      "name": "Tyler Brooks",
+      "role": "Senior DevOps Engineer",
+      "experienceYears": 8,
+      "skills": [
+        "CI/CD pipelines",
+        "Jenkins",
+        "GitHub Actions",
+        "Kubernetes",
+        "Terraform",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-007",
+      "name": "Jordan Kim",
+      "role": "DevOps Engineer",
+      "experienceYears": 5,
+      "skills": [
+        "Docker",
+        "Kubernetes",
+        "AWS GovCloud",
+        "Helm",
+        "monitoring",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-008",
+      "name": "Alicia Fontaine",
+      "role": "DevSecOps Lead",
+      "experienceYears": 10,
+      "skills": [
+        "DevSecOps",
+        "SAST/DAST",
+        "SonarQube",
+        "Anchore",
+        "ATO pipeline automation",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-009",
+      "name": "Derek Osei",
+      "role": "DevOps Engineer",
+      "experienceYears": 6,
+      "skills": [
+        "Terraform",
+        "Ansible",
+        "AWS",
+        "infrastructure-as-code",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-010",
+      "name": "Megan Walsh",
+      "role": "Platform Engineer",
+      "experienceYears": 7,
+      "skills": [
+        "Kubernetes",
+        "OpenShift",
+        "GitOps",
+        "ArgoCD",
+        "service mesh",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-011",
+      "name": "Carlos Ibarra",
+      "role": "DevOps Engineer",
+      "experienceYears": 4,
+      "skills": [
+        "CI/CD",
+        "Jenkins",
+        "Docker",
+        "Linux",
+        "bash scripting"
+      ]
+    },
+    {
+      "id": "tm-012",
+      "name": "Nadia Petrov",
+      "role": "Site Reliability Engineer",
+      "experienceYears": 9,
+      "skills": [
+        "SRE",
+        "Prometheus",
+        "Grafana",
+        "incident management",
+        "SLO/SLA",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-013",
+      "name": "Owen Garrett",
+      "role": "DevOps Engineer",
+      "experienceYears": 5,
+      "skills": [
+        "AWS CodePipeline",
+        "CloudFormation",
+        "ECR",
+        "ECS",
+        "secrets management"
+      ]
+    },
+    {
+      "id": "tm-014",
+      "name": "Brianna Cole",
+      "role": "Build & Release Engineer",
+      "experienceYears": 6,
+      "skills": [
+        "release management",
+        "GitLab CI",
+        "artifact management",
+        "Nexus",
+        "environment management"
+      ]
+    },
+    {
+      "id": "tm-015",
+      "name": "Sameer Chopra",
+      "role": "Senior DevOps Engineer",
+      "experienceYears": 11,
+      "skills": [
+        "AWS GovCloud",
+        "FedRAMP compliance",
+        "Terraform",
+        "Vault",
+        "pipeline security",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-016",
+      "name": "Felicia Dumont",
+      "role": "DevOps Engineer",
+      "experienceYears": 4,
+      "skills": [
+        "Docker",
+        "GitHub Actions",
+        "Python automation",
+        "AWS",
+        "monitoring dashboards"
+      ]
+    },
+    {
+      "id": "tm-017",
+      "name": "Aaron Hsieh",
+      "role": "Infrastructure Engineer",
+      "experienceYears": 8,
+      "skills": [
+        "AWS",
+        "network security",
+        "load balancing",
+        "transit gateway",
+        "VPN",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-018",
+      "name": "Chris Washington",
+      "role": "Senior Software Engineer",
+      "experienceYears": 10,
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "microservices",
+        "REST APIs",
+        "PostgreSQL",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-019",
+      "name": "Angela Park",
+      "role": "Software Engineer",
+      "experienceYears": 5,
+      "skills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "REST APIs",
+        "accessibility (508)"
+      ]
+    },
+    {
+      "id": "tm-020",
+      "name": "Ryan Liu",
+      "role": "Full-Stack Engineer",
+      "experienceYears": 7,
+      "skills": [
+        "React",
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "Docker",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-021",
+      "name": "Destiny Monroe",
+      "role": "Backend Engineer",
+      "experienceYears": 6,
+      "skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Redis",
+        "message queues",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-022",
+      "name": "Patrick O'Brien",
+      "role": "Senior Software Engineer",
+      "experienceYears": 12,
+      "skills": [
+        "COBOL modernization",
+        "Java",
+        "legacy migration",
+        "batch processing",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-023",
+      "name": "Leila Hamdan",
+      "role": "Software Engineer",
+      "experienceYears": 4,
+      "skills": [
+        "React",
+        "JavaScript",
+        "CSS",
+        "REST APIs",
+        "unit testing"
+      ]
+    },
+    {
+      "id": "tm-024",
+      "name": "Drew Castellano",
+      "role": "Backend Engineer",
+      "experienceYears": 7,
+      "skills": [
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "GraphQL",
+        "microservices"
+      ]
+    },
+    {
+      "id": "tm-025",
+      "name": "Yuna Tanaka",
+      "role": "Software Engineer II",
+      "experienceYears": 5,
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "Kafka",
+        "event-driven architecture",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-026",
+      "name": "Marcus Bailey",
+      "role": "Senior Full-Stack Engineer",
+      "experienceYears": 11,
+      "skills": [
+        "React",
+        "Java",
+        "AWS Lambda",
+        "serverless",
+        "DynamoDB",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-027",
+      "name": "Isabelle Tremblay",
+      "role": "Software Engineer",
+      "experienceYears": 6,
+      "skills": [
+        "Python",
+        "Django",
+        "REST APIs",
+        "PostgreSQL",
+        "data pipelines"
+      ]
+    },
+    {
+      "id": "tm-028",
+      "name": "Kenji Watanabe",
+      "role": "Software Architect",
+      "experienceYears": 14,
+      "skills": [
+        "system design",
+        "microservices",
+        "event-driven architecture",
+        "API gateway",
+        "cloud-native",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-029",
+      "name": "Fatima Al-Rashid",
+      "role": "Software Engineer",
+      "experienceYears": 5,
+      "skills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "accessibility (508)",
+        "veteran-facing UX"
+      ]
+    },
+    {
+      "id": "tm-030",
+      "name": "Brendan Kowalski",
+      "role": "Backend Engineer",
+      "experienceYears": 8,
+      "skills": [
+        "Java",
+        "Spring Security",
+        "OAuth 2.0",
+        "identity management",
+        "PIV/CAC integration"
+      ]
+    },
+    {
+      "id": "tm-031",
+      "name": "Zoe Moreau",
+      "role": "Software Engineer",
+      "experienceYears": 4,
+      "skills": [
+        "Go",
+        "gRPC",
+        "microservices",
+        "REST APIs",
+        "cloud functions"
+      ]
+    },
+    {
+      "id": "tm-032",
+      "name": "Nathan Cruz",
+      "role": "Senior Software Engineer",
+      "experienceYears": 9,
+      "skills": [
+        "C#",
+        ".NET",
+        "Azure Government",
+        "REST APIs",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-033",
+      "name": "Adriana Vega",
+      "role": "Software Engineer II",
+      "experienceYears": 6,
+      "skills": [
+        "Python",
+        "Flask",
+        "Celery",
+        "Redis",
+        "async processing",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-034",
+      "name": "Miles Porter",
+      "role": "Software Engineer",
+      "experienceYears": 3,
+      "skills": [
+        "React",
+        "JavaScript",
+        "Node.js",
+        "GraphQL",
+        "unit testing"
+      ]
+    },
+    {
+      "id": "tm-035",
+      "name": "Nina Rosario",
+      "role": "QA Lead",
+      "experienceYears": 10,
+      "skills": [
+        "test strategy",
+        "Selenium",
+        "Playwright",
+        "test planning",
+        "federal compliance testing",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-036",
+      "name": "Justin Tran",
+      "role": "QA Engineer",
+      "experienceYears": 6,
+      "skills": [
+        "Cypress",
+        "Jest",
+        "API testing",
+        "Postman",
+        "regression testing"
+      ]
+    },
+    {
+      "id": "tm-037",
+      "name": "Kelsey Okafor",
+      "role": "Automated Test Engineer",
+      "experienceYears": 7,
+      "skills": [
+        "Selenium",
+        "Java",
+        "TestNG",
+        "CI/CD integration",
+        "smoke testing",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-038",
+      "name": "Benjamin Marsh",
+      "role": "Performance Test Engineer",
+      "experienceYears": 8,
+      "skills": [
+        "JMeter",
+        "Gatling",
+        "load testing",
+        "performance baselines",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-039",
+      "name": "Tanya Fischer",
+      "role": "QA Engineer",
+      "experienceYears": 5,
+      "skills": [
+        "manual testing",
+        "test case design",
+        "bug triage",
+        "Jira",
+        "ISTQB certified"
+      ]
+    },
+    {
+      "id": "tm-040",
+      "name": "Rajesh Mehta",
+      "role": "Security Test Engineer",
+      "experienceYears": 9,
+      "skills": [
+        "penetration testing",
+        "OWASP",
+        "vulnerability scanning",
+        "SAST/DAST",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-041",
+      "name": "Claudia Santos",
+      "role": "QA Engineer",
+      "experienceYears": 4,
+      "skills": [
+        "Playwright",
+        "API testing",
+        "test automation",
+        "Postman",
+        "accessibility testing (508)"
+      ]
+    },
+    {
+      "id": "tm-042",
+      "name": "Owen Harrington",
+      "role": "QA Engineer II",
+      "experienceYears": 6,
+      "skills": [
+        "regression testing",
+        "Cypress",
+        "REST-assured",
+        "CI/CD testing",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-043",
+      "name": "Aisha Obi",
+      "role": "Lead UX Designer",
+      "experienceYears": 10,
+      "skills": [
+        "user research",
+        "Figma",
+        "Section 508 accessibility",
+        "design systems",
+        "veteran UX",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-044",
+      "name": "Leo Fontaine",
+      "role": "UX Designer",
+      "experienceYears": 6,
+      "skills": [
+        "Figma",
+        "prototyping",
+        "usability testing",
+        "interaction design",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-045",
+      "name": "Maya Chen",
+      "role": "UX Researcher",
+      "experienceYears": 7,
+      "skills": [
+        "user research",
+        "contextual inquiry",
+        "journey mapping",
+        "survey design",
+        "VA Design System"
+      ]
+    },
+    {
+      "id": "tm-046",
+      "name": "Jordan Rivera",
+      "role": "UX/UI Designer",
+      "experienceYears": 5,
+      "skills": [
+        "Figma",
+        "UI design",
+        "design tokens",
+        "responsive design",
+        "accessibility (508)"
+      ]
+    },
+    {
+      "id": "tm-047",
+      "name": "Cassie Huang",
+      "role": "Content Strategist / UX Writer",
+      "experienceYears": 8,
+      "skills": [
+        "content strategy",
+        "UX writing",
+        "plain language",
+        "VA plain-language standards",
+        "information architecture"
+      ]
+    },
+    {
+      "id": "tm-048",
+      "name": "Stefan Novak",
+      "role": "UX Designer",
+      "experienceYears": 4,
+      "skills": [
+        "Figma",
+        "prototyping",
+        "wireframing",
+        "user flows",
+        "component libraries"
+      ]
+    },
+    {
+      "id": "tm-049",
+      "name": "Priya Sharma",
+      "role": "Data Engineer",
+      "experienceYears": 7,
+      "skills": [
+        "AWS Glue",
+        "Spark",
+        "Databricks",
+        "ETL pipelines",
+        "data lake architecture",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-050",
+      "name": "Elijah Thomas",
+      "role": "Senior Data Engineer",
+      "experienceYears": 10,
+      "skills": [
+        "Apache Kafka",
+        "Spark",
+        "Delta Lake",
+        "Python",
+        "real-time data pipelines",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-051",
+      "name": "Christine Woo",
+      "role": "Data Analyst",
+      "experienceYears": 6,
+      "skills": [
+        "Power BI",
+        "SQL",
+        "data storytelling",
+        "federal reporting dashboards",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-052",
+      "name": "Antoine Bernard",
+      "role": "Data Engineer",
+      "experienceYears": 5,
+      "skills": [
+        "Python",
+        "Airflow",
+        "PostgreSQL",
+        "dbt",
+        "data quality"
+      ]
+    },
+    {
+      "id": "tm-053",
+      "name": "Dani Reeves",
+      "role": "Business Intelligence Analyst",
+      "experienceYears": 8,
+      "skills": [
+        "Power BI",
+        "Tableau",
+        "DAX",
+        "SQL",
+        "executive dashboards",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-054",
+      "name": "Hiroshi Tanaka",
+      "role": "Data Architect",
+      "experienceYears": 13,
+      "skills": [
+        "data modeling",
+        "data governance",
+        "AWS Redshift",
+        "snowflake schema",
+        "lineage tracking",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-055",
+      "name": "Rosa Guerrero",
+      "role": "Data Engineer",
+      "experienceYears": 4,
+      "skills": [
+        "Python",
+        "AWS S3",
+        "Glue",
+        "Lambda",
+        "data validation"
+      ]
+    },
+    {
+      "id": "tm-056",
+      "name": "Kyle Anderson",
+      "role": "Data Analyst",
+      "experienceYears": 5,
+      "skills": [
+        "SQL",
+        "Power BI",
+        "Excel",
+        "reporting automation",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-057",
+      "name": "Shane McCormick",
+      "role": "Cybersecurity Lead",
+      "experienceYears": 12,
+      "skills": [
+        "FedRAMP",
+        "NIST 800-53",
+        "ATO",
+        "SIEM",
+        "continuous monitoring",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-058",
+      "name": "Nadira Hassan",
+      "role": "Information Systems Security Officer (ISSO)",
+      "experienceYears": 8,
+      "skills": [
+        "ISSO",
+        "ATO documentation",
+        "POA&M management",
+        "FISMA",
+        "FedRAMP Moderate",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-059",
+      "name": "Lucas Klein",
+      "role": "Cybersecurity Analyst",
+      "experienceYears": 6,
+      "skills": [
+        "SIEM",
+        "Splunk",
+        "threat hunting",
+        "incident response",
+        "SOC operations",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-060",
+      "name": "Elena Volkov",
+      "role": "Zero-Trust Architect",
+      "experienceYears": 10,
+      "skills": [
+        "zero-trust architecture",
+        "BeyondCorp",
+        "identity-centric security",
+        "microsegmentation",
+        "NIST SP 800-207"
+      ]
+    },
+    {
+      "id": "tm-061",
+      "name": "Terrence Phillips",
+      "role": "Penetration Tester",
+      "experienceYears": 9,
+      "skills": [
+        "penetration testing",
+        "red team",
+        "OWASP",
+        "NIST 800-115",
+        "vulnerability assessment",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-062",
+      "name": "Aisha Brooks",
+      "role": "Cybersecurity Analyst",
+      "experienceYears": 5,
+      "skills": [
+        "vulnerability scanning",
+        "Tenable Nessus",
+        "CIS benchmarks",
+        "hardening",
+        "patch management"
+      ]
+    },
+    {
+      "id": "tm-063",
+      "name": "Connor Wright",
+      "role": "Cloud Security Engineer",
+      "experienceYears": 7,
+      "skills": [
+        "AWS Security Hub",
+        "GuardDuty",
+        "CloudTrail",
+        "IAM least privilege",
+        "CSPM",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-064",
+      "name": "Bethany Liu",
+      "role": "Senior Cloud Architect",
+      "experienceYears": 11,
+      "skills": [
+        "AWS GovCloud",
+        "multi-account strategy",
+        "landing zone",
+        "Control Tower",
+        "cost optimization",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-065",
+      "name": "Omar Khalil",
+      "role": "Cloud Architect",
+      "experienceYears": 9,
+      "skills": [
+        "Azure Government",
+        "hybrid cloud",
+        "networking",
+        "ExpressRoute",
+        "Azure Policy",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-066",
+      "name": "Raj Patel",
+      "role": "Solutions Architect",
+      "experienceYears": 13,
+      "skills": [
+        "cloud-native design",
+        "Well-Architected Framework",
+        "AWS",
+        "serverless",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-067",
+      "name": "Ingrid Svensson",
+      "role": "Cloud Migration Architect",
+      "experienceYears": 8,
+      "skills": [
+        "migration strategy",
+        "6 Rs framework",
+        "AWS Migration Hub",
+        "legacy modernization",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-068",
+      "name": "Destiny Johnson",
+      "role": "Scrum Master",
+      "experienceYears": 7,
+      "skills": [
+        "Scrum",
+        "SAFe",
+        "Jira",
+        "sprint facilitation",
+        "retrospectives",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-069",
+      "name": "Michael Durand",
+      "role": "Program Manager",
+      "experienceYears": 11,
+      "skills": [
+        "program management",
+        "federal contracts",
+        "EVMS",
+        "risk management",
+        "stakeholder reporting",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-070",
+      "name": "Sarah Kim",
+      "role": "Scrum Master",
+      "experienceYears": 6,
+      "skills": [
+        "Scrum",
+        "Kanban",
+        "Jira",
+        "team facilitation",
+        "agile coaching"
+      ]
+    },
+    {
+      "id": "tm-071",
+      "name": "Kwame Asante",
+      "role": "Senior Project Manager",
+      "experienceYears": 10,
+      "skills": [
+        "PMP",
+        "federal project management",
+        "schedule management",
+        "risk registers",
+        "DoD contract"
+      ]
+    },
+    {
+      "id": "tm-072",
+      "name": "Tracy Coleman",
+      "role": "Agile Coach",
+      "experienceYears": 9,
+      "skills": [
+        "SAFe Program Consultant",
+        "agile transformation",
+        "PI planning",
+        "team coaching",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-073",
+      "name": "Louis Gagnon",
+      "role": "Project Manager",
+      "experienceYears": 7,
+      "skills": [
+        "PMP",
+        "Jira",
+        "project scheduling",
+        "resource allocation",
+        "status reporting"
+      ]
+    },
+    {
+      "id": "tm-074",
+      "name": "Vanessa Diaz",
+      "role": "Scrum Master / RTE",
+      "experienceYears": 8,
+      "skills": [
+        "Release Train Engineer",
+        "SAFe",
+        "PI planning",
+        "ART facilitation",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-075",
+      "name": "Emily Stern",
+      "role": "Senior Business Analyst",
+      "experienceYears": 9,
+      "skills": [
+        "requirements elicitation",
+        "process mapping",
+        "user stories",
+        "JIRA",
+        "federal business analysis",
+        "VA BCMS contract"
+      ]
+    },
+    {
+      "id": "tm-076",
+      "name": "Jason Howell",
+      "role": "Business Analyst",
+      "experienceYears": 6,
+      "skills": [
+        "requirements documentation",
+        "gap analysis",
+        "stakeholder interviews",
+        "workflow design",
+        "CMS contract"
+      ]
+    },
+    {
+      "id": "tm-077",
+      "name": "Monica Navarro",
+      "role": "Business Analyst",
+      "experienceYears": 5,
+      "skills": [
+        "user stories",
+        "acceptance criteria",
+        "process improvement",
+        "Visio",
+        "data flow diagrams"
+      ]
+    }
+  ]
 }

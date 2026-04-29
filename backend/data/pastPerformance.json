@@ -1,0 +1,99 @@
+[
+  {
+    "id": "pp-001-va-vba-modernization",
+    "opportunityId": "legacy-opp-001",
+    "opportunityName": "VBA Claims Processing Modernization",
+    "agency": "Department of Veterans Affairs",
+    "vehicle": "SPRUCE IDIQ",
+    "setAside": "SDVOSB",
+    "contractValue": "50-200M",
+    "capabilities": [
+      "Cloud migration and application modernization (AWS GovCloud, Azure Government)",
+      "DevSecOps pipeline design and CI/CD automation",
+      "FedRAMP Moderate authorization support and ATO preparation",
+      "Legacy system integration and data migration"
+    ],
+    "outcome": "won",
+    "lossReason": null,
+    "lessonsLearned": [
+      {
+        "tag": "relationship",
+        "note": "Having a warm intro to the Program Director through our incumbent sub made a measurable difference. Buyers cited our understanding of their environment as a key differentiator over lower-priced competitors."
+      },
+      {
+        "tag": "proposal_quality",
+        "note": "Our phased migration narrative — with explicit risk gates and rollback plans — directly addressed the buyer's fear of service disruption. Made this the centerpiece of the technical volume."
+      },
+      {
+        "tag": "pricing",
+        "note": "We priced 8% above the lowest offer but won on best value. The evaluators documented that our risk mitigation approach justified the premium. Don't race to the bottom on complex modernization work."
+      }
+    ],
+    "notes": "Competed as SDVOSB prime with two subs. Won at Gate 3 after a very competitive BAFO round. Program Director later told us our ATO roadmap was the single most cited differentiator in the source selection decision. Contract ran 3 years, earned Exceptional CPARS across all categories.",
+    "closedAt": "2024-09-15T00:00:00.000Z",
+    "createdAt": "2026-04-01T00:00:00.000Z"
+  },
+  {
+    "id": "pp-002-cms-platform",
+    "opportunityId": "legacy-opp-002",
+    "opportunityName": "CMS Beneficiary Data Platform Replatform",
+    "agency": "Centers for Medicare & Medicaid Services (CMS)",
+    "vehicle": "OASIS+",
+    "setAside": "Small Business",
+    "contractValue": "50-200M",
+    "capabilities": [
+      "Cloud migration and application modernization (AWS GovCloud, Azure Government)",
+      "Data engineering and analytics (Power BI, Databricks)",
+      "FedRAMP Moderate authorization support and ATO preparation",
+      "Cybersecurity and zero-trust architecture"
+    ],
+    "outcome": "lost",
+    "lossReason": "past_performance",
+    "lessonsLearned": [
+      {
+        "tag": "past_performance",
+        "note": "The winning team had a directly relevant CMS CPARS citation at similar scale. Our references were strong but none were CMS-specific. For high-stakes CMS bids, we need a named CMS sub or prime partner with a recent citation."
+      },
+      {
+        "tag": "relationship",
+        "note": "We had no relationship with the CO or COR going into proposal. Made cold outreach too late — only 2 weeks before RFP drop. Earlier BD investment is critical for CMS opportunities."
+      },
+      {
+        "tag": "proposal_quality",
+        "note": "Our data architecture section was undercooked. We described tools but didn't quantify outcomes or show a migration sequence. Evaluators noted 'insufficient detail on data governance and lineage tracking.'"
+      }
+    ],
+    "notes": "Lost in best-value evaluation. Came in second on technical, third on past performance volume. The winning firm had an incumbent-adjacent relationship and a CMS-specific CPARS. We were competitive on price. Key lesson: CMS procurement offices weigh agency-specific past performance very heavily — we need to build that reference base before pursuing another CMS replatform at this scale.",
+    "closedAt": "2025-03-20T00:00:00.000Z",
+    "createdAt": "2026-04-01T00:00:00.000Z"
+  },
+  {
+    "id": "pp-003-dod-cloud",
+    "opportunityId": "legacy-opp-003",
+    "opportunityName": "DISA Enterprise Cloud Services Expansion",
+    "agency": "Department of Defense",
+    "vehicle": "GSA MAS",
+    "setAside": "Small Business",
+    "contractValue": "50-200M",
+    "capabilities": [
+      "Cloud migration and application modernization (AWS GovCloud, Azure Government)",
+      "Cybersecurity and zero-trust architecture",
+      "DevSecOps pipeline design and CI/CD automation"
+    ],
+    "outcome": "no_bid",
+    "lossReason": null,
+    "lessonsLearned": [
+      {
+        "tag": "capability_gap",
+        "note": "PWS required CMMC Level 2 certification and at least 5 cleared personnel at TS/SCI. We had neither at the time. Pursuing without closing this gap would have been a proposal-stage disqualifier."
+      },
+      {
+        "tag": "timeline",
+        "note": "The draft-to-proposal window was 5 weeks. Even if we had the clearances, our proposal team was already committed to two other live proposals. Bandwidth is a real constraint — track pipeline load before committing."
+      }
+    ],
+    "notes": "Made a deliberate no-bid decision at Gate 2. Capability gaps (CMMC, cleared staff) and proposal bandwidth were the deciding factors. Documented this as a strategic marker — if we invest in CMMC Level 2 certification over the next 12 months, a future DISA recompete would be a strong fit given our DevSecOps and cloud modernization track record.",
+    "closedAt": "2025-07-01T00:00:00.000Z",
+    "createdAt": "2026-04-01T00:00:00.000Z"
+  }
+]

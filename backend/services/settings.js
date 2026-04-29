@@ -6,7 +6,8 @@ const DATA_FILE = path.join(__dirname, '../data/settings.json');
 const DEFAULT_SETTINGS = {
   openaiApiKey: '',
   model: '',
-  baseUrl: ''
+  baseUrl: '',
+  systemPromptSuffix: ''
 };
 
 const ensureDataFile = () => {
@@ -46,7 +47,8 @@ const updateSettings = async (incoming = {}) => {
     ...current,
     openaiApiKey: incoming.openaiApiKey !== undefined ? String(incoming.openaiApiKey || '').trim() : current.openaiApiKey,
     model: incoming.model !== undefined ? String(incoming.model || '').trim() : current.model,
-    baseUrl: incoming.baseUrl !== undefined ? String(incoming.baseUrl || '').trim() : current.baseUrl
+    baseUrl: incoming.baseUrl !== undefined ? String(incoming.baseUrl || '').trim() : current.baseUrl,
+    systemPromptSuffix: incoming.systemPromptSuffix !== undefined ? String(incoming.systemPromptSuffix || '').trim() : (current.systemPromptSuffix || '')
   };
 
   ensureDataFile();

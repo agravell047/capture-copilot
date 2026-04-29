@@ -64,6 +64,24 @@
   background: #e2e8f0;
 }
 
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title-row h2 {
+  margin: 0;
+}
+
+.section-hint {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
 .collapse-indicator {
   font-size: 1.2rem;
   font-weight: 700;
@@ -78,8 +96,64 @@ h1 {
 
 .subtitle {
   color: #666;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.25rem 0;
   font-size: 14px;
+}
+
+/* ── Capture completeness meter ── */
+.capture-completeness {
+  margin-bottom: 1.75rem;
+  padding: 0.85rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.capture-completeness-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.capture-completeness-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+}
+
+.capture-completeness-pct {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.capture-completeness-track {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.capture-completeness-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.capture-completeness-hint {
+  margin: 0.5rem 0 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.capture-completeness-hint strong {
+  color: #374151;
+}
+
+.capture-completeness-charcount {
+  font-weight: 400;
+  color: #9ca3af;
 }
 
 form {
@@ -106,10 +180,8 @@ form {
   padding-top: 0.75rem;
   border-top: 1px dashed #e5e7eb;
   display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .rfp-upload-label {
@@ -117,31 +189,98 @@ form {
   font-weight: 600;
   color: #374151;
   font-size: 13px;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.2rem;
 }
 
-.rfp-upload-left {
-  flex: 1;
-  min-width: 240px;
+/* Gate picker */
+.gate-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.25rem;
 }
 
-.rfp-upload-actions {
+.gate-card {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.rfp-upload-toggle {
-  display: inline-flex;
-  gap: 0.4rem;
+.gate-card:hover {
+  border-color: #1c3044;
+  background: #edf6fb;
+}
+
+.gate-card.selected {
+  border-color: #1c3044;
+  background: #edf6fb;
+}
+
+.gate-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1c3044;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gate-card.selected .gate-card-label {
+  color: #253d54;
+}
+
+.gate-card-sublabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.gate-card-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* RFP active banner */
+.rfp-active-banner {
+  display: flex;
   align-items: center;
-  font-size: 13px;
-  color: #374151;
-  font-weight: 600;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-left: 4px solid #16a34a;
+  border-radius: 8px;
+}
+
+.rfp-active-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.rfp-active-info strong {
+  font-size: 14px;
+  color: #166534;
+}
+
+.rfp-active-sub {
+  font-size: 12px;
+  color: #15803d;
 }
 
 .rfp-clear {
-  padding: 0.55rem 0.8rem;
+  flex-shrink: 0;
+  padding: 0.45rem 0.75rem;
+  font-size: 13px;
 }
 
 .form-row {
@@ -154,6 +293,82 @@ form {
   height: 1px;
   background: #e5e7eb;
   margin: 0.5rem 0 0.25rem 0;
+}
+
+/* ── Two-zone form layout ── */
+.form-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-zone-core {
+  background: #f5f9fc;
+  border: 1.5px solid #daeef8;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.form-zone-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.form-zone-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #1c3044;
+}
+
+.form-zone-hint {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.form-zone-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.25rem 0;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-zone-divider::before,
+.form-zone-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.form-zone-divider-hint {
+  font-weight: 400;
+  color: #9ca3af;
+}
+
+.field-ai-tip {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  background: #daeef8;
+  color: #1c3044;
+  font-size: 11px;
+  font-weight: 600;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-zone-enrich {
+  padding: 0 0.25rem;
 }
 
 .inline-add {
@@ -253,6 +468,137 @@ form {
   padding: 1rem;
 }
 
+/* Contact Picker */
+.contact-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-picker-search {
+  padding: 7px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-picker-search:focus {
+  outline: none;
+  border-color: #1c3044;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+}
+
+.contact-picker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 4px;
+  background: #fff;
+}
+
+.contact-picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background 0.1s;
+}
+
+.contact-picker-item:hover {
+  background: #f9fafb;
+}
+
+.contact-picker-item.selected {
+  background: #edf6fb;
+}
+
+.contact-picker-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  flex: 1;
+  font-size: 14px;
+}
+
+.contact-picker-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #1c3044;
+  cursor: pointer;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.contact-picker-check input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.contact-picker-meta {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Agency group header */
+.contact-picker-agency-group {
+  margin-bottom: 2px;
+}
+
+.contact-picker-agency-header {
+  padding: 5px 10px 3px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  margin-bottom: 1px;
+}
+
+.contact-picker-agency-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.contact-picker-agency-check input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #1c3044;
+  cursor: pointer;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.contact-picker-agency-check input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.contact-picker-agency-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex: 1;
+}
+
+.contact-picker-agency-count {
+  font-size: 11px;
+  color: #9ca3af;
+  background: #e5e7eb;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
 .evidence-list {
   list-style: none;
   margin: 0.75rem 0 1rem 0;
@@ -328,7 +674,7 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #646cff;
+  border-color: #1c3044;
   box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
 }
 
@@ -366,7 +712,7 @@ textarea {
   width: auto;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -383,12 +729,12 @@ textarea {
 }
 
 .btn-primary {
-  background-color: #646cff;
+  background-color: #1c3044;
   color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #535bf2;
+  background-color: #253d54;
 }
 
 .btn-primary:disabled {
@@ -473,6 +819,102 @@ textarea {
   font-size: 12px;
   margin-top: 0.5rem;
   text-transform: uppercase;
+}
+
+/* ── pWin arc gauge ── */
+.pwin-gauge-wrap {
+  position: relative;
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pwin-gauge-label {
+  position: absolute;
+  bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.pwin-gauge-score {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.pwin-gauge-text {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #6b7280;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ── Gate progress bar ── */
+.gate-progress-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.gate-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.gate-connector {
+  flex: 1;
+  height: 2px;
+  background: #e5e7eb;
+  margin-top: 7px;
+  align-self: flex-start;
+  transition: background 0.4s;
+}
+
+.gate-connector-done {
+  background: #1c3044;
+}
+
+.gate-step-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  border: 2px solid #d1d5db;
+  z-index: 1;
+  transition: background 0.4s, border-color 0.4s;
+}
+
+.gate-step-done .gate-step-dot {
+  background: #c5e8f5;
+  border-color: #1c3044;
+}
+
+.gate-step-current .gate-step-dot {
+  background: #1c3044;
+  border-color: #1c3044;
+  box-shadow: 0 0 0 3px #c5e8f5;
+}
+
+.gate-step-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  text-align: center;
+}
+
+.gate-step-current .gate-step-label {
+  color: #1c3044;
+  font-weight: 700;
 }
 
 .opportunity-header-actions {
@@ -788,6 +1230,83 @@ textarea {
   color: #721c24;
 }
 
+/* Proposed Team Card */
+.proposed-team-card {
+  margin-bottom: 1.5rem;
+}
+
+.proposed-team-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.proposed-team-header > div {
+  flex: 1;
+}
+
+.proposed-team-header h3 {
+  margin: 0 0 0.25rem 0;
+}
+
+.email-blast-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.proposed-team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.proposed-team-member {
+  border: 1px solid #daeef8;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  background: #f5f9fc;
+}
+
+.proposed-team-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.proposed-team-info strong {
+  color: #1c3044;
+  font-size: 15px;
+}
+
+.proposed-role-badge {
+  background: #c5e8f5;
+  color: #1c3044;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.02em;
+}
+
+.proposed-team-title {
+  color: #666;
+  font-size: 13px;
+}
+
+.proposed-team-rationale {
+  margin: 0;
+  color: #444;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
 /* Feasibility Section */
 .feasibility-section {
   background: #fafafa;
@@ -983,7 +1502,7 @@ select#updateType {
 }
 
 .update-type-note {
-  background: #eef2ff;
+  background: #edf6fb;
   color: #3342a8;
 }
 
@@ -1050,6 +1569,10 @@ select#updateType {
 
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .gate-picker {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .results-grid {

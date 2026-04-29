@@ -56,6 +56,72 @@ const SET_ASIDE_OPTIONS = [
   'HUBZone'
 ]
 
+function PwinGauge({ score, tier }) {
+  const radius = 42
+  const stroke = 8
+  const circumference = Math.PI * radius // half-circle arc length
+  const offset = circumference - (score / 100) * circumference
+  const colorMap = { high: '#16a34a', medium: '#d97706', low: '#dc2626' }
+  const color = colorMap[tier] || '#dc2626'
+  return (
+    <div className="pwin-gauge-wrap">
+      <svg width="110" height="62" viewBox="0 0 110 62">
+        {/* track */}
+        <path
+          d="M 9 58 A 42 42 0 0 1 101 58"
+          fill="none"
+          stroke="#e5e7eb"
+          strokeWidth={stroke}
+          strokeLinecap="round"
+        />
+        {/* fill — animates via CSS; hidden at 0 to avoid cap dot artifact */}
+        {score > 0 && (
+          <path
+            d="M 9 58 A 42 42 0 0 1 101 58"
+            fill="none"
+            stroke={color}
+            strokeWidth={stroke}
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            style={{ transition: 'stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)' }}
+          />
+        )}
+      </svg>
+      <div className="pwin-gauge-label">
+        <span className="pwin-gauge-score" style={{ color }}>{score}%</span>
+        <span className="pwin-gauge-text">pWin</span>
+      </div>
+    </div>
+  )
+}
+
+const GATE_STEPS = [
+  { key: '0', label: 'Awareness' },
+  { key: '1', label: 'Qualify' },
+  { key: '2', label: 'Capture' },
+  { key: '3', label: 'Proposal' },
+]
+
+function GateProgressBar({ gate }) {
+  const current = Number(gate ?? 0)
+  const items = []
+  GATE_STEPS.forEach((step, i) => {
+    items.push(
+      <div key={`step-${i}`} className={`gate-step${i <= current ? ' gate-step-done' : ''}${i === current ? ' gate-step-current' : ''}`}>
+        <div className="gate-step-dot" />
+        <div className="gate-step-label">{step.label}</div>
+      </div>
+    )
+    if (i < GATE_STEPS.length - 1) {
+      items.push(
+        <div key={`conn-${i}`} className={`gate-connector${i < current ? ' gate-connector-done' : ''}`} />
+      )
+    }
+  })
+  return <div className="gate-progress-bar">{items}</div>
+}
+
 function OpportunityWorkspace({
   opportunity,
   onOpportunityChange,
@@ -199,40 +265,31 @@ function OpportunityWorkspace({
         </div>
 
         <div className="opportunity-header-actions">
-          <div className={`pwin-badge pwin-${latestAnalysis.pWinScore?.tier || 'low'}`}>
-            <div className="pwin-value">{latestAnalysis.pWinScore?.score || 0}%</div>
-            <div className="pwin-label">pWin</div>
-          </div>
+          <PwinGauge score={latestAnalysis.pWinScore?.score || 0} tier={latestAnalysis.pWinScore?.tier || 'low'} />
 
-          {showUpdateForm && (
-            <button
-              type="button"
-              className="btn btn-secondary workspace-action"
-              onClick={handleReanalyze}
-              disabled={reanalyzeLoading}
-            >
-              {reanalyzeLoading ? 'Refreshing Analysis...' : 'Re-run Analysis'}
-            </button>
-          )}
-
-          {showUpdateForm && (
-            <button
-              type="button"
-              className="btn btn-primary workspace-action"
-              onClick={handleScrollToUpdateForm}
-            >
-              Add Update
-            </button>
-          )}
+          <button
+            type="button"
+            className="btn btn-secondary workspace-action"
+            onClick={handleReanalyze}
+            disabled={reanalyzeLoading}
+          >
+            {reanalyzeLoading ? '⟳ Refreshing…' : '⟳ Re-run Analysis'}
+          </button>
         </div>
       </div>
+
+      <GateProgressBar gate={opportunity.gate} />
 
       <div className="result-card opportunity-snapshot-card">
         <h3>Opportunity Snapshot</h3>
         <dl className="profile-list">
           <div className="profile-row">
             <dt>Gate</dt>
-            <dd>{`Gate ${Number.isFinite(Number(opportunity.gate)) ? opportunity.gate : 0}`}</dd>
+            <dd>{(() => {
+              const g = Number.isFinite(Number(opportunity.gate)) ? Number(opportunity.gate) : 0
+              const names = ['Awareness', 'Qualify', 'Capture', 'Proposal']
+              return `Gate ${g} — ${names[g] ?? ''}` 
+            })()}</dd>
           </div>
           <div className="profile-row">
             <dt>Agency</dt>
@@ -420,6 +477,46 @@ function OpportunityWorkspace({
         </div>
       </div>
 
+      {Array.isArray(latestAnalysis.proposedTeam) && latestAnalysis.proposedTeam.length > 0 && (
+        <div className="result-card proposed-team-card">
+          <div className="proposed-team-header">
+            <div>
+              <h3>Proposed Capture Team</h3>
+              <p className="card-help">Recommended by the AI based on skills, experience, and opportunity fit. Names and emails are resolved locally — they were never sent to the AI.</p>
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary email-blast-btn"
+              onClick={() => {
+                const to = latestAnalysis.proposedTeam.map((m) => m.email).filter(Boolean).join(',');
+                const subject = encodeURIComponent(`Capture Team — ${latestAnalysis.opportunityName || 'New Opportunity'}`);
+                const body = encodeURIComponent(
+                  `Hi team,\n\nYou have been identified as a proposed team member for the following capture opportunity:\n\n` +
+                  `Opportunity: ${latestAnalysis.opportunityName || 'TBD'}\n\n` +
+                  latestAnalysis.proposedTeam.map((m) => `• ${m.name} — ${m.proposedRole}`).join('\n') +
+                  `\n\nPlease confirm your availability and interest.\n\nThanks`
+                );
+                window.open(`mailto:${to}?subject=${subject}&body=${body}`);
+              }}
+            >
+              Invite Team by Email
+            </button>
+          </div>
+          <ul className="proposed-team-list">
+            {latestAnalysis.proposedTeam.map((member) => (
+              <li key={member.id} className="proposed-team-member">
+                <div className="proposed-team-info">
+                  <strong>{member.name}</strong>
+                  <span className="proposed-role-badge">{member.proposedRole}</span>
+                  <span className="proposed-team-title">{member.role}</span>
+                </div>
+                <p className="proposed-team-rationale">{member.rationale}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {latestAnalysis.feasibilityFactors && (
         <div className="feasibility-section">
           <h3>Feasibility Factors</h3>
@@ -444,7 +541,7 @@ function OpportunityWorkspace({
           </div>
         </div>
 
-        <div className={`updates-layout ${!showUpdateForm ? 'updates-layout-full' : ''}`}>
+        <div className="updates-layout updates-layout-full">
           <div className="updates-feed">
             {updates.length > 0 ? (
               <ul className="updates-list">
@@ -469,7 +566,7 @@ function OpportunityWorkspace({
             )}
           </div>
 
-          {showUpdateForm && (
+          {false && (
             <div className="update-form-card" ref={updateFormRef}>
               <h3>Add Update</h3>
 

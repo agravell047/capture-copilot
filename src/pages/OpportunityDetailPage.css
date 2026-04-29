@@ -26,7 +26,22 @@
 .detail-actions {
   display: flex;
   gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
+.outcome-badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.outcome-badge--won { background: #dcfce7; color: #15803d; }
+.outcome-badge--lost { background: #fee2e2; color: #b91c1c; }
+.outcome-badge--no_bid { background: #fef9c3; color: #92400e; }
+.outcome-badge--withdrew { background: #daeef8; color: #1c3044; }
 
 .detail-empty {
   background: white;
