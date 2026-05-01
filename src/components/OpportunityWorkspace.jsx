@@ -520,6 +520,7 @@ function OpportunityWorkspace({
       {latestAnalysis.feasibilityFactors && (
         <div className="feasibility-section">
           <h3>Feasibility Factors</h3>
+          <p className="feasibility-subtitle">Could we win this? — vehicle access, alignment, and execution readiness, independent of whether we <em>should</em> pursue it.</p>
           <div className="factors-grid">
             {Object.entries(latestAnalysis.feasibilityFactors).map(([key, value]) => (
               <div key={key} className="factor">
