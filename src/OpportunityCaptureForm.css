@@ -646,6 +646,12 @@ form {
   gap: 0.75rem;
   align-items: center;
   flex-wrap: wrap;
+  min-width: 0;
+}
+
+.evidence-url {
+  font-size: 12px;
+  color: #1d4ed8;
 }
 
 .evidence-source {

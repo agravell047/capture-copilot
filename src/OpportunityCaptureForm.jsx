@@ -1057,8 +1057,14 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
                         <div className="evidence-meta">
                           <span className="evidence-source">{item.source || 'Other'}</span>
                           {item.url && (
-                            <a href={item.url} target="_blank" rel="noreferrer">
-                              {item.url}
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="evidence-url"
+                              title={item.url}
+                            >
+                              Link →
                             </a>
                           )}
                         </div>
