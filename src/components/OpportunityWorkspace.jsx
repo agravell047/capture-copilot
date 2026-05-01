@@ -348,8 +348,8 @@ function OpportunityWorkspace({
                   {item.url ? (
                     <>
                       {' — '}
-                      <a href={item.url} target="_blank" rel="noreferrer">
-                        {item.url}
+                      <a href={item.url} target="_blank" rel="noreferrer" title={item.url}>
+                        Link →
                       </a>
                     </>
                   ) : null}
