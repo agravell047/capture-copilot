@@ -46,11 +46,12 @@ nextSteps should focus on relationship-building, intel-gathering, and go/no-go d
 PRIORITY QUESTIONS at this stage:
 - What is the win strategy and discriminators?
 - Who are we teaming with and does the team close all gaps?
-- Are we shaping the requirement (briefings, RFI responses, white papers)?
+- Are we shaping the requirement (briefings, RFI responses, industry days)?
 - What does the incumbent look like and how do we beat them?
 - How are evaluation criteria likely to be weighted and are we positioned against them?
-pWin should reflect capture progress — relationships, teaming, shaping actions completed.
-nextSteps should be specific capture actions: meetings booked, white papers, teaming agreements, orals prep.`,
+- If the company IS the incumbent, what is the retention strategy and pricing posture?
+pWin should reflect capture progress — relationships, teaming, shaping actions completed. Incumbent primes at Gate 2 should reflect their advantage.
+nextSteps should be specific capture actions: stakeholder meetings, teaming agreements, competitive pricing strategy, solution briefings, orals preparation.`,
   },
   3: {
     stage: 'Gate 3 — Proposal',
@@ -87,7 +88,8 @@ ALWAYS ASSESS (regardless of gate):
 11. TEAM FIT: company.teamMembers is pre-filtered by relevance from a team of company.teamSize. Name specific individuals for key roles.
 
 IMPORTANT RULES:
-- pWin must be 0-100, realistic and conservative — reflect the actual stage of capture maturity
+- pWin must be 0-100, realistic — reflect the actual capture position, neither inflated nor unnecessarily discounted
+- Incumbent advantage: if the company is the current prime contractor with active relationships with the PM and COR, pWin should reflect that — incumbents at Gate 2 with strong delivery track records typically score 65–80%
 - Recommendation: GO (pursue as prime), SUBCONTRACT (pursue as sub), or NO_GO
 - Avoid generic statements — be specific to this agency, scope, and company
 - Base ALL reasoning ONLY on provided data — do not invent facts, contacts, or past performance
@@ -96,6 +98,7 @@ IMPORTANT RULES:
 - proposedTeam: use ONLY memberId values from the company.teamMembers list provided — do not fabricate IDs or names. Always propose at least 3-5 members covering distinct roles (capture, technical, program management, etc.)
 - gaps: if recommendation is NO_GO or pWin is below 50, return at least 3 gaps. Otherwise return only real gaps — do not fabricate gaps to meet a quota. Tie each gap to a specific evaluation criterion when criteria are provided
 - fitDetails: list ONLY factors that explain the fit verdict direction. If recommendation is NO_GO or pWin is low, fitDetails should highlight what is weak or missing — not what is strong. Strengths belong in the strengths array, not in fitDetails
+- nextSteps must be practical capture actions — relationship meetings, teaming agreements, competitive analysis, pricing strategy, solution briefings, compliance checks. Do NOT suggest thought leadership activities (white papers, blog posts, conference submissions) or generic marketing activities
 - If evaluation criteria are provided, tie fitDetails and gaps directly to those weighted criteria
 - Before returning, verify your JSON is complete and properly closed — every array and object must have a closing bracket
 - Return ONLY valid JSON with NO additional text, markdown, or explanation outside the JSON`;
