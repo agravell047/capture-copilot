@@ -456,13 +456,13 @@ function OpportunityWorkspace({
           <h3>Recommendation</h3>
           {latestAnalysis.recommendation ? (
             <div className="recommendation-content">
-              <div className={`recommendation-action recommendation-${latestAnalysis.recommendation.action?.toLowerCase()}`}>
+              <div className={`recommendation-action recommendation-${latestAnalysis.recommendation.action?.toLowerCase().replace(/\s+/g, '-')}`}>
                 {latestAnalysis.recommendation.action}
               </div>
               <p>{latestAnalysis.recommendation.rationale}</p>
               {latestAnalysis.recommendation.nextSteps && (
                 <>
-                  <h4>Next Steps</h4>
+                  <h4>{latestAnalysis.recommendation.action === 'Pass' ? 'Possible Next Steps' : 'Next Steps'}</h4>
                   <ol>
                     {latestAnalysis.recommendation.nextSteps.map((step, index) => (
                       <li key={index}>{step}</li>

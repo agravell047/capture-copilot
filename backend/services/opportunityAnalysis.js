@@ -93,8 +93,9 @@ IMPORTANT RULES:
 - Base ALL reasoning ONLY on provided data — do not invent facts, contacts, or past performance
 - Be concise: use short sentences and tight prose — do not pad or repeat yourself across fields
 - Do not repeat the opportunity name or agency name inside field values — it is already known
-- proposedTeam: use ONLY memberId values from the company.teamMembers list provided — do not fabricate IDs or names
-- gaps: always return at least one gap, even at Gate 0 — every pursuit has something unknown or weak
+- proposedTeam: use ONLY memberId values from the company.teamMembers list provided — do not fabricate IDs or names. Always propose at least 3-5 members covering distinct roles (capture, technical, program management, etc.)
+- gaps: if recommendation is NO_GO or pWin is below 50, return at least 3 gaps. Otherwise return only real gaps — do not fabricate gaps to meet a quota. Tie each gap to a specific evaluation criterion when criteria are provided
+- fitDetails: list ONLY factors that explain the fit verdict direction. If recommendation is NO_GO or pWin is low, fitDetails should highlight what is weak or missing — not what is strong. Strengths belong in the strengths array, not in fitDetails
 - If evaluation criteria are provided, tie fitDetails and gaps directly to those weighted criteria
 - Before returning, verify your JSON is complete and properly closed — every array and object must have a closing bracket
 - Return ONLY valid JSON with NO additional text, markdown, or explanation outside the JSON`;
@@ -282,14 +283,15 @@ REQUIRED JSON format (always return this exact shape):
   "recommendation": "GO" | "SUBCONTRACT" | "NO_GO",
   "pWin": number between 0 and 100,
   "fitSummary": "string - one sentence on overall fit (used as the headline)",
-  "fitDetails": ["2-5 short bullets explaining why (specific)"],
+  "fitDetails": ["2-5 bullets explaining the FIT VERDICT direction only — if NO_GO/low pWin, highlight what is weak or missing; if GO, highlight what is strong. Do NOT mix positives and negatives here."],
   "recommendationRationale": "2-4 sentences explaining the recommendation (not just the same as fitSummary)",
   "nextSteps": ["3-6 specific next steps tailored to this opportunity AND gate stage"],
   "pWinRationale": "1-2 sentences explaining drivers of pWin at this stage of capture",
   "gaps": [{"area":"string","detail":"string","severity":"high|medium|low","mitigation":"string"}],
+  "feasibilityFactors": {"Vehicle Fit":"Strong|Moderate|Weak","Set-Aside Alignment":"Strong|Moderate|Weak","Relationship Coverage":"Strong|Moderate|Weak","Timeline Feasibility":"Favorable|Moderate|Challenging","Scope Alignment":"Strong|Moderate|Weak"},
   "strengths": ["strength1", "strength2"],
   "risks": ["risk1", "risk2"],
-  "proposedTeam": [{"memberId":"tm-XXX","proposedRole":"string (the role on this proposal, e.g. Technical Volume Lead)","rationale":"1 sentence why this person fits this opportunity"}]
+  "proposedTeam": ["at least 3-5 members — {memberId: from company.teamMembers only, proposedRole: their role on this proposal, rationale: 1 sentence}"]
 }`;
 
   const systemPrompt = buildSystemPrompt(gate);
@@ -410,10 +412,10 @@ REQUIRED JSON format (always return this exact shape):
           : pWinRationale
       },
       gaps: normalizeGapItems(response.gaps || []),
-      feasibilityFactors: buildFeasibilityFactors(formData),
+      feasibilityFactors: response.feasibilityFactors && typeof response.feasibilityFactors === 'object' ? response.feasibilityFactors : undefined,
       risks: normalizeRiskItems(response.risks || []),
       recommendation: {
-        action: response.recommendation === 'GO' ? 'Go' : response.recommendation === 'SUBCONTRACT' ? 'Conditional' : 'Pass',
+        action: response.recommendation === 'GO' ? 'Go' : response.recommendation === 'SUBCONTRACT' ? 'Conditional' : 'No Go',
         rationale: recommendationRationale,
         nextSteps
       },
