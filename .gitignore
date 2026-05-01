@@ -1,1 +1,4 @@
 node_modules
+
+# Never commit secrets — store API keys in environment variables instead
+backend/data/settings.json
