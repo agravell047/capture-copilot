@@ -993,6 +993,24 @@ textarea {
   border: 2px solid #f5c6cb;
 }
 
+.analysis-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0 1.5rem;
+  color: #9ca3af;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.analysis-divider::before,
+.analysis-divider::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid #e5e7eb;
+}
+
 .results-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

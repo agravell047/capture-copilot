@@ -390,6 +390,8 @@ function OpportunityWorkspace({
         </div>
       </div>
 
+      <div className="analysis-divider"><span>Analysis</span></div>
+
       <div className="results-grid">
         <div className="result-card">
           <h3>Fit Assessment</h3>
