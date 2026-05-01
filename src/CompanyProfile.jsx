@@ -86,19 +86,32 @@ const parseCsv = (text) => {
 }
 
 function StageDemoButton() {
-  const [staged, setStaged] = useState(() => localStorage.getItem('capturepilot_demo_prefill') === '1')
+  const [staged, setStaged] = useState(() => localStorage.getItem('capturepilot_demo_prefill') || null)
+
+  const stage = (scenario) => {
+    localStorage.setItem('capturepilot_demo_prefill', scenario)
+    setStaged(scenario)
+  }
+
   return (
-    <button
-      type="button"
-      className="btn-stage-demo"
-      disabled={staged}
-      onClick={() => {
-        localStorage.setItem('capturepilot_demo_prefill', '1')
-        setStaged(true)
-      }}
-    >
-      {staged ? 'Demo Mode — ready' : 'Demo Mode'}
-    </button>
+    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+      <button
+        type="button"
+        className="btn-stage-demo btn-stage-demo-go"
+        disabled={staged === 'go'}
+        onClick={() => stage('go')}
+      >
+        {staged === 'go' ? 'Demo GO — ready' : 'Stage Demo: Strong GO'}
+      </button>
+      <button
+        type="button"
+        className="btn-stage-demo btn-stage-demo-nogo"
+        disabled={staged === 'nogo'}
+        onClick={() => stage('nogo')}
+      >
+        {staged === 'nogo' ? 'Demo No Go — ready' : 'Stage Demo: No Go'}
+      </button>
+    </div>
   )
 }
 

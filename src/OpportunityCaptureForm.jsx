@@ -53,7 +53,7 @@ const agencyOptions = [
   'Other'
 ]
 
-const DEMO_FORM_DATA = {
+const DEMO_NOGO_FORM_DATA = {
   opportunityName: 'SSA Disability Claims Processing Modernization',
   agency: 'Social Security Administration',
   contractValue: '5-50M',
@@ -86,6 +86,42 @@ const DEMO_FORM_DATA = {
   ],
   similarPursuits: ['pp-001-va-vba-modernization', 'pp-002-cms-platform'],
 }
+
+const DEMO_GO_FORM_DATA = {
+  opportunityName: 'VA Benefits Delivery Modernization — Phase II',
+  agency: 'Department of Veterans Affairs',
+  contractValue: '50-200M',
+  vehicle: 'SPRUCE IDIQ',
+  setAside: 'SDVOSB',
+  gate: 2,
+  description: 'Extend the VA Benefits Delivery at Discharge (BDD) platform with a modern cloud-native architecture on AWS GovCloud. Scope includes microservices decomposition of the legacy monolith, real-time claims status API for veteran-facing mobile and web, integration with VA Identity and Access Management (IAM), DevSecOps pipeline with continuous ATO monitoring, and Section 508 remediation of the claimant portal. Incumbent task order expires September 2026; recompete RFP expected June 2026.',
+  timeline: 'Draft RFP released March 2026; final RFP expected June 2026; award Q3 2026. Five-year base IDIQ with two one-year options.',
+  knownRelationships: 'Apex holds the current Phase I task order as prime — strong relationship with the VA OIT Program Director and Contracting Officer. COR has informally indicated satisfaction with delivery. Two incumbent sub-contractors (data migration and 508 accessibility) plan to re-team with Apex. Program Director attended our QBR in February and requested a technical roadmap for Phase II scope.',
+  notes: 'Incumbent advantage is real — we have deep context on the legacy system, active relationships, and a CPARS in progress expected to be Exceptional. SPRUCE IDIQ vehicle confirmed. SDVOSB set-aside matches. Main risk is price — VA will likely apply pressure at BAFO. Pricing strategy should lead with value and risk mitigation, not discount.',
+  evaluationType: 'Best Value Tradeoff',
+  evaluationCriteria: [
+    'Technical approach and transition/continuity plan (40%)',
+    'Past performance on VA or comparable federal benefits platforms (30%)',
+    'Key personnel qualifications and availability (20%)',
+    'Price realism and value (10%)',
+  ],
+  stakeholders: [
+    {
+      contactId: 'contact-angela-kim',
+      id: 'contact-angela-kim',
+      name: 'Angela Kim',
+      role: 'Director, Digital Services',
+      office: 'SSA OCIO',
+      relationshipStrength: 'strong',
+      lastTouch: '2026-03-22',
+      nextTouch: '2026-05-12',
+      notes: '',
+    },
+  ],
+  similarPursuits: ['pp-001-va-vba-modernization', 'pp-002-cms-platform'],
+}
+
+const DEMO_FORM_DATA = DEMO_NOGO_FORM_DATA
 
 const DEMO_COLLAPSED_SECTIONS = {
   evaluation: false,
@@ -315,7 +351,8 @@ function CaptureCompleteness({ formData }) {
 function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, onViewPortfolio }) {
   const [formData, setFormData] = useState(() => {
     if (editingOpportunityId) return initialFormData
-    if (localStorage.getItem('capturepilot_demo_prefill') === '1') return { ...initialFormData, ...DEMO_FORM_DATA }
+    if (localStorage.getItem('capturepilot_demo_prefill') === 'go') return { ...initialFormData, ...DEMO_GO_FORM_DATA }
+    if (localStorage.getItem('capturepilot_demo_prefill') === 'nogo') return { ...initialFormData, ...DEMO_NOGO_FORM_DATA }
     return initialFormData
   })
   const [evaluationCriteriaDraft, setEvaluationCriteriaDraft] = useState('')
@@ -341,7 +378,7 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
   const [result, setResult] = useState(null)
   const [loadedOpportunity, setLoadedOpportunity] = useState(null)
   const [collapsedSections, setCollapsedSections] = useState(() => {
-    if (!editingOpportunityId && localStorage.getItem('capturepilot_demo_prefill') === '1') return DEMO_COLLAPSED_SECTIONS
+    if (!editingOpportunityId && (localStorage.getItem('capturepilot_demo_prefill') === 'go' || localStorage.getItem('capturepilot_demo_prefill') === 'nogo')) return DEMO_COLLAPSED_SECTIONS
     return { evaluation: true, knownRelationships: true, stakeholders: true, evidence: true, internalNotes: true, similarPursuits: true }
   })
 

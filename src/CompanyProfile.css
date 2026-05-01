@@ -792,3 +792,30 @@
   background: #fef08a;
   border-color: #facc15;
 }
+
+.btn-stage-demo-go {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.btn-stage-demo-go:hover:not(:disabled) {
+  background: #dcfce7;
+  border-color: #4ade80;
+}
+
+.btn-stage-demo-nogo {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.btn-stage-demo-nogo:hover:not(:disabled) {
+  background: #fee2e2;
+  border-color: #f87171;
+}
+
+.btn-stage-demo:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
