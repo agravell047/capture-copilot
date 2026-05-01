@@ -53,6 +53,49 @@ const agencyOptions = [
   'Other'
 ]
 
+const DEMO_FORM_DATA = {
+  opportunityName: 'SSA Disability Claims Processing Modernization',
+  agency: 'Social Security Administration',
+  contractValue: '5-50M',
+  vehicle: 'OASIS+',
+  setAside: 'SDVOSB',
+  gate: 1,
+  description: "Modernize SSA's Disability Case Management System \u2014 a 30-year-old COBOL/mainframe platform processing 2.8 million annual disability claims. Scope includes phased cloud migration to AWS GovCloud, legacy COBOL rewrite to Java/Spring microservices, integration with SSA's existing Numident and MBR databases, Section 508-compliant claimant portal redesign, DevSecOps pipeline implementation, and FedRAMP Moderate ATO preparation. Requires continuity-of-operations planning for 24/7 claims processing during migration.",
+  timeline: 'Sources Sought issued April 14, 2026; RFP anticipated September 2026; award expected Q1 2027. Five-year IDIQ base with two option years.',
+  knownRelationships: "Marcus Webb attended the SSA IT Modernization Industry Day on April 9th and had a brief conversation with the program's Deputy CIO. No formal relationship yet \u2014 agency contact at SSA OIT identified but no direct outreach completed. Our OASIS+ vehicle PM at SSA confirmed Apex is registered and in good standing on the vehicle.",
+  notes: 'OASIS+ vehicle aligns perfectly. SDVOSB set-aside confirmed via Sources Sought. Biggest risk is the absence of SSA past performance \u2014 we have strong CMS and VA comparable work but no direct SSA reference. Need to assess the competitive landscape and identify a teaming partner with SSA incumbent access before committing full capture resources.',
+  evaluationType: 'Best Value Tradeoff',
+  evaluationCriteria: [
+    'Technical approach and legacy modernization methodology (35%)',
+    'Past performance on comparable federal benefits systems (30%)',
+    'Management approach and key personnel (20%)',
+    'Price realism (15%)',
+  ],
+  stakeholders: [
+    {
+      contactId: 'contact-angela-kim',
+      id: 'contact-angela-kim',
+      name: 'Angela Kim',
+      role: 'Director, Digital Services',
+      office: 'SSA OCIO',
+      relationshipStrength: 'strong',
+      lastTouch: '2026-03-22',
+      nextTouch: '2026-05-12',
+      notes: '',
+    },
+  ],
+  similarPursuits: ['pp-001-va-vba-modernization', 'pp-002-cms-platform'],
+}
+
+const DEMO_COLLAPSED_SECTIONS = {
+  evaluation: false,
+  knownRelationships: false,
+  stakeholders: false,
+  evidence: true,
+  internalNotes: false,
+  similarPursuits: false,
+}
+
 const vehicleOptions = [
   'GSA MAS',
   'OASIS+',
@@ -270,7 +313,11 @@ function CaptureCompleteness({ formData }) {
 }
 
 function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, onViewPortfolio }) {
-  const [formData, setFormData] = useState(initialFormData)
+  const [formData, setFormData] = useState(() => {
+    if (editingOpportunityId) return initialFormData
+    if (localStorage.getItem('capturepilot_demo_prefill') === '1') return { ...initialFormData, ...DEMO_FORM_DATA }
+    return initialFormData
+  })
   const [evaluationCriteriaDraft, setEvaluationCriteriaDraft] = useState('')
   const [stakeholderDraft, setStakeholderDraft] = useState({
     name: '',
@@ -293,24 +340,13 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
   const [error, setError] = useState('')
   const [result, setResult] = useState(null)
   const [loadedOpportunity, setLoadedOpportunity] = useState(null)
-  const [collapsedSections, setCollapsedSections] = useState({
-    evaluation: true,
-    knownRelationships: true,
-    stakeholders: true,
-    evidence: true,
-    internalNotes: true,
-    similarPursuits: true
+  const [collapsedSections, setCollapsedSections] = useState(() => {
+    if (!editingOpportunityId && localStorage.getItem('capturepilot_demo_prefill') === '1') return DEMO_COLLAPSED_SECTIONS
+    return { evaluation: true, knownRelationships: true, stakeholders: true, evidence: true, internalNotes: true, similarPursuits: true }
   })
 
   useEffect(() => {
-    setCollapsedSections((current) => ({
-      ...current,
-      evaluation: !(formData.evaluationType || formData.evaluationCriteria.length || formData.evaluationNotes),
-      knownRelationships: !formData.knownRelationships,
-      stakeholders: !formData.stakeholders.length,
-      evidence: !formData.evidence.length,
-      internalNotes: !formData.notes
-    }))
+    localStorage.removeItem('capturepilot_demo_prefill')
   }, [])
 
   useEffect(() => {
@@ -318,7 +354,6 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
 
     const loadOpportunityForEdit = async () => {
       if (!editingOpportunityId) {
-        setFormData(initialFormData)
         setUseUploadedRfp(false)
         setError('')
         setResult(null)
@@ -566,6 +601,13 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
   const handleReset = () => {
     setFormData(initialFormData)
     setUseUploadedRfp(false)
+    setError('')
+    setResult(null)
+  }
+
+  const handleLoadDemoData = () => {
+    setFormData({ ...initialFormData, ...DEMO_FORM_DATA })
+    setCollapsedSections(DEMO_COLLAPSED_SECTIONS)
     setError('')
     setResult(null)
   }
@@ -1072,12 +1114,13 @@ function OpportunityCaptureForm({ editingOpportunityId, onOpportunityCreated, on
 
           <div className="form-actions">
             <button type="submit" disabled={loading} className="btn btn-primary">
-              {loading
-                ? editingOpportunityId
-                  ? 'Saving Changes...'
-                  : 'Creating Opportunity...'
-                : editingOpportunityId
-                  ? 'Save Changes & Reanalyze' 
+              {loading ? (
+                <>
+                  <span className="btn-spinner" />
+                  {editingOpportunityId ? 'Saving Changes…' : 'Analyzing…'}
+                </>
+              ) : editingOpportunityId
+                  ? 'Save Changes & Reanalyze'
                   : 'Create & Analyze Opportunity'}
             </button>
             <button type="button" onClick={handleReset} className="btn btn-secondary">

@@ -281,7 +281,10 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
       {error && <div className="error-message">{error}</div>}
 
       {loading ? (
-        <div className="portfolio-empty">Loading…</div>
+        <div className="page-loading">
+          <div className="page-loading-spinner" />
+          Loading…
+        </div>
       ) : view === 'board' ? (
         <>
           <div className="kanban-board">

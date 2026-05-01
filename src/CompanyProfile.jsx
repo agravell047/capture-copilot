@@ -85,6 +85,23 @@ const parseCsv = (text) => {
   return { headers, rows }
 }
 
+function StageDemoButton() {
+  const [staged, setStaged] = useState(() => localStorage.getItem('capturepilot_demo_prefill') === '1')
+  return (
+    <button
+      type="button"
+      className="btn-stage-demo"
+      disabled={staged}
+      onClick={() => {
+        localStorage.setItem('capturepilot_demo_prefill', '1')
+        setStaged(true)
+      }}
+    >
+      {staged ? 'Demo Mode — ready' : 'Demo Mode'}
+    </button>
+  )
+}
+
 function CompanyProfile() {
   const messageRef = useRef(null)
   const csvInputRef = useRef(null)
@@ -573,7 +590,14 @@ function CompanyProfile() {
   }
 
   if (loading) {
-    return <div className="company-profile"><p>Loading company profile...</p></div>
+    return (
+      <div className="company-profile">
+        <div className="page-loading">
+          <div className="page-loading-spinner" />
+          Loading…
+        </div>
+      </div>
+    )
   }
 
   const TABS = [
@@ -994,6 +1018,11 @@ John Smith,Program Manager,DHS,CSOC,jsmith@dhs.gov,strong,Active relationship fr
             </div>
             <div className="profile-actions settings-actions">
               <button className="save-button" onClick={saveAiSettings} disabled={saving}>{saving ? 'Saving…' : 'Save Settings'}</button>
+            </div>
+            <div className="settings-row" style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid #e5e7eb' }}>
+              <div className="settings-field">
+                <StageDemoButton />
+              </div>
             </div>
           </div>
         </div>

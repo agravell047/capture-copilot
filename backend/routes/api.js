@@ -100,6 +100,8 @@ router.get('/settings', async (req, res) => {
 router.post('/settings', async (req, res) => {
   try {
     const result = await settingsService.updateSettings(req.body || {});
+    const hasKey = Boolean(result.openaiApiKey);
+    console.log(`[LLM] API key: ${hasKey ? 'CONFIGURED via Settings — real OpenAI calls enabled' : 'removed — mock responses will be used'}`);
     res.json({
       hasOpenAiKey: Boolean(result.openaiApiKey),
       model: result.model || '',

@@ -94,6 +94,30 @@
       "problemMatcher": []
     },
     {
+      "label": "Kill App Ports",
+      "type": "shell",
+      "command": "for /f \"tokens=5\" %p in ('netstat -aon ^| findstr \":3001 \" 2^>nul') do @taskkill /F /PID %p 2>nul & for /f \"tokens=5\" %p in ('netstat -aon ^| findstr \":5173 \" 2^>nul') do @taskkill /F /PID %p 2>nul & exit 0",
+      "options": {
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      }
+    },
+    {
+      "label": "Restart App (Frontend + Backend)",
+      "dependsOn": ["Kill App Ports", "Run App (Frontend + Backend)"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
       "label": "Build Frontend",
       "type": "shell",
       "command": "npm run build",

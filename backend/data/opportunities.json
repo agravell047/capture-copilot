@@ -755,5 +755,353 @@
     "outcome": null,
     "outcomeDetails": null,
     "similarPursuits": []
+  },
+  {
+    "id": "914bdf55-3eeb-4300-890b-bd14c004c93f",
+    "name": "SSA Disability Claims Processing Modernization",
+    "createdAt": "2026-04-29T05:22:14.562Z",
+    "updatedAt": "2026-04-29T05:33:58.314Z",
+    "opportunityName": "SSA Disability Claims Processing Modernization",
+    "agency": "Social Security Administration",
+    "contractValue": "5-50M",
+    "vehicle": "OASIS+",
+    "setAside": "SDVOSB",
+    "timeline": "",
+    "description": "Modernize SSA's Disability Case Management System — a 30-year-old COBOL/mainframe platform processing 2.8 million annual disability claims. Scope includes phased cloud migration to AWS GovCloud, legacy COBOL rewrite to Java/Spring microservices, integration with SSA's existing Numident and MBR databases, Section 508-compliant claimant portal redesign, DevSecOps pipeline implementation, and FedRAMP Moderate ATO preparation. Requires continuity-of-operations planning for 24/7 claims processing during migration.",
+    "knownRelationships": "Marcus Webb attended the SSA IT Modernization Industry Day on April 9th and had a brief conversation with the program's Deputy CIO. No formal relationship yet — agency contact at SSA OIT identified but no direct outreach completed. Our OASIS+ vehicle PM at SSA confirmed Apex is registered and in good standing on the vehicle.",
+    "notes": "",
+    "status": "archived",
+    "gate": 1,
+    "evidence": [],
+    "stakeholders": [
+      {
+        "id": "contact-angela-kim",
+        "name": "Angela Kim",
+        "role": "Director, Digital Services",
+        "office": "SSA OCIO",
+        "relationshipStrength": "strong",
+        "lastTouch": "2026-03-22",
+        "nextTouch": "2026-05-12",
+        "notes": "Long-standing relationship going back to the SSA My Social Security modernization. Angela is an internal champion for our accessibility-first approach and has referenced our UX work in multiple acquisition briefings. Critical contact for any SSA digital services pursuit."
+      }
+    ],
+    "evaluation": {
+      "type": "Best Value Tradeoff",
+      "criteria": [
+        "Technical approach and legacy modernization methodology (35%)",
+        "Past performance on comparable federal benefits systems (30%)",
+        "Management approach and key personnel (20%)",
+        "Price realism (15%)"
+      ],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": {
+      "opportunityName": "SSA Disability Claims Processing Modernization",
+      "name": "SSA Disability Claims Processing Modernization",
+      "agency": "Social Security Administration",
+      "contractValue": "5-50M",
+      "vehicle": "OASIS+",
+      "setAside": "SDVOSB",
+      "fitAssessment": {
+        "rating": "Good",
+        "rationale": "Strong vehicle and set-aside fit — OASIS+ is pre-qualified and SDVOSB set-aside reduces the competitive field. Core COBOL modernization scope maps directly to Apex's declared capabilities, with CMS and VA analog past performance as the credibility bridge. The key qualification question is whether SSA will accept comparable benefits-platform references in lieu of direct SSA history.",
+        "details": [
+          "OASIS+ vehicle is pre-qualified — Apex is registered and in good standing, eliminating vehicle access risk at Gate 1.",
+          "SDVOSB set-aside confirmed via Sources Sought — significantly narrows the competitive field to SDVOSB-eligible primes only.",
+          "COBOL-to-microservices modernization with AWS GovCloud migration is a declared core capability with direct delivery history.",
+          "CMS Medicaid Enterprise Systems engagement is the strongest past performance analog — benefits adjudication at scale with FedRAMP and Section 508 requirements is functionally comparable.",
+          "FedRAMP Moderate and DevSecOps are named PWS requirements that match Apex core delivery capabilities exactly.",
+          "No direct SSA past performance — the 30%-weighted past performance criterion is the primary proposal risk at this stage."
+        ],
+        "strengths": [
+          "OASIS+ vehicle pre-qualified — no access risk",
+          "SDVOSB set-aside confirmed, reducing the competitive field",
+          "COBOL modernization and AWS GovCloud migration are declared core capabilities",
+          "CMS and VA analog past performance are high-credibility comparables for a benefits agency",
+          "FedRAMP Moderate and DevSecOps requirements match Apex core delivery exactly"
+        ]
+      },
+      "pWinScore": {
+        "score": 52,
+        "tier": "medium",
+        "reasoning": "Conservative Gate 1 estimate reflecting strong structural fit (vehicle, set-aside, scope) against the two primary drag factors: absence of SSA-specific past performance weighted at 30% and no established buyer relationship. pWin is upgradable to 65-70% if teaming brings SSA incumbent access and stakeholder introductions are secured before RFP drop."
+      },
+      "gaps": [
+        {
+          "area": "SSA Past Performance",
+          "detail": "No direct SSA delivery history. Past performance is weighted at 30% and evaluators will compare references directly against the SSA benefits and disability claims context.",
+          "severity": "high",
+          "mitigation": "Identify a teaming partner with an active or recent SSA task order. Position CMS Medicaid Enterprise work as the primary analog — document the functional parallels between Medicaid adjudication and disability claims processing explicitly."
+        },
+        {
+          "area": "Buyer Relationship",
+          "detail": "No established relationship with the SSA program office, contracting officer, or technical authority beyond a brief Industry Day encounter.",
+          "severity": "high",
+          "mitigation": "Request a one-on-one industry engagement meeting with SSA OIT leadership. Use Marcus Webb's Industry Day contact (Deputy CIO) as the warm introduction path."
+        },
+        {
+          "area": "Competitive Landscape",
+          "detail": "SSA modernization historically attracts large prime contractors. Incumbent presence and large-prime teaming posture are not yet mapped.",
+          "severity": "medium",
+          "mitigation": "Pull active SSA IDIQ vehicle award data on SAM.gov. Confirm whether the SDVOSB set-aside effectively limits the field before committing full capture investment."
+        }
+      ],
+      "feasibilityFactors": {
+        "Vehicle Fit": "Strong",
+        "Set-Aside Alignment": "Strong",
+        "Relationship Coverage": "Strong",
+        "Timeline Feasibility": "Challenging",
+        "Scope Alignment": "Strong"
+      },
+      "risks": [
+        "No SSA past performance reference — 30% evaluation weight makes this the single largest proposal risk.",
+        "Buyer relationship is nascent — no established trust with the program office or contracting officer.",
+        "Legacy COBOL scope may attract large established contractors with existing SSA mainframe access.",
+        "Continuity-of-operations requirement (24/7 claims processing) adds delivery complexity and proposal narrative risk.",
+        "September RFP timeline leaves ~5 months for capture — adequate but requires immediate relationship-building to be effective."
+      ],
+      "recommendation": {
+        "action": "Go",
+        "rationale": "Qualify and pursue as SDVOSB prime. Vehicle fit, set-aside alignment, and scope match are all strong enough to justify Gate 1 investment. The gaps — SSA past performance and buyer relationship — are real but addressable before a September RFP drop with the right teaming strategy. Do not commit full capture resources yet: complete the qualification actions below first, particularly identifying a teaming partner with active SSA task order experience.",
+        "nextSteps": [
+          "Request an industry engagement meeting with SSA OIT — use Marcus Webb's Industry Day contact (Deputy CIO) as the entry point. Target before May 15.",
+          "Identify 1-2 teaming partner candidates with active SSA task orders. Prioritize firms with SSA COBOL or mainframe modernization experience.",
+          "Pull all active SSA IDIQ vehicles and award data on SAM.gov to map the competitive landscape before committing further resources.",
+          "Have Priya Nair draft a one-page technical brief on Apex's COBOL-to-cloud methodology addressing the 24/7 continuity-of-operations constraint — this will be the leave-behind for the SSA OIT meeting.",
+          "Go/No-Go checkpoint: reconvene in 3 weeks to assess whether a credible teaming path and buyer engagement are achievable before RFP drop."
+        ]
+      },
+      "proposedTeam": [
+        {
+          "id": "tm-002",
+          "name": "James Okafor",
+          "email": "james.okafor@apexfederal.com",
+          "role": "VP of Capture & Business Development",
+          "proposedRole": "Capture Lead",
+          "rationale": "James Okafor owns the capture strategy and pipeline — the right person to manage this pursuit from qualification through proposal."
+        },
+        {
+          "id": "tm-003",
+          "name": "Priya Nair",
+          "email": "priya.nair@apexfederal.com",
+          "role": "Chief Technology Officer",
+          "proposedRole": "Technical Volume Lead",
+          "rationale": "Priya Nair's cloud architecture and FedRAMP expertise are central to the technical approach narrative for SSA's GovCloud migration."
+        },
+        {
+          "id": "tm-004",
+          "name": "Marcus Webb",
+          "email": "marcus.webb@apexfederal.com",
+          "role": "Director of Program Delivery",
+          "proposedRole": "Program Manager",
+          "rationale": "Marcus Webb has the existing Industry Day contact at SSA OIT and the federal CPARS reporting background needed to lead program delivery."
+        },
+        {
+          "id": "tm-005",
+          "name": "Sofia Reyes",
+          "email": "sofia.reyes@apexfederal.com",
+          "role": "Lead Proposal Manager",
+          "proposedRole": "Proposal Manager",
+          "rationale": "Sofia Reyes owns the compliance matrix and color review process — essential for a Best Value Tradeoff evaluation with four weighted criteria."
+        },
+        {
+          "id": "tm-022",
+          "name": "Patrick O'Brien",
+          "email": "patrick.obrien@apexfederal.com",
+          "role": "Senior Software Engineer",
+          "proposedRole": "Key Personnel — Legacy Migration Lead",
+          "rationale": "Patrick O'Brien's COBOL modernization and Java migration background directly addresses the 30-year mainframe-to-microservices core requirement."
+        },
+        {
+          "id": "tm-008",
+          "name": "Alicia Fontaine",
+          "email": "alicia.fontaine@apexfederal.com",
+          "role": "DevSecOps Lead",
+          "proposedRole": "Key Personnel — DevSecOps Lead",
+          "rationale": "Alicia Fontaine's ATO pipeline automation and SAST/DAST credentials are directly responsive to the FedRAMP Moderate and DevSecOps PWS requirements."
+        }
+      ]
+    },
+    "rfp": null,
+    "outcome": null,
+    "outcomeDetails": null,
+    "similarPursuits": [
+      "pp-003-dod-cloud"
+    ]
+  },
+  {
+    "id": "eb459db2-4af7-494b-9f34-1c7cffe22286",
+    "name": "SSA Disability Claims Processing Modernization",
+    "createdAt": "2026-04-29T05:29:55.687Z",
+    "updatedAt": "2026-04-29T05:29:55.687Z",
+    "opportunityName": "SSA Disability Claims Processing Modernization",
+    "agency": "Social Security Administration",
+    "contractValue": "5-50M",
+    "vehicle": "OASIS+",
+    "setAside": "SDVOSB",
+    "timeline": "",
+    "description": "Modernize SSA's Disability Case Management System — a 30-year-old COBOL/mainframe platform processing 2.8 million annual disability claims. Scope includes phased cloud migration to AWS GovCloud, legacy COBOL rewrite to Java/Spring microservices, integration with SSA's existing Numident and MBR databases, Section 508-compliant claimant portal redesign, DevSecOps pipeline implementation, and FedRAMP Moderate ATO preparation. Requires continuity-of-operations planning for 24/7 claims processing during migration.",
+    "knownRelationships": "Marcus Webb attended the SSA IT Modernization Industry Day on April 9th and had a brief conversation with the program's Deputy CIO. No formal relationship yet — agency contact at SSA OIT identified but no direct outreach completed. Our OASIS+ vehicle PM at SSA confirmed Apex is registered and in good standing on the vehicle.",
+    "notes": "",
+    "status": "active",
+    "gate": 1,
+    "evidence": [],
+    "stakeholders": [
+      {
+        "id": "contact-angela-kim",
+        "name": "Angela Kim",
+        "role": "Director, Digital Services",
+        "office": "SSA OCIO",
+        "relationshipStrength": "strong",
+        "lastTouch": "2026-03-22",
+        "nextTouch": "2026-05-12",
+        "notes": "Long-standing relationship going back to the SSA My Social Security modernization. Angela is an internal champion for our accessibility-first approach and has referenced our UX work in multiple acquisition briefings. Critical contact for any SSA digital services pursuit."
+      }
+    ],
+    "evaluation": {
+      "type": "",
+      "criteria": [
+        "Technical approach and legacy modernization methodology (35%)",
+        "Past performance on comparable federal benefits systems (30%)",
+        "Management approach and key personnel (20%)",
+        "Price realism (15%)"
+      ],
+      "notes": ""
+    },
+    "updates": [],
+    "latestAnalysis": {
+      "opportunityName": "SSA Disability Claims Processing Modernization",
+      "name": "SSA Disability Claims Processing Modernization",
+      "agency": "Social Security Administration",
+      "contractValue": "5-50M",
+      "vehicle": "OASIS+",
+      "setAside": "SDVOSB",
+      "fitAssessment": {
+        "rating": "Good",
+        "rationale": "Strong vehicle and set-aside fit — OASIS+ is pre-qualified and SDVOSB set-aside reduces the competitive field. Core COBOL modernization scope maps directly to Apex's declared capabilities, with CMS and VA analog past performance as the credibility bridge. The key qualification question is whether SSA will accept comparable benefits-platform references in lieu of direct SSA history.",
+        "details": [
+          "OASIS+ vehicle is pre-qualified — Apex is registered and in good standing, eliminating vehicle access risk at Gate 1.",
+          "SDVOSB set-aside confirmed via Sources Sought — significantly narrows the competitive field to SDVOSB-eligible primes only.",
+          "COBOL-to-microservices modernization with AWS GovCloud migration is a declared core capability with direct delivery history.",
+          "CMS Medicaid Enterprise Systems engagement is the strongest past performance analog — benefits adjudication at scale with FedRAMP and Section 508 requirements is functionally comparable.",
+          "FedRAMP Moderate and DevSecOps are named PWS requirements that match Apex core delivery capabilities exactly.",
+          "No direct SSA past performance — the 30%-weighted past performance criterion is the primary proposal risk at this stage."
+        ],
+        "strengths": [
+          "OASIS+ vehicle pre-qualified — no access risk",
+          "SDVOSB set-aside confirmed, reducing the competitive field",
+          "COBOL modernization and AWS GovCloud migration are declared core capabilities",
+          "CMS and VA analog past performance are high-credibility comparables for a benefits agency",
+          "FedRAMP Moderate and DevSecOps requirements match Apex core delivery exactly"
+        ]
+      },
+      "pWinScore": {
+        "score": 52,
+        "tier": "medium",
+        "reasoning": "Conservative Gate 1 estimate reflecting strong structural fit (vehicle, set-aside, scope) against the two primary drag factors: absence of SSA-specific past performance weighted at 30% and no established buyer relationship. pWin is upgradable to 65-70% if teaming brings SSA incumbent access and stakeholder introductions are secured before RFP drop."
+      },
+      "gaps": [
+        {
+          "area": "SSA Past Performance",
+          "detail": "No direct SSA delivery history. Past performance is weighted at 30% and evaluators will compare references directly against the SSA benefits and disability claims context.",
+          "severity": "high",
+          "mitigation": "Identify a teaming partner with an active or recent SSA task order. Position CMS Medicaid Enterprise work as the primary analog — document the functional parallels between Medicaid adjudication and disability claims processing explicitly."
+        },
+        {
+          "area": "Buyer Relationship",
+          "detail": "No established relationship with the SSA program office, contracting officer, or technical authority beyond a brief Industry Day encounter.",
+          "severity": "high",
+          "mitigation": "Request a one-on-one industry engagement meeting with SSA OIT leadership. Use Marcus Webb's Industry Day contact (Deputy CIO) as the warm introduction path."
+        },
+        {
+          "area": "Competitive Landscape",
+          "detail": "SSA modernization historically attracts large prime contractors. Incumbent presence and large-prime teaming posture are not yet mapped.",
+          "severity": "medium",
+          "mitigation": "Pull active SSA IDIQ vehicle award data on SAM.gov. Confirm whether the SDVOSB set-aside effectively limits the field before committing full capture investment."
+        }
+      ],
+      "feasibilityFactors": {
+        "Vehicle Fit": "Strong",
+        "Set-Aside Alignment": "Strong",
+        "Relationship Coverage": "Strong",
+        "Timeline Feasibility": "Challenging",
+        "Scope Alignment": "Strong"
+      },
+      "risks": [
+        "No SSA past performance reference — 30% evaluation weight makes this the single largest proposal risk.",
+        "Buyer relationship is nascent — no established trust with the program office or contracting officer.",
+        "Legacy COBOL scope may attract large established contractors with existing SSA mainframe access.",
+        "Continuity-of-operations requirement (24/7 claims processing) adds delivery complexity and proposal narrative risk.",
+        "September RFP timeline leaves ~5 months for capture — adequate but requires immediate relationship-building to be effective."
+      ],
+      "recommendation": {
+        "action": "Go",
+        "rationale": "Qualify and pursue as SDVOSB prime. Vehicle fit, set-aside alignment, and scope match are all strong enough to justify Gate 1 investment. The gaps — SSA past performance and buyer relationship — are real but addressable before a September RFP drop with the right teaming strategy. Do not commit full capture resources yet: complete the qualification actions below first, particularly identifying a teaming partner with active SSA task order experience.",
+        "nextSteps": [
+          "Request an industry engagement meeting with SSA OIT — use Marcus Webb's Industry Day contact (Deputy CIO) as the entry point. Target before May 15.",
+          "Identify 1-2 teaming partner candidates with active SSA task orders. Prioritize firms with SSA COBOL or mainframe modernization experience.",
+          "Pull all active SSA IDIQ vehicles and award data on SAM.gov to map the competitive landscape before committing further resources.",
+          "Have Priya Nair draft a one-page technical brief on Apex's COBOL-to-cloud methodology addressing the 24/7 continuity-of-operations constraint — this will be the leave-behind for the SSA OIT meeting.",
+          "Go/No-Go checkpoint: reconvene in 3 weeks to assess whether a credible teaming path and buyer engagement are achievable before RFP drop."
+        ]
+      },
+      "proposedTeam": [
+        {
+          "id": "tm-002",
+          "name": "James Okafor",
+          "email": "james.okafor@apexfederal.com",
+          "role": "VP of Capture & Business Development",
+          "proposedRole": "Capture Lead",
+          "rationale": "James Okafor owns the capture strategy and pipeline — the right person to manage this pursuit from qualification through proposal."
+        },
+        {
+          "id": "tm-003",
+          "name": "Priya Nair",
+          "email": "priya.nair@apexfederal.com",
+          "role": "Chief Technology Officer",
+          "proposedRole": "Technical Volume Lead",
+          "rationale": "Priya Nair's cloud architecture and FedRAMP expertise are central to the technical approach narrative for SSA's GovCloud migration."
+        },
+        {
+          "id": "tm-004",
+          "name": "Marcus Webb",
+          "email": "marcus.webb@apexfederal.com",
+          "role": "Director of Program Delivery",
+          "proposedRole": "Program Manager",
+          "rationale": "Marcus Webb has the existing Industry Day contact at SSA OIT and the federal CPARS reporting background needed to lead program delivery."
+        },
+        {
+          "id": "tm-005",
+          "name": "Sofia Reyes",
+          "email": "sofia.reyes@apexfederal.com",
+          "role": "Lead Proposal Manager",
+          "proposedRole": "Proposal Manager",
+          "rationale": "Sofia Reyes owns the compliance matrix and color review process — essential for a Best Value Tradeoff evaluation with four weighted criteria."
+        },
+        {
+          "id": "tm-022",
+          "name": "Patrick O'Brien",
+          "email": "patrick.obrien@apexfederal.com",
+          "role": "Senior Software Engineer",
+          "proposedRole": "Key Personnel — Legacy Migration Lead",
+          "rationale": "Patrick O'Brien's COBOL modernization and Java migration background directly addresses the 30-year mainframe-to-microservices core requirement."
+        },
+        {
+          "id": "tm-008",
+          "name": "Alicia Fontaine",
+          "email": "alicia.fontaine@apexfederal.com",
+          "role": "DevSecOps Lead",
+          "proposedRole": "Key Personnel — DevSecOps Lead",
+          "rationale": "Alicia Fontaine's ATO pipeline automation and SAST/DAST credentials are directly responsive to the FedRAMP Moderate and DevSecOps PWS requirements."
+        }
+      ]
+    },
+    "rfp": null,
+    "outcome": null,
+    "outcomeDetails": null,
+    "similarPursuits": [
+      "pp-003-dod-cloud"
+    ]
   }
 ]

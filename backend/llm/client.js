@@ -1,4 +1,4 @@
-const axios = require('axios');
+const OpenAI = require('openai');
 const settingsService = require('../services/settings');
 
 const MOCK_RESPONSES = {
@@ -125,12 +125,12 @@ const isPlausibleOpenAiKey = (apiKey) => {
   return trimmed.startsWith('sk-');
 };
 
-const callLLM = async ({ messages, json = false, model = '', maxTokens = 500 }) => {
+const callLLM = async ({ messages, json = false, model = '' }) => {
   const envKey = process.env.OPENAI_API_KEY;
   const envModel = process.env.OPENAI_MODEL;
   const settings = await settingsService.getSettings();
   const apiKey = isPlausibleOpenAiKey(envKey) ? String(envKey).trim() : String(settings.openaiApiKey || '').trim();
-  const resolvedModel = String(model || envModel || settings.model || 'gpt-3.5-turbo').trim();
+  const resolvedModel = String(model || envModel || settings.model || 'gpt-4o-mini').trim();
   const resolvedBaseUrl = String(process.env.OPENAI_BASE_URL || settings.baseUrl || 'https://api.openai.com').trim().replace(/\/+$/, '');
   const useApi = isPlausibleOpenAiKey(apiKey);
 
@@ -138,21 +138,27 @@ const callLLM = async ({ messages, json = false, model = '', maxTokens = 500 }) 
     let content;
 
     if (useApi) {
-      // Call OpenAI API (Chat Completions; keep simple for this POC)
-      const response = await axios.post(`${resolvedBaseUrl}/v1/chat/completions`, {
+      // Use official OpenAI SDK — Responses API (recommended per docs)
+      const clientOptions = { apiKey };
+      if (resolvedBaseUrl !== 'https://api.openai.com') {
+        clientOptions.baseURL = `${resolvedBaseUrl}/v1`;
+      }
+      const openai = new OpenAI(clientOptions);
+
+      // Map system → developer role (Responses API convention)
+      const input = messages.map(m => ({
+        role: m.role === 'system' ? 'developer' : m.role,
+        content: m.content
+      }));
+
+      const response = await openai.responses.create({
         model: resolvedModel,
-        messages,
-        max_tokens: maxTokens,
+        input,
         temperature: 0.7
-      }, {
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json'
-        }
       });
 
-      content = response.data.choices[0].message.content.trim();
-      console.log('[LLM Client] Using OpenAI API');
+      content = response.output_text.trim();
+      console.log('[LLM Client] Using OpenAI Responses API');
     } else {
       // Use mock response
       console.log('[LLM Client] Using mock response (no API key configured)');
@@ -171,11 +177,9 @@ const callLLM = async ({ messages, json = false, model = '', maxTokens = 500 }) 
 
     return content;
   } catch (error) {
-    if (error.response) {
-      throw new Error(`OpenAI API error: ${error.response.status} - ${error.response.data?.error?.message || error.message}`);
-    } else if (error.request) {
-      throw new Error('OpenAI API request failed: No response received');
-    } else if (error.message.includes('ENOTFOUND')) {
+    if (error instanceof OpenAI.APIError) {
+      throw new Error(`OpenAI API error: ${error.status} - ${error.message}`);
+    } else if (error.message?.includes('ENOTFOUND') || error.message?.includes('ECONNREFUSED')) {
       throw new Error('Network error: Cannot reach OpenAI API');
     } else {
       throw new Error(`LLM client error: ${error.message}`);

@@ -90,8 +90,14 @@ IMPORTANT RULES:
 - pWin must be 0-100, realistic and conservative — reflect the actual stage of capture maturity
 - Recommendation: GO (pursue as prime), SUBCONTRACT (pursue as sub), or NO_GO
 - Avoid generic statements — be specific to this agency, scope, and company
-- Base ALL reasoning ONLY on provided data
-- Return ONLY valid JSON with NO additional text`;
+- Base ALL reasoning ONLY on provided data — do not invent facts, contacts, or past performance
+- Be concise: use short sentences and tight prose — do not pad or repeat yourself across fields
+- Do not repeat the opportunity name or agency name inside field values — it is already known
+- proposedTeam: use ONLY memberId values from the company.teamMembers list provided — do not fabricate IDs or names
+- gaps: always return at least one gap, even at Gate 0 — every pursuit has something unknown or weak
+- If evaluation criteria are provided, tie fitDetails and gaps directly to those weighted criteria
+- Before returning, verify your JSON is complete and properly closed — every array and object must have a closing bracket
+- Return ONLY valid JSON with NO additional text, markdown, or explanation outside the JSON`;
 };
 
 const toCompactString = (value) => {
@@ -311,7 +317,7 @@ REQUIRED JSON format (always return this exact shape):
         { role: 'user', content: prompt }
       ],
       json: true,
-      maxTokens: 800
+      model: 'gpt-4o-mini'
     });
 
     console.log('[Opportunity Analysis] LLM Response:', JSON.stringify(response));

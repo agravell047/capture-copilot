@@ -13,27 +13,27 @@
 
 **DO:** Open http://localhost:5173. Dashboard loads in Board view.
 
-**SAY:** *"This is the CapturePilot dashboard — which is live view into current contract opportunities for the company. Every active pursuit is on the board, organized by gate stage. Before you look at a single card, the top bar tells you the story."*
+**SAY:** *"This is the capture pilot dashboard — active opportunities, organized by where they are in the capture process."*
 
 **DO:** Sweep cursor across the 7 KPI stat cards left to right.
 
-**SAY:** *"Active pursuits in the pipeline. How many are in proposal — where resources are most committed. Total pipeline value across all active opportunities. The AI-weighted expected value, which discounts each deal by its pWin score. Historical win rate from our closed pursuit record. High-confidence deals above 70% pWin — your strongest bets. And Needs Attention — pursuits that haven't been touched in over 30 days. Pipeline health at a glance, before you open a single card."*
+**SAY:** *"Active pursuits in the pipeline. How many are in proposal. Total pipeline value across all active opportunities. Expected value based on AI-analysis. Historical win rate. the how many are in pWin, which are the high confidence opportunities. And Needs Attention — pursuits that haven't been touched in over 30 days."*
 
 **DO:** Point to the gate columns — Gate 0 through Gate 3. Point to the column header showing count badge and dollar total.
 
-**SAY:** *"Four gate columns — Awareness through Proposal. Each column shows a count badge and the total contract value of everything in it. You can see at a glance where the weight of your pipeline sits."*
+**SAY:** *"Down below, we have four gate columns, each representing a phase between Awareness and Proposal. Each column shows a count badge and the total contract value of everything in it. You can see at a glance where the weight of your pipeline sits."*
 
 **DO:** Point to one card's colored left border, then another (different color).
 
-**SAY:** *"Every card has a colored left border — green for high pWin, amber for medium, red for low. You can read the health of your pipeline spatially, just by scanning the board."*
+**SAY:** *"Every card has a colored left border — green for high pWin, amber for medium, red for low.*
 
 **DO:** Point to the bottom of a card — the freshness timestamp ("Xd ago").
 
-**SAY:** *"Each card shows when this capture was last touched. If it's going stale, you'll see it immediately. You don't need a status meeting to know which opportunities are being neglected."*
+**SAY:** *"Each card shows when it was last updated — so you can see at a glance what's been sitting too long."*
 
 **DO:** Click **Table** toggle.
 
-**SAY:** *"Same data, different lens. Every field searchable and sortable."*
+**SAY:** *"You also have the option to switch between views. Table view gives you the same opportunities in a flat list — easier to filter and compare."*
 
 **DO:** Click **Board** to return.
 
@@ -49,19 +49,19 @@
 
 **DO:** Click **VA Benefits Platform Modernization**.
 
-**SAY:** *"Let's open a mature pursuit."*
+**SAY:** *"Let's look an exisiting pursuit."*
 
 **DO:** Point to the animated pWin arc gauge in the top right.
 
-**SAY:** *"The pWin gauge animates on load — fills from zero to score. Color-coded: this one is green, 76%, High confidence. Not a number buried in a table — a visual that reads in half a second."*
+**SAY:** *"The pWin gauge tells us the confidence level for this bid. This bid would a big with high confidence in winning..
 
 **DO:** Point to the Gate progress bar below the header.
 
-**SAY:** *"Gate progress bar — four stages, Awareness through Proposal. This pursuit is at Gate 2 — Capture. You can see exactly where it sits in the capture lifecycle without reading a single field."*
+**SAY:** *"Below it, the gate progress bar has four stages, that match what we saw on the dashboard. This pursuit is at Gate 2 — Capture. You can see exactly where it sits in the capture lifecycle without reading a single field."*
 
 **DO:** Point to Fit Assessment card — show the rating badge and bullet points.
 
-**SAY:** *"Fit assessment — the AI evaluated our company profile against this opportunity and returned a rating, a rationale, and the specific reasons why. Not generic. Specific to Apex's capabilities, vehicles, and set-asides."*
+**SAY:** *"the Fit assessment represents hpw the AI evaluated our company profile against this opportunity and returned a rating, a rationale, and the specific reasons why. Not generic. Specific to Apex's capabilities, vehicles, and set-asides."*
 
 **DO:** Point to Gap Analysis card — show severity badges (HIGH/MED/LOW) and mitigations.
 
@@ -69,7 +69,7 @@
 
 **DO:** Point to Recommendation card — show the action badge and the numbered next steps.
 
-**SAY:** *"Recommendation: Go. Five sequenced next steps — not generic advice, specific to this pursuit's stage and gaps."*
+**SAY:** *"Recommendation was a Go with Five sequenced next steps "*
 
 **DO:** Scroll to Proposed Capture Team.
 
@@ -93,44 +93,47 @@
 
 **SAY:** *"Now the intake flow. This is day one — no RFP, no solicitation, just early awareness."*
 
-**DO:** Type `SSA Disability Claims Processing Modernization` in Opportunity Name. Point to the completeness bar moving up.
+---
+
+**► Zone 1 — Core capture details**
+
+**DO:** Type `SSA Disability Claims Processing Modernization` in Opportunity Name. Point to the completeness bar moving.
 
 **SAY:** *"Watch the Analysis Quality bar in the top right. The system is coaching you as you type — it knows what's missing and what would make the analysis sharper."*
 
-**DO:** Select **Social Security Administration** from Agency dropdown. Show that contacts auto-populate in the Stakeholders section.
+**DO:** Select **Social Security Administration** from Agency dropdown. Set Contract Value to **$5M–$50M**.
 
-**SAY:** *"Agency selected — and notice the Stakeholders section just pre-loaded every SSA contact from our CRM. The system knows our relationships and surfaces them automatically."*
+**SAY:** *"Agency selected. The system already knows our contacts and relationships here — you'll see that reflected when we get to the Stakeholders section."*
 
-**DO:** Set Contract Value to **$5M–$50M**, Vehicle to **OASIS+**, Set-Aside to **SDVOSB**, Gate to **Gate 1 — Qualify**.
+**DO:** Click **Gate 1 — Qualify** on the gate picker.
 
-**DO:** Paste the Timeline field:
-```
-Sources Sought issued April 14, 2026; RFP anticipated September 2026; award expected Q1 2027. Five-year IDIQ base with two option years.
-```
-
-**SAY:** *"Timeline — Sources Sought issued, RFP anticipated September, award Q1 2027. The AI will use this to reason about urgency and gate appropriateness."*
+**SAY:** *"Gate 1 — we've done a quick fit check and decided to invest resources in qualifying this one."*
 
 **DO:** Paste the Description. Point to the completeness bar jumping.
 ```
 Modernize SSA's Disability Case Management System — a 30-year-old COBOL/mainframe platform processing 2.8 million annual disability claims. Scope includes phased cloud migration to AWS GovCloud, legacy COBOL rewrite to Java/Spring microservices, integration with SSA's existing Numident and MBR databases, Section 508-compliant claimant portal redesign, DevSecOps pipeline implementation, and FedRAMP Moderate ATO preparation. Requires continuity-of-operations planning for 24/7 claims processing during migration.
 ```
 
-**SAY:** *"The description is the biggest signal — 25 points. Watch the bar jump."*
+**SAY:** *"Description is the biggest signal — 25 points. Watch the bar jump. And see the RFP upload option below? If the solicitation is already out, you drop the file here and the AI extracts and summarizes it instead."*
 
-**DO:** Expand **Known Relationships / Internal Notes** section. Paste:
+---
+
+**► Zone 2 — Enrich the analysis**
+
+**DO:** Set Vehicle to **OASIS+**, Set-Aside to **SDVOSB**.
+
+**SAY:** *"Vehicle and set-aside — the AI uses these to assess competitive positioning. OASIS+ pre-qualifies us, SDVOSB narrows the competitive field."*
+
+**DO:** Paste the Timeline field:
 ```
-Marcus Webb attended the SSA IT Modernization Industry Day on April 9th and had a brief conversation with the program's Deputy CIO. No formal relationship yet — agency contact at SSA OIT identified but no direct outreach completed. Our OASIS+ vehicle PM at SSA confirmed Apex is registered and in good standing on the vehicle.
-```
-And Internal Notes:
-```
-OASIS+ vehicle aligns perfectly. SDVOSB set-aside confirmed via Sources Sought. Biggest risk is the absence of SSA past performance — we have strong CMS and VA comparable work but no direct SSA reference. Need to assess the competitive landscape and identify a teaming partner with SSA incumbent access before committing full capture resources.
+Sources Sought issued April 14, 2026; RFP anticipated September 2026; award expected Q1 2027. Five-year IDIQ base with two option years.
 ```
 
-**SAY:** *"Known relationships and internal notes. This is where you capture what you know that's not in a database — who you've met, what they said, what your gaps are. The AI reads all of it."*
+**SAY:** *"Timeline — Sources Sought issued, RFP anticipated September, award Q1 2027. The AI uses this to reason about urgency and whether Gate 1 is the right stage."*
 
-**DO:** Expand **Similar Past Pursuits**. Pick one relevant past pursuit from the list.
+---
 
-**SAY:** *"Similar past pursuits. The AI learns from our history — past performance, win/loss patterns, team compositions that worked. Linking them here sharpens the analysis."*
+**► Collapsible sections**
 
 **DO:** Expand **Evaluation**. Type `Best Value`. Add the four criteria:
 ```
@@ -140,11 +143,35 @@ Management approach and key personnel (20%)
 Price realism (15%)
 ```
 
-**SAY:** *"Evaluation approach and weighted criteria. The AI uses this to assess how our gaps and strengths map to what will actually be scored."*
+**SAY:** *"Evaluation approach and weighted criteria. The AI maps our gaps and strengths directly to what will actually be scored on this deal."*
+
+**DO:** Expand **Known Relationships**. Paste:
+```
+Marcus Webb attended the SSA IT Modernization Industry Day on April 9th and had a brief conversation with the program's Deputy CIO. No formal relationship yet — agency contact at SSA OIT identified but no direct outreach completed. Our OASIS+ vehicle PM at SSA confirmed Apex is registered and in good standing on the vehicle.
+```
+
+**SAY:** *"Known relationships — who we've met, what was said. This is the context that doesn't live in a database. The AI reads it."*
+
+**DO:** Expand **Stakeholders**. Show that SSA contacts are already pre-loaded from the agency selection.
+
+**SAY:** *"Stakeholders auto-populated from our contact database when we selected the agency. Anyone we already know at SSA is already here."*
+
+**DO:** Expand **Internal Notes**. Paste:
+```
+OASIS+ vehicle aligns perfectly. SDVOSB set-aside confirmed via Sources Sought. Biggest risk is the absence of SSA past performance — we have strong CMS and VA comparable work but no direct SSA reference. Need to assess the competitive landscape and identify a teaming partner with SSA incumbent access before committing full capture resources.
+```
+
+**SAY:** *"Internal notes — our honest read on the opportunity. Gaps, risks, strategic considerations. The AI incorporates this into the analysis."*
+
+**DO:** Expand **Similar Past Pursuits**. Pick one relevant past pursuit from the list.
+
+**SAY:** *"Similar past pursuits. The AI learns from our history — past performance, win/loss patterns, team compositions that worked. Linking them here sharpens the analysis."*
+
+---
 
 **DO:** Point to the completeness bar — should be near or at 100%.
 
-**SAY:** *"We're at 100% analysis quality. Every signal the AI can use is in the system. Now — Create."*
+**SAY:** *"100% analysis quality. Every signal the AI can use is in the system. Now — Create."*
 
 **DO:** Click **Create & Analyze Opportunity**.
 
@@ -368,3 +395,52 @@ Click **Settings** in navbar. Walk each tab:
 | Page won't load | Restart "Run App" task, refresh |
 | Analysis is blank | Refresh — it saved, just didn't render |
 | AI errors | Fine — mock response is built in, no API key needed |
+
+---
+
+## Quick Copy-Paste Inputs (ACT 2 — New Capture)
+
+> **Tip:** The form has a **Load Demo Data** button at the top — click it and everything below auto-fills instantly. Use this section only as a fallback.
+
+**Opportunity Name**
+```
+SSA Disability Claims Processing Modernization
+```
+
+**Agency:** `Social Security Administration` — **Contract Value:** `$5M – $50M` — **Vehicle:** `OASIS+` — **Set-Aside:** `SDVOSB` — **Gate:** `Gate 1 — Qualify`
+
+**Description**
+```
+Modernize SSA's Disability Case Management System — a 30-year-old COBOL/mainframe platform processing 2.8 million annual disability claims. Scope includes phased cloud migration to AWS GovCloud, legacy COBOL rewrite to Java/Spring microservices, integration with SSA's existing Numident and MBR databases, Section 508-compliant claimant portal redesign, DevSecOps pipeline implementation, and FedRAMP Moderate ATO preparation. Requires continuity-of-operations planning for 24/7 claims processing during migration.
+```
+
+**Timeline**
+```
+Sources Sought issued April 14, 2026; RFP anticipated September 2026; award expected Q1 2027. Five-year IDIQ base with two option years.
+```
+
+**Known Relationships**
+```
+Marcus Webb attended the SSA IT Modernization Industry Day on April 9th and had a brief conversation with the program's Deputy CIO. No formal relationship yet — agency contact at SSA OIT identified but no direct outreach completed. Our OASIS+ vehicle PM at SSA confirmed Apex is registered and in good standing on the vehicle.
+```
+
+**Internal Notes**
+```
+OASIS+ vehicle aligns perfectly. SDVOSB set-aside confirmed via Sources Sought. Biggest risk is the absence of SSA past performance — we have strong CMS and VA comparable work but no direct SSA reference. Need to assess the competitive landscape and identify a teaming partner with SSA incumbent access before committing full capture resources.
+```
+
+**Evaluation Type:** `Best Value`
+
+**Evaluation Criteria** _(add one at a time)_
+```
+Technical approach and legacy modernization methodology (35%)
+```
+```
+Past performance on comparable federal benefits systems (30%)
+```
+```
+Management approach and key personnel (20%)
+```
+```
+Price realism (15%)
+```
