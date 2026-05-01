@@ -183,6 +183,13 @@ router.post('/opportunities', async (req, res) => {
 // Fields that can be updated without re-running AI analysis
 const METADATA_ONLY_FIELDS = new Set(['gate', 'status']);
 
+// DELETE /api/opportunities/:id
+router.delete('/opportunities/:id', (req, res) => {
+  const deleted = opportunityStoreService.deleteOpportunity(req.params.id);
+  if (!deleted) return res.status(404).json({ error: 'Opportunity not found' });
+  res.json({ success: true });
+});
+
 router.patch('/opportunities/:id', async (req, res) => {
   try {
     const opportunity = await opportunityStoreService.getOpportunityById(req.params.id);

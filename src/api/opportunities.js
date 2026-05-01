@@ -22,6 +22,9 @@ const request = async (path, options = {}) => {
   return parseResponse(response)
 }
 
+export const deleteOpportunity = (opportunityId) =>
+  request(`/opportunities/${opportunityId}`, { method: 'DELETE' })
+
 export const listOpportunities = () => request('/opportunities')
 
 export const getOpportunity = (opportunityId) => request(`/opportunities/${opportunityId}`)

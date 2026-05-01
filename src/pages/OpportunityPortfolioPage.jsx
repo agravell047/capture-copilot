@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { listOpportunities, patchOpportunity } from '../api/opportunities'
+import { listOpportunities, patchOpportunity, deleteOpportunity } from '../api/opportunities'
 import {
   formatTimestamp,
   formatContractValueBucket,
@@ -76,12 +76,11 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
 
   useEffect(() => { loadOpportunities() }, [])
 
-  const archiveOpportunity = async (id, e) => {
-    e.stopPropagation()
-    if (!window.confirm('Archive this opportunity?')) return
+  const handleDelete = async (id, e) => {
+    if (e) e.stopPropagation()
     try {
-      await patchOpportunity(id, { status: 'archived' })
-      await loadOpportunities()
+      await deleteOpportunity(id)
+      setOpportunities((prev) => prev.filter((o) => o.id !== id))
     } catch (err) {
       setError(err.message)
     }
@@ -363,16 +362,7 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
                                 </div>
                               )
                             })()}
-                            <div className="kanban-card-actions">
-                              <button
-                                type="button"
-                                className="kanban-archive-btn"
-                                onClick={(e) => archiveOpportunity(o.id, e)}
-                                title="Archive"
-                              >
-                                Archive
-                              </button>
-                            </div>
+
                           </div>
                         )
                       })
@@ -402,6 +392,7 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
                       <th>Outcome</th>
                       <th>Value</th>
                       <th>Closed</th>
+                      <th />
                     </tr>
                   </thead>
                   <tbody>
@@ -423,6 +414,16 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
                         </td>
                         <td>{formatContractValueBucket(o.contractValue)}</td>
                         <td>{formatTimestamp(o.updatedAt)}</td>
+                        <td>
+                          <button
+                            type="button"
+                            className="kanban-delete-btn"
+                            style={{ fontSize: 11, padding: '2px 8px' }}
+                            onClick={(e) => { e.stopPropagation(); handleDelete(o.id, e) }}
+                          >
+                            Delete
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -492,6 +493,16 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
                         >
                           Open
                         </button>
+                        {isClosed && (
+                          <button
+                            type="button"
+                            className="kanban-delete-btn"
+                            style={{ padding: '4px 10px', fontSize: 12, marginLeft: 4 }}
+                            onClick={(e) => { e.stopPropagation(); handleDelete(o.id, e) }}
+                          >
+                            Delete
+                          </button>
+                        )}
                       </td>
                     </tr>
                   )
@@ -501,6 +512,7 @@ function OpportunityPortfolioPage({ onCreateOpportunity, onOpenOpportunity }) {
           </table>
         </div>
       )}
+
     </div>
   )
 }

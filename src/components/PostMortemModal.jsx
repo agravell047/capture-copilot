@@ -20,7 +20,7 @@ const LOSS_REASON_LABELS = {
   other: 'Other'
 }
 
-function PostMortemModal({ opportunity, onClose, onSaved }) {
+function PostMortemModal({ opportunity, onClose, onSaved, onDelete }) {
   const [meta, setMeta] = useState({ outcomes: [], lossReasons: [], lessonTags: [] })
   const [outcome, setOutcome] = useState('')
   const [lossReason, setLossReason] = useState('')
@@ -182,6 +182,22 @@ function PostMortemModal({ opportunity, onClose, onSaved }) {
             </button>
           </div>
         </form>
+
+        {onDelete && (
+          <div className="modal-danger-zone">
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => {
+                if (window.confirm(`Permanently delete "${opportunity.opportunityName || opportunity.name}"? This cannot be undone and will remove it from all AI context.`))
+                  onDelete(opportunity.id)
+              }}
+            >
+              Delete permanently
+            </button>
+            <p className="modal-danger-hint">Removes from the system and AI context entirely.</p>
+          </div>
+        )}
       </div>
     </div>
   )

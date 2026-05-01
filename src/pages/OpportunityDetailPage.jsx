@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { getOpportunity } from '../api/opportunities'
+import { getOpportunity, deleteOpportunity } from '../api/opportunities'
 import OpportunityWorkspace from '../components/OpportunityWorkspace'
 import PostMortemModal from '../components/PostMortemModal'
 import { getOpportunityName } from '../utils/opportunities'
 import './OpportunityDetailPage.css'
 import '../OpportunityCaptureForm.css'
 
-function OpportunityDetailPage({ opportunityId, onBackToPortfolio, onCreateOpportunity, onEditOpportunity }) {
+function OpportunityDetailPage({ opportunityId, onBackToPortfolio, onCreateOpportunity, onEditOpportunity, onOpportunityDeleted }) {
   const [opportunity, setOpportunity] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -116,6 +116,11 @@ function OpportunityDetailPage({ opportunityId, onBackToPortfolio, onCreateOppor
           onSaved={({ opportunity: updated }) => {
             setOpportunity(updated)
             setShowPostMortem(false)
+          }}
+          onDelete={async (id) => {
+            await deleteOpportunity(id)
+            if (onOpportunityDeleted) onOpportunityDeleted()
+            else onBackToPortfolio()
           }}
         />
       )}

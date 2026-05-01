@@ -100,6 +100,15 @@ const appendUpdate = async (opportunityId, updateData = {}) => {
   return { opportunity: nextOpportunity, update };
 };
 
+const deleteOpportunity = (opportunityId) => {
+  const opportunities = readOpportunities();
+  const index = opportunities.findIndex((o) => o.id === opportunityId);
+  if (index === -1) return false;
+  opportunities.splice(index, 1);
+  writeOpportunities(opportunities);
+  return true;
+};
+
 const attachLatestAnalysis = async (opportunityId, latestAnalysis) => {
   return upsertOpportunity({
     id: opportunityId,
@@ -112,5 +121,6 @@ module.exports = {
   getOpportunityById,
   upsertOpportunity,
   appendUpdate,
-  attachLatestAnalysis
+  attachLatestAnalysis,
+  deleteOpportunity
 };
